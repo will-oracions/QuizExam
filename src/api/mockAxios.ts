@@ -1,6 +1,6 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { ITodo } from "../todos/ITodo";
+import { ITodo } from "../todos/interfaces/ITodo";
 
 const mock = new MockAdapter(axios);
 

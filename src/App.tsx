@@ -4,10 +4,13 @@ import axios from "axios";
 import Header from "./components/Header";
 
 import "./api/mockAxios";
-import { ITodo } from "./todos/ITodo";
+import { ITodo } from "./todos/models/ITodo";
+import useTodos from "./todos/hooks/useTodos";
 
 function App() {
   const [todos, setTodos] = React.useState<ITodo[]>([]);
+
+  const { data, error, isLoading } = useTodos();
 
   React.useEffect(() => {
     (async () => {
@@ -22,6 +25,16 @@ function App() {
       setTodos(res.data);
     })();
   }, []);
+
+  // if (isLoading) {
+  //   return <p>Loading todos....</p>;
+  // }
+
+  // if (error) {
+  //   return <p>{error.message}</p>;
+  // }
+
+  console.log("DATA: ", data);
 
   return (
     <>
