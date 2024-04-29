@@ -10,7 +10,7 @@ import useTodos from "./todos/hooks/useTodos";
 function App() {
   const [todos, setTodos] = React.useState<ITodo[]>([]);
 
-  const { data, error, isLoading } = useTodos();
+  const { data } = useTodos();
 
   React.useEffect(() => {
     (async () => {
