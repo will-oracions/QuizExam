@@ -4,9 +4,9 @@ import axios from "axios";
 import Header from "./components/Header";
 
 import "./api/mockAxios";
-import { Todo } from "./todos/models/Todo";
-import useTodos from "./todos/hooks/useTodos";
-import CustomDatatable from "./components/CustomDatatable";
+import { Todo } from "./modules/todos/models/Todo";
+import useTodos from "./modules/todos/hooks/useTodos";
+// import CustomDatatable from "./components/CustomDatatable";
 
 function App() {
   const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -54,7 +54,7 @@ function App() {
           blanditiis. Magnam.
         </p>
 
-        <CustomDatatable />
+        {/* <CustomDatatable /> */}
       </div>
     </>
   );

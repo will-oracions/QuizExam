@@ -1,6 +1,6 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { Todo } from "../todos/models/Todo";
+import { Todo } from "../modules/todos/models/Todo";
 
 const mock = new MockAdapter(axios);
 

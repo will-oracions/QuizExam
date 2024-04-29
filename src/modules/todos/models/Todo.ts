@@ -1,12 +1,12 @@
 export interface Todo {
   id: number;
-  title: string;
-  assignee: Assignee;
-  startDate: Date;
-  endDate: Date;
-  prority: TodoPrority;
-  labels: TodoLabel[];
-  description: string;
+  title?: string;
+  assignee?: Assignee;
+  startDate?: Date;
+  endDate?: Date;
+  prority?: TodoPrority;
+  labels?: TodoLabel[];
+  description?: string;
 }
 
 export interface Assignee {
