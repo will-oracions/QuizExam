@@ -1,7 +1,10 @@
+import Header from "./components/Header";
+
 function App() {
   return (
     <>
       <div className="container">
+        <Header />
         <h1>WizeTodoList</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea at
