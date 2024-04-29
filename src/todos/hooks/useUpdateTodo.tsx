@@ -1,9 +1,9 @@
 import axios from "axios";
-import { ITodo } from "../models/ITodo";
+import { Todo } from "../models/Todo";
 import { useMutation } from "@tanstack/react-query";
 
-const updateTodo = async (data: ITodo) => {
-  const res = await axios.put<ITodo>(`/todos/${data.id}`, axios);
+const updateTodo = async (data: Todo) => {
+  const res = await axios.put<Todo>(`/todos/${data.id}`, axios);
   return res.data;
 };
 

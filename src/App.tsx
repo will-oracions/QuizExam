@@ -4,11 +4,11 @@ import axios from "axios";
 import Header from "./components/Header";
 
 import "./api/mockAxios";
-import { ITodo } from "./todos/models/ITodo";
+import { Todo } from "./todos/models/Todo";
 import useTodos from "./todos/hooks/useTodos";
 
 function App() {
-  const [todos, setTodos] = React.useState<ITodo[]>([]);
+  const [todos, setTodos] = React.useState<Todo[]>([]);
 
   const { data } = useTodos();
 

@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { ITodo } from "../models/ITodo";
+import { Todo } from "../models/Todo";
 
 const getTodos = async () => {
-  const res = await axios.get<ITodo>("/todos");
+  const res = await axios.get<Todo>("/todos");
   return res.data;
 };
 
