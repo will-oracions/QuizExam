@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 import "../api/mockAxios";
+import { Box } from "@mui/material";
 
 function Layout() {
   return (
@@ -11,7 +12,9 @@ function Layout() {
           <Header />
         </div>
 
-        <Outlet />
+        <Box className="app-main-content">
+          <Outlet />
+        </Box>
       </div>
     </>
   );

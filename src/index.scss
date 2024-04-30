@@ -21,33 +21,40 @@ body {
       }
     }
 
+    max-width: 100vw;
+    overflow-y: hidden;
     height: 100vh;
-    display: grid;
-    grid-template-areas:
-      "header  header header"
-      "sidebar main  main"
-      "sidebar main  main"
-      "sidebar main  main"
-      "sidebar main  main"
-      "sidebar main  main";
 
-    #app-header {
-      border: 4px solid orange;
-      grid-area: header;
-      height: 5rem;
-    }
+    .app-main-content {
+      padding: 20px;
+      display: grid;
 
-    #app-sidebar {
-      width: 300px;
-      padding: 10px;
-      border: 4px solid green;
-      grid-area: sidebar;
-    }
+      grid-template-areas:
+        "header  header header"
+        "sidebar main  main"
+        "sidebar main  main"
+        "sidebar main  main"
+        "sidebar main  main"
+        "sidebar main  main";
 
-    #app-main {
-      padding: 10px;
-      border: 4px solid yellow;
-      grid-area: main;
+      #app-header {
+        border: 4px solid orange;
+        grid-area: header;
+        height: 5rem;
+      }
+
+      #app-sidebar {
+        width: 300px;
+        padding: 10px;
+        border: 4px solid green;
+        grid-area: sidebar;
+      }
+
+      #app-main {
+        padding: 10px;
+        border: 4px solid yellow;
+        grid-area: main;
+      }
     }
   }
 }
