@@ -1,9 +1,8 @@
 import axios from "axios";
-import { Assignee } from "../models/Assignee";
 import { useMutation } from "@tanstack/react-query";
 
 const deleteAssignee = async (id: number) => {
-  const res = await axios.delete<Assignee>(`/assignees/${id}`);
+  const res = await axios.delete<void>(`/assignees/${id}`);
   return res.data;
 };
 

@@ -11,6 +11,7 @@ import { Assignee } from "../models/Assignee";
 import Sidebar2 from "../../../components/Sidebar2";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
+import useDeleteAssignee from "../hooks/useDeleteAssignee";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
@@ -30,6 +31,7 @@ const Assignees = () => {
 
   const createAssigneeMutation = useCreateAssignee();
   const editAssigneeMutation = useUpdateAssignee();
+  const deleteAssigneeMutation = useDeleteAssignee();
   const getAssigneeListQuery = useAssignees();
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
@@ -82,8 +84,22 @@ const Assignees = () => {
         console.log("Response: ", res);
 
         setAssignees(assignees.map((a) => (a.id === res.id ? res : a)));
+        setEditingAssignee(null);
         // notify();
         assigneeCreateModal.closeModal();
+      },
+    });
+  };
+
+  const handleDeleteAssignee = () => {
+    if (!deletingAssignee) return;
+    console.log("Delete: ", deletingAssignee);
+    deleteAssigneeMutation.mutate(deletingAssignee.id, {
+      onSuccess: (res) => {
+        console.log("Res", res);
+        setAssignees((prev) => prev.filter((a) => a.id != deletingAssignee.id));
+        setDeletingAssignee(null);
+        assigneeDeleteModal.closeModal();
       },
     });
   };
@@ -102,6 +118,7 @@ const Assignees = () => {
 
   const openDeleteAssigneeModal = (row: Assignee) => {
     console.log(row);
+    setDeletingAssignee(row);
     assigneeDeleteModal.openModal();
   };
 
@@ -142,8 +159,10 @@ const Assignees = () => {
         addEditModalIsLoading={
           createAssigneeMutation.isPending || editAssigneeMutation.isPending
         }
+        isDeleting={deleteAssigneeMutation.isPending}
         triggerSubmitForm={triggerSubmitForm}
         editingAssignee={editingAssignee}
+        triggerDelete={handleDeleteAssignee}
       />
     </>
   );

@@ -14,6 +14,8 @@ interface Props {
   onSubmitAssigneeForm: (data: Partial<Assignee>) => void;
   triggerSubmitForm: () => void;
   editingAssignee?: Assignee | null;
+  triggerDelete: () => void;
+  isDeleting?: boolean;
 }
 
 const AssigneeModals = ({
@@ -25,6 +27,8 @@ const AssigneeModals = ({
   errorMessage,
   onSubmitAssigneeForm,
   editingAssignee,
+  triggerDelete,
+  isDeleting,
 }: Props) => {
   return (
     <>
@@ -74,6 +78,7 @@ const AssigneeModals = ({
         footer={
           <div>
             <Button
+              onClick={() => assigneeDeleteModal.closeModal()}
               className="modal-action-button"
               type="submit"
               variant="outlined"
@@ -83,11 +88,14 @@ const AssigneeModals = ({
             </Button>
 
             <Button
+              disabled={isDeleting}
+              onClick={triggerDelete}
               className="modal-action-button"
               variant="contained"
               color="error"
               style={{ marginTop: "10px" }}>
-              Delete
+              {isDeleting && <CircularProgress size="20px" color="inherit" />}
+              &nbsp; Delete
             </Button>
           </div>
         }>

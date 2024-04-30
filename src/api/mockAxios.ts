@@ -67,9 +67,12 @@ mock.onPut(/\/assignees\/\d+/).reply(async (config) => {
   return [200, updatedAssignee];
 });
 
-mock.onDelete(/\/assignees\/\d+/).reply((config) => {
+mock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   assignees = assignees.filter((assignee) => assignee.id !== assigneeId);
+
+  await sleep(1000);
+
   return [204];
 });
 
