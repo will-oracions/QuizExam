@@ -7,6 +7,8 @@ import CustomModal from "./components/CustomModal/CustomModal";
 import useCustomModal from "./components/CustomModal/hooks/useCustomModal";
 import Sidebar from "./components/Sidebar";
 import { Todo } from "./modules/todos/models/Todo";
+import CustomDataTable from "./components/CustomDatatable/CustomDatatable";
+import { GridColDef } from "@mui/x-data-grid";
 // import CustomDatatable from "./components/CustomDatatable";
 
 function App() {
@@ -41,6 +43,32 @@ function App() {
   // Modal
   const { isOpen, openModal, closeModal } = useCustomModal();
 
+  interface Row {
+    id: number;
+    title: string;
+    description: string;
+    completed: boolean;
+  }
+
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "title", headerName: "Title", width: 150 },
+    { field: "description", headerName: "Description", width: 150 },
+    { field: "completed", headerName: "Completed", type: "boolean", width: 90 },
+  ];
+
+  const rows: Row[] = [
+    { id: 1, title: "Snow", description: "Jon", completed: true },
+    { id: 2, title: "Lannister", description: "Cersei", completed: false },
+    { id: 3, title: "Lannister", description: "Jaime", completed: false },
+    { id: 4, title: "Stark", description: "Arya", completed: false },
+    { id: 5, title: "Targaryen", description: "Daenerys", completed: true },
+    { id: 6, title: "Melisandre", description: "", completed: true },
+    { id: 7, title: "Clifford", description: "Ferrara", completed: true },
+    { id: 8, title: "Frances", description: "Rossini", completed: false },
+    { id: 9, title: "Roxie", description: "Harvey", completed: true },
+  ];
+
   return (
     <>
       <div id="app-layout" className="container">
@@ -68,6 +96,13 @@ function App() {
           </p>
 
           <button onClick={openModal}>Opem Modal</button>
+
+          <CustomDataTable<Row>
+            rows={rows}
+            columns={columns}
+            onEdit={(row) => console.log(row)}
+            onDelete={(row) => console.log(row)}
+          />
         </main>
       </div>
 
