@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -7,12 +7,15 @@ import CustomModal from "../../../components/CustomModal/CustomModal";
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
 import AssigneeForm from "../components/AssigneeForm";
 import { Assignee } from "../models/Assignee";
+import React from "react";
 
 const Assignees = () => {
   // const [assignees] = React.useState<Assignee[]>([]);
 
   const assigneeCreateModal = useCustomModal();
   const deleteAssigreeModal = useCustomModal();
+
+  const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID" },
@@ -33,6 +36,10 @@ const Assignees = () => {
     { id: 9, name: "Roxie", email: "Harvey", phone: "4545174421" },
   ];
 
+  const handleSubmitForm = () => {
+    formRef.current?.triggerSubmit();
+  };
+
   return (
     <>
       <Box>
@@ -52,8 +59,8 @@ const Assignees = () => {
         <CustomDatatable<Assignee>
           rows={rows}
           columns={columns}
-          onEdit={(row) => assigneeCreateModal.openModal()}
-          onDelete={(row) => deleteAssigreeModal.openModal()}
+          onEdit={() => assigneeCreateModal.openModal()}
+          onDelete={() => deleteAssigreeModal.openModal()}
         />
       </Box>
 
@@ -62,27 +69,33 @@ const Assignees = () => {
         title="Create a assignee"
         footer={
           <div>
-            <Button
+            {/* <Button
               className="modal-action-button"
               type="submit"
               variant="contained"
               color="error"
               style={{ marginTop: "10px" }}>
               Cancel
-            </Button>
+            </Button> */}
 
             <Button
+              disabled={false}
+              onClick={handleSubmitForm}
               className="modal-action-button"
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}>
-              Create
+              <CircularProgress size="20px" color="inherit" />
+              &nbsp; Create
             </Button>
           </div>
         }
         isOpen={assigneeCreateModal.isOpen}
         onClose={assigneeCreateModal.closeModal}>
-        <AssigneeForm onSubmit={(data) => console.log("Data: ", data)} />
+        <AssigneeForm
+          ref={formRef}
+          onSubmit={(data) => console.log("Data: ", data)}
+        />
       </CustomModal>
 
       {/* Delete Assignee Confirm Modal */}

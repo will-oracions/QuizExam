@@ -1,16 +1,29 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+import React, { forwardRef } from "react";
+import { Assignee } from "../models/Assignee";
 
-interface AssigneeFormProps {
-  onSubmit: (text: string) => void;
+interface Props {
+  onSubmit: (data: Partial<Assignee>) => void;
 }
 
-export default function AssigneeForm({ onSubmit }: AssigneeFormProps) {
-  const { register, handleSubmit, reset } = useForm<{ text: string }>();
+const AssigneeForm = forwardRef(({ onSubmit }: Props, ref) => {
+  const { register, handleSubmit, reset } = useForm<Partial<Assignee>>();
 
-  const handleFormSubmit: SubmitHandler<{ text: string }> = (data) => {
-    onSubmit(data.text);
-    reset();
+  const submitBtnRef = React.useRef<HTMLButtonElement>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    triggerSubmit: () => {
+      submitBtnRef.current?.click();
+    },
+    resetForm: () => {
+      reset();
+    },
+  }));
+
+  const handleFormSubmit: SubmitHandler<Partial<Assignee>> = (data) => {
+    onSubmit(data);
+    // reset();
   };
 
   return (
@@ -21,7 +34,8 @@ export default function AssigneeForm({ onSubmit }: AssigneeFormProps) {
             fullWidth
             variant="outlined"
             label="name"
-            {...register("text", {
+            type="text"
+            {...register("name", {
               required: true,
               minLength: {
                 value: 3,
@@ -34,9 +48,10 @@ export default function AssigneeForm({ onSubmit }: AssigneeFormProps) {
         <Box marginBottom={2}>
           <TextField
             fullWidth
+            type="email"
             variant="outlined"
             label="email"
-            {...register("text", { required: true })}
+            {...register("email", { required: true })}
           />
         </Box>
 
@@ -45,18 +60,21 @@ export default function AssigneeForm({ onSubmit }: AssigneeFormProps) {
             fullWidth
             variant="outlined"
             label="phone"
-            {...register("text", { required: true })}
+            {...register("phone", { required: true })}
           />
         </Box>
 
-        {/* <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "10px" }}>
-        Add Task
-      </Button> */}
+        <Button
+          ref={submitBtnRef}
+          style={{ display: "none" }}
+          type="submit"
+          variant="contained"
+          color="primary">
+          Submit
+        </Button>
       </form>
     </div>
   );
-}
+});
+
+export default AssigneeForm;
