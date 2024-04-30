@@ -3,7 +3,7 @@ import axios from "axios";
 import { Assignee } from "../models/Assignee";
 
 const getAssignees = async () => {
-  const res = await axios.get<Assignee>("/assignees");
+  const res = await axios.get<Assignee[]>("/assignees");
   return res.data;
 };
 

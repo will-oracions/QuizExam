@@ -2,11 +2,23 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { Todo } from "../modules/todos/models/Todo";
 import { Assignee } from "../modules/assignees/models/Assignee";
+import { sleep } from "../utils";
 
 const mock = new MockAdapter(axios);
 
 let todos: Todo[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
-let assignees: Assignee[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+
+let assignees: Assignee[] = [
+  { id: 1, name: "Snow", email: "Jon", phone: "4545174421" },
+  { id: 2, name: "Lannister", email: "Cersei", phone: "4545174421" },
+  { id: 3, name: "Lannister", email: "Jaime", phone: "4545174421" },
+  { id: 4, name: "Stark", email: "Arya", phone: "4545174421" },
+  { id: 5, name: "Targaryen", email: "Daenerys", phone: "4545174421" },
+  { id: 6, name: "Melisandre", email: "", phone: "4545174421" },
+  { id: 7, name: "Clifford", email: "Ferrara", phone: "4545174421" },
+  { id: 8, name: "Frances", email: "Rossini", phone: "4545174421" },
+  { id: 9, name: "Roxie", email: "Harvey", phone: "4545174421" },
+];
 
 // Mock Todos Api
 mock.onGet("/todos").reply(200, todos);
@@ -33,9 +45,13 @@ mock.onDelete(/\/todos\/\d+/).reply((config) => {
 // Mock Assignees API
 mock.onGet("/assignees").reply(200, assignees);
 
-mock.onPost("/assignees").reply((config) => {
-  const assignee = JSON.parse(config.data);
-  assignees.push({ ...assignee, id: assignee.length + 1 });
+mock.onPost("/assignees").reply(async (config) => {
+  const data = JSON.parse(config.data);
+  const assignee = { ...data, id: assignees.length + 1 };
+  assignees.push(assignee);
+
+  await sleep(3000);
+
   return [201, assignee];
 });
 

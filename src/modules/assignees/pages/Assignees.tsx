@@ -1,5 +1,5 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,16 +9,26 @@ import CustomModal from "../../../components/CustomModal/CustomModal";
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
 import AssigneeForm from "../components/AssigneeForm";
 import { Assignee } from "../models/Assignee";
+import useCreateAssignee from "../hooks/useCreateAssignee";
+import useAssignees from "../hooks/useAssignees";
 
 const Assignees = () => {
-  // const [assignees] = React.useState<Assignee[]>([]);
+  const [assignees, setAssignees] = React.useState<Assignee[]>([]);
+
   const notify = () =>
     toast("Assignee created", { type: "info", className: "app-toast" });
 
   const assigneeCreateModal = useCustomModal();
   const deleteAssigreeModal = useCustomModal();
 
+  const createMutation = useCreateAssignee();
+  const getListQuery = useAssignees();
+
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
+
+  React.useEffect(() => {
+    getListQuery.data && setAssignees(getListQuery.data);
+  }, [getListQuery.data]);
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID" },
@@ -27,25 +37,22 @@ const Assignees = () => {
     { field: "phone", headerName: "Phone", type: "boolean" },
   ];
 
-  const rows: Assignee[] = [
-    { id: 1, name: "Snow", email: "Jon", phone: "4545174421" },
-    { id: 2, name: "Lannister", email: "Cersei", phone: "4545174421" },
-    { id: 3, name: "Lannister", email: "Jaime", phone: "4545174421" },
-    { id: 4, name: "Stark", email: "Arya", phone: "4545174421" },
-    { id: 5, name: "Targaryen", email: "Daenerys", phone: "4545174421" },
-    { id: 6, name: "Melisandre", email: "", phone: "4545174421" },
-    { id: 7, name: "Clifford", email: "Ferrara", phone: "4545174421" },
-    { id: 8, name: "Frances", email: "Rossini", phone: "4545174421" },
-    { id: 9, name: "Roxie", email: "Harvey", phone: "4545174421" },
-  ];
-
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
   };
 
   const onSubmitAssigneeForm = (data: Partial<Assignee>) => {
-    console.log("Data: ", data);
-    notify();
+    // console.log("Data: ", data);
+
+    createMutation.mutate(data, {
+      onSuccess: (res) => {
+        // console.log("Response: ", res);
+
+        setAssignees([res as Assignee, ...assignees]);
+        notify();
+        assigneeCreateModal.closeModal();
+      },
+    });
   };
 
   return (
@@ -65,7 +72,7 @@ const Assignees = () => {
         </Box>
 
         <CustomDatatable<Assignee>
-          rows={rows}
+          rows={assignees}
           columns={columns}
           onEdit={() => assigneeCreateModal.openModal()}
           onDelete={() => deleteAssigreeModal.openModal()}
@@ -74,7 +81,7 @@ const Assignees = () => {
 
       {/* Create Assignee Modal */}
       <CustomModal
-        title="Create a assignee"
+        title="Create new Assignee"
         footer={
           <div>
             {/* <Button
@@ -87,13 +94,15 @@ const Assignees = () => {
             </Button> */}
 
             <Button
-              disabled={false}
+              disabled={createMutation.isPending}
               onClick={triggerSubmitForm}
               className="modal-action-button"
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}>
-              <CircularProgress size="20px" color="inherit" />
+              {createMutation.isPending && (
+                <CircularProgress size="20px" color="inherit" />
+              )}
               &nbsp; Create
             </Button>
           </div>
