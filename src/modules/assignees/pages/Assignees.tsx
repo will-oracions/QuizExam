@@ -35,7 +35,7 @@ const Assignees = () => {
 
   return (
     <>
-      <main id="app-main">
+      <Box>
         <h3>Manage Assignees</h3>
 
         <Box marginBottom={5}>
@@ -55,8 +55,9 @@ const Assignees = () => {
           onEdit={(row) => assigneeCreateModal.openModal()}
           onDelete={(row) => deleteAssigreeModal.openModal()}
         />
-      </main>
+      </Box>
 
+      {/* Create Assignee Modal */}
       <CustomModal
         title="Create a assignee"
         footer={
@@ -84,6 +85,7 @@ const Assignees = () => {
         <AssigneeForm onSubmit={(data) => console.log("Data: ", data)} />
       </CustomModal>
 
+      {/* Delete Assignee Confirm Modal */}
       <CustomModal
         isOpen={deleteAssigreeModal.isOpen}
         onClose={deleteAssigreeModal.closeModal}

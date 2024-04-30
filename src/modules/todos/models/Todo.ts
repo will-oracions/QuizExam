@@ -1,3 +1,5 @@
+import { Assignee } from "../../assignees/models/Assignee";
+
 export interface Todo {
   id: number;
   title?: string;
@@ -7,12 +9,6 @@ export interface Todo {
   prority?: TodoPrority;
   labels?: TodoLabel[];
   description?: string;
-}
-
-export interface Assignee {
-  name: string;
-  email: string;
-  phone: string;
 }
 
 export enum TodoPrority {
