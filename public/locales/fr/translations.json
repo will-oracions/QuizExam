@@ -1,3 +1,4 @@
 {
-  "appDescription": "Une gestion optimal de vos tâches."
+  "appDescription": "Une gestion optimal de vos tâches.",
+  "pageNotFoundMessage": "La page que vous demandez n'existe pas."
 }

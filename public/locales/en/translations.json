@@ -1,3 +1,4 @@
 {
-  "appDescription": "Manage your tasks"
+  "appDescription": "Manage your tasks",
+  "pageNotFoundMessage": "The page your are looking for does not exist"
 }
