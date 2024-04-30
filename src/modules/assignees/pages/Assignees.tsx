@@ -1,16 +1,15 @@
 import React from "react";
 import { toast } from "react-toastify";
 import { Box, Button, CircularProgress } from "@mui/material";
-import { GridColDef } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 
-import CustomDatatable from "../../../components/CustomDatatable/CustomDatatable";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
 import AssigneeForm from "../components/AssigneeForm";
 import { Assignee } from "../models/Assignee";
 import useCreateAssignee from "../hooks/useCreateAssignee";
 import useAssignees from "../hooks/useAssignees";
+import AssigneeDatatable from "../components/AssigneeDatatable";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
@@ -30,13 +29,6 @@ const Assignees = () => {
   React.useEffect(() => {
     getListQuery.data && setAssignees(getListQuery.data);
   }, [getListQuery.data]);
-
-  const columns: GridColDef[] = [
-    { field: "id", headerName: "ID" },
-    { field: "name", headerName: "Name" },
-    { field: "email", headerName: "Email" },
-    { field: "phone", headerName: "Phone", type: "boolean" },
-  ];
 
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
@@ -84,11 +76,10 @@ const Assignees = () => {
           </Button>
         </Box>
 
-        <CustomDatatable<Assignee>
-          rows={assignees}
-          columns={columns}
-          onEdit={() => assigneeCreateModal.openModal()}
-          onDelete={() => deleteAssigreeModal.openModal()}
+        <AssigneeDatatable
+          assignees={assignees}
+          assigneeCreateModal={assigneeCreateModal}
+          deleteAssigreeModal={deleteAssigreeModal}
         />
       </Box>
 
@@ -139,8 +130,8 @@ const Assignees = () => {
             <Button
               className="modal-action-button"
               type="submit"
-              variant="contained"
-              color="error"
+              variant="outlined"
+              color="primary"
               style={{ marginTop: "10px" }}>
               Cancel
             </Button>
@@ -148,9 +139,9 @@ const Assignees = () => {
             <Button
               className="modal-action-button"
               variant="contained"
-              color="primary"
+              color="error"
               style={{ marginTop: "10px" }}>
-              Create
+              Delete
             </Button>
           </div>
         }>
