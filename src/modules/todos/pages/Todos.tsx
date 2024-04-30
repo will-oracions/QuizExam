@@ -214,19 +214,19 @@ const Todos = () => {
       </div>
 
       <main id="app-main">
-        <h1>WizeTodoList</h1>
+        {/* <h1>WizeTodoList</h1>
         <ul>
           {todos.map((todo, index) => (
             <li key={index}>{todo.id}</li>
           ))}
-        </ul>
+        </ul> */}
 
-        <p>
+        {/* <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea at
           distinctio, vel, quia ab iste optio dolores doloribus explicabo sed
           recusandae voluptate beatae excepturi rerum mollitia sequi velit
           blanditiis. Magnam.
-        </p>
+        </p> */}
 
         <button onClick={openModal}>Opem Modal</button>
 

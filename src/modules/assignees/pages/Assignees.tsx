@@ -9,6 +9,7 @@ import AssigneeModals from "../components/AssigneeModals";
 import useAssignees from "../hooks/useAssignees";
 import useCreateAssignee from "../hooks/useCreateAssignee";
 import { Assignee } from "../models/Assignee";
+import Sidebar2 from "../../../components/Sidebar2";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
@@ -58,29 +59,35 @@ const Assignees = () => {
 
   return (
     <>
-      <Box>
-        <h3>Manage Assignees</h3>
+      <div id="app-sidebar">
+        <Sidebar2 onCreateTodo={() => console.log("Create")} />
+      </div>
 
-        <Box marginBottom={5}>
-          <Button
-            onClick={() => {
-              assigneeCreateModal.openModal();
-              setErrorMessage("");
-            }}
-            variant="outlined"
-            color="primary"
-            style={{ marginTop: "10px" }}
-            startIcon={<AddIcon />}>
-            Create new Assignee
-          </Button>
+      <main id="app-main">
+        <Box>
+          <h3>Manage Assignees</h3>
+
+          <Box marginBottom={5}>
+            <Button
+              onClick={() => {
+                assigneeCreateModal.openModal();
+                setErrorMessage("");
+              }}
+              variant="outlined"
+              color="primary"
+              style={{ marginTop: "10px" }}
+              startIcon={<AddIcon />}>
+              Create new Assignee
+            </Button>
+          </Box>
+
+          <AssigneeDatatable
+            assignees={assignees}
+            assigneeCreateModal={assigneeCreateModal}
+            deleteAssigreeModal={deleteAssigreeModal}
+          />
         </Box>
-
-        <AssigneeDatatable
-          assignees={assignees}
-          assigneeCreateModal={assigneeCreateModal}
-          deleteAssigreeModal={deleteAssigreeModal}
-        />
-      </Box>
+      </main>
 
       <AssigneeModals
         assigneeCreateModal={assigneeCreateModal}
