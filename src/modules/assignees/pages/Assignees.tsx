@@ -12,7 +12,8 @@ import { Assignee } from "../models/Assignee";
 
 const Assignees = () => {
   // const [assignees] = React.useState<Assignee[]>([]);
-  const notify = () => toast("Wow so easy!");
+  const notify = () =>
+    toast("Assignee created", { type: "info", className: "app-toast" });
 
   const assigneeCreateModal = useCustomModal();
   const deleteAssigreeModal = useCustomModal();
