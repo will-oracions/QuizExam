@@ -10,6 +10,7 @@ import { Todo } from "./modules/todos/models/Todo";
 import CustomDataTable from "./components/CustomDatatable/CustomDatatable";
 import { GridColDef } from "@mui/x-data-grid";
 import CustomAutoComplete from "./components/CustomAutoComplete/CustomAutoComplete";
+import TodoForm from "./modules/todos/components/TodoForm";
 // import CustomDatatable from "./components/CustomDatatable";
 
 interface Movie {
@@ -18,7 +19,7 @@ interface Movie {
 }
 
 function App() {
-  const [todos, setTodos] = React.useState<Todo[]>([]);
+  const [todos] = React.useState<Todo[]>([]);
 
   // const { data } = useTodos();
 
@@ -252,6 +253,8 @@ function App() {
         onClose={closeModal}>
         <h2>Contenu du modal</h2>
         <p>Ce texte est à l'intérieur du modal.</p>
+
+        <TodoForm onSubmit={(data) => console.log("Data: ", data)} />
 
         <CustomAutoComplete<Movie> label="The Movie" data={moviesData} />
         <p>
