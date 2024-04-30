@@ -2,7 +2,7 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { Todo } from "../modules/todos/models/Todo";
 import { Assignee } from "../modules/assignees/models/Assignee";
-import { sleep } from "../utils";
+import { generateFakeId, sleep } from "../utils";
 
 const mock = new MockAdapter(axios);
 
@@ -25,7 +25,7 @@ mock.onGet("/todos").reply(200, todos);
 
 mock.onPost("/todos").reply((config) => {
   const todo = JSON.parse(config.data);
-  todos.push({ ...todo, id: todos.length + 1 });
+  todos.push({ ...todo, id: generateFakeId() });
   return [201, todo];
 });
 
@@ -47,7 +47,7 @@ mock.onGet("/assignees").reply(200, assignees);
 
 mock.onPost("/assignees").reply(async (config) => {
   const data = JSON.parse(config.data);
-  const assignee = { ...data, id: assignees.length + 1 };
+  const assignee = { ...data, id: generateFakeId() };
   assignees.push(assignee);
 
   await sleep(3000);
