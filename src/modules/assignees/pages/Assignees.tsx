@@ -14,6 +14,7 @@ import useAssignees from "../hooks/useAssignees";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   const notify = () =>
     toast("Assignee created", { type: "info", className: "app-toast" });
@@ -44,6 +45,15 @@ const Assignees = () => {
   const onSubmitAssigneeForm = (data: Partial<Assignee>) => {
     // console.log("Data: ", data);
 
+    const exist = assignees.find(
+      (a) => a.name?.toLowerCase() === data.name?.toLowerCase()
+    );
+    if (exist) {
+      setErrorMessage("The name already exist.");
+      return;
+    }
+
+    setErrorMessage("");
     createMutation.mutate(data, {
       onSuccess: (res) => {
         // console.log("Response: ", res);
@@ -62,7 +72,10 @@ const Assignees = () => {
 
         <Box marginBottom={5}>
           <Button
-            onClick={assigneeCreateModal.openModal}
+            onClick={() => {
+              assigneeCreateModal.openModal();
+              setErrorMessage("");
+            }}
             variant="outlined"
             color="primary"
             style={{ marginTop: "10px" }}
@@ -109,7 +122,11 @@ const Assignees = () => {
         }
         isOpen={assigneeCreateModal.isOpen}
         onClose={assigneeCreateModal.closeModal}>
-        <AssigneeForm ref={formRef} onSubmit={onSubmitAssigneeForm} />
+        <AssigneeForm
+          errorMessage={errorMessage}
+          ref={formRef}
+          onSubmit={onSubmitAssigneeForm}
+        />
       </CustomModal>
 
       {/* Delete Assignee Confirm Modal */}

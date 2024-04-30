@@ -5,9 +5,10 @@ import { Assignee } from "../models/Assignee";
 
 interface Props {
   onSubmit: (data: Partial<Assignee>) => void;
+  errorMessage?: string;
 }
 
-const AssigneeForm = forwardRef(({ onSubmit }: Props, ref) => {
+const AssigneeForm = forwardRef(({ onSubmit, errorMessage }: Props, ref) => {
   const {
     register,
     handleSubmit,
@@ -33,9 +34,11 @@ const AssigneeForm = forwardRef(({ onSubmit }: Props, ref) => {
 
   return (
     <div style={{ minWidth: "400px" }}>
-      <Box marginBottom={2}>
-        <Alert severity="error">This is an error Alert.</Alert>
-      </Box>
+      {errorMessage && (
+        <Box marginBottom={2}>
+          <Alert severity="error">{errorMessage}</Alert>
+        </Box>
+      )}
 
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Box marginBottom={2}>
