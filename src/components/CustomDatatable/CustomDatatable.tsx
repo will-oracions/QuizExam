@@ -53,6 +53,7 @@ const CustomDatatable = <TRow extends Record<string, any>>({
   return (
     <div className="app-datatable">
       <DataGrid
+        autoHeight={true}
         rows={rows}
         columns={columnsWithActions}
         initialState={{
