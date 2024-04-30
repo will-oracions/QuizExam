@@ -1,24 +1,19 @@
 import { GridColDef } from "@mui/x-data-grid";
 import CustomDatatable from "../../../components/CustomDatatable/CustomDatatable";
 import { Assignee } from "../models/Assignee";
-import { CustomModalType } from "../../../components/CustomModal/hooks/useCustomModal";
 
 interface Props {
   assignees: Assignee[];
-  assigneeCreateModal: CustomModalType;
-  deleteAssigreeModal: CustomModalType;
+  handleEdit: (row: Assignee) => void;
+  handleDelete: (row: Assignee) => void;
 }
 
-const AssigneeDatatable = ({
-  assignees,
-  assigneeCreateModal,
-  deleteAssigreeModal,
-}: Props) => {
+const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID" },
     { field: "name", headerName: "Name" },
     { field: "email", headerName: "Email" },
-    { field: "phone", headerName: "Phone", type: "boolean" },
+    { field: "phone", headerName: "Phone" },
   ];
 
   return (
@@ -26,8 +21,8 @@ const AssigneeDatatable = ({
       <CustomDatatable<Assignee>
         rows={assignees}
         columns={columns}
-        onEdit={() => assigneeCreateModal.openModal()}
-        onDelete={() => deleteAssigreeModal.openModal()}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
       />
     </>
   );

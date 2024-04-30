@@ -6,106 +6,120 @@ import { Assignee } from "../models/Assignee";
 interface Props {
   onSubmit: (data: Partial<Assignee>) => void;
   errorMessage?: string;
+  defaultValue?: Assignee | null;
 }
 
-const AssigneeForm = forwardRef(({ onSubmit, errorMessage }: Props, ref) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<Partial<Assignee>>();
+const AssigneeForm = forwardRef(
+  ({ onSubmit, errorMessage, defaultValue }: Props, ref) => {
+    const {
+      register,
+      handleSubmit,
+      reset,
+      // setValue,
+      formState: { errors },
+    } = useForm<Partial<Assignee>>({
+      defaultValues: defaultValue || {},
+    });
 
-  const submitBtnRef = React.useRef<HTMLButtonElement>(null);
+    const submitBtnRef = React.useRef<HTMLButtonElement>(null);
 
-  React.useImperativeHandle(ref, () => ({
-    triggerSubmit: () => {
-      submitBtnRef.current?.click();
-    },
-    resetForm: () => {
-      reset();
-    },
-  }));
+    // React.useEffect(() => {
+    //   const values = defaultValue;
+    //   delete values?.id;
+    //   for (const key in values) {
+    //     setValue(key, values[key]);
+    //   }
+    // }, [defaultValue]);
 
-  const handleFormSubmit: SubmitHandler<Partial<Assignee>> = (data) => {
-    onSubmit(data);
-    // reset();
-  };
+    React.useImperativeHandle(ref, () => ({
+      triggerSubmit: () => {
+        submitBtnRef.current?.click();
+      },
+      resetForm: () => {
+        reset();
+      },
+    }));
 
-  return (
-    <div style={{ minWidth: "400px" }}>
-      {errorMessage && (
-        <Box marginBottom={2}>
-          <Alert severity="error">{errorMessage}</Alert>
-        </Box>
-      )}
+    const handleFormSubmit: SubmitHandler<Partial<Assignee>> = (data) => {
+      onSubmit(data);
+      // reset();
+    };
 
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Box marginBottom={2}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="name"
-            type="text"
-            {...register("name", {
-              required: {
-                value: true,
-                message: "Le nom est requis.",
-              },
-              minLength: {
-                value: 3,
-                message: "Le nom doit avoir au moins 3 charactères",
-              },
-            })}
-            error={Boolean(errors.name)}
-            helperText={errors.name ? errors.name.message : ""}
-          />
-        </Box>
+    return (
+      <div style={{ minWidth: "400px" }}>
+        {errorMessage && (
+          <Box marginBottom={2}>
+            <Alert severity="error">{errorMessage}</Alert>
+          </Box>
+        )}
 
-        <Box marginBottom={2}>
-          <TextField
-            fullWidth
-            type="email"
-            variant="outlined"
-            label="email"
-            {...register("email", {
-              required: {
-                value: true,
-                message: "Le email est requis.",
-              },
-            })}
-            error={Boolean(errors.email)}
-            helperText={errors.email ? errors.email.message : ""}
-          />
-        </Box>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
+          <Box marginBottom={2}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="name"
+              type="text"
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "Le nom est requis.",
+                },
+                minLength: {
+                  value: 3,
+                  message: "Le nom doit avoir au moins 3 charactères",
+                },
+              })}
+              error={Boolean(errors.name)}
+              helperText={errors.name ? errors.name.message : ""}
+            />
+          </Box>
 
-        <Box marginBottom={2}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="phone"
-            {...register("phone", {
-              required: {
-                value: true,
-                message: "Le Numéro de téléphone est requis.",
-              },
-            })}
-            error={Boolean(errors.phone)}
-            helperText={errors.phone ? errors.phone.message : ""}
-          />
-        </Box>
+          <Box marginBottom={2}>
+            <TextField
+              fullWidth
+              type="email"
+              variant="outlined"
+              label="email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Le email est requis.",
+                },
+              })}
+              error={Boolean(errors.email)}
+              helperText={errors.email ? errors.email.message : ""}
+            />
+          </Box>
 
-        <Button
-          ref={submitBtnRef}
-          style={{ display: "none" }}
-          type="submit"
-          variant="contained"
-          color="primary">
-          Submit
-        </Button>
-      </form>
-    </div>
-  );
-});
+          <Box marginBottom={2}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              label="phone"
+              {...register("phone", {
+                required: {
+                  value: true,
+                  message: "Le Numéro de téléphone est requis.",
+                },
+              })}
+              error={Boolean(errors.phone)}
+              helperText={errors.phone ? errors.phone.message : ""}
+            />
+          </Box>
+
+          <Button
+            ref={submitBtnRef}
+            style={{ display: "none" }}
+            type="submit"
+            variant="contained"
+            color="primary">
+            Submit
+          </Button>
+        </form>
+      </div>
+    );
+  }
+);
 
 export default AssigneeForm;

@@ -1,5 +1,4 @@
-import AddIcon from "@mui/icons-material/Add";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -10,18 +9,26 @@ import useAssignees from "../hooks/useAssignees";
 import useCreateAssignee from "../hooks/useCreateAssignee";
 import { Assignee } from "../models/Assignee";
 import Sidebar2 from "../../../components/Sidebar2";
+import useUpdateAssignee from "../hooks/useUpdateAssignee";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
+  const [editingAssignee, setEditingAssignee] = React.useState<Assignee | null>(
+    null
+  );
+  const [deletingAssignee, setDeletingAssignee] =
+    React.useState<Assignee | null>(null);
+
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   const notify = () =>
     toast("Assignee created", { type: "info", className: "app-toast" });
 
   const assigneeCreateModal = useCustomModal();
-  const deleteAssigreeModal = useCustomModal();
+  const assigneeDeleteModal = useCustomModal();
 
   const createMutation = useCreateAssignee();
+  const editMutation = useUpdateAssignee();
   const getListQuery = useAssignees();
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
@@ -37,6 +44,14 @@ const Assignees = () => {
   const onSubmitAssigneeForm = (data: Partial<Assignee>) => {
     // console.log("Data: ", data);
 
+    const handler = editingAssignee
+      ? handleSaveUpdateAssignee
+      : handleSaveAssignee;
+
+    handler(data);
+  };
+
+  const handleSaveAssignee = (data: Partial<Assignee>) => {
     const exist = assignees.find(
       (a) => a.name?.toLowerCase() === data.name?.toLowerCase()
     );
@@ -46,6 +61,7 @@ const Assignees = () => {
     }
 
     setErrorMessage("");
+
     createMutation.mutate(data, {
       onSuccess: (res) => {
         // console.log("Response: ", res);
@@ -57,46 +73,66 @@ const Assignees = () => {
     });
   };
 
+  const handleSaveUpdateAssignee = (data: Partial<Assignee>) => {
+    setErrorMessage("");
+
+    editMutation.mutate(data as Assignee, {
+      onSuccess: (res) => {
+        console.log("Response: ", res);
+
+        setAssignees(assignees.map((a) => (a.id === res.id ? res : a)));
+        // notify();
+        assigneeCreateModal.closeModal();
+      },
+    });
+  };
+
+  const handleCreateAssignee = () => {
+    assigneeCreateModal.openModal();
+    setErrorMessage("");
+  };
+
+  const handleEditAssigee = (row: Assignee) => {
+    console.log(row);
+    setEditingAssignee(row);
+    setErrorMessage("");
+    assigneeCreateModal.openModal();
+  };
+
+  const handleDeleteAssignee = (row: Assignee) => {
+    console.log(row);
+    assigneeDeleteModal.openModal();
+  };
+
   return (
     <>
       <div id="app-sidebar">
-        <Sidebar2 onCreateTodo={() => console.log("Create")} />
+        <Sidebar2 handleCreate={handleCreateAssignee} />
       </div>
 
       <main id="app-main">
         <Box>
-          <h3>Manage Assignees</h3>
-
-          <Box marginBottom={5}>
-            <Button
-              onClick={() => {
-                assigneeCreateModal.openModal();
-                setErrorMessage("");
-              }}
-              variant="outlined"
-              color="primary"
-              style={{ marginTop: "10px" }}
-              startIcon={<AddIcon />}>
-              Create new Assignee
-            </Button>
-          </Box>
+          <h3 className="page-title">Manage Assignees</h3>
 
           <AssigneeDatatable
             assignees={assignees}
-            assigneeCreateModal={assigneeCreateModal}
-            deleteAssigreeModal={deleteAssigreeModal}
+            handleEdit={handleEditAssigee}
+            handleDelete={handleDeleteAssignee}
           />
         </Box>
       </main>
 
       <AssigneeModals
         assigneeCreateModal={assigneeCreateModal}
-        deleteAssigreeModal={deleteAssigreeModal}
+        assigneeDeleteModal={assigneeDeleteModal}
         errorMessage={errorMessage}
         formRef={formRef}
         onSubmitAssigneeForm={onSubmitAssigneeForm}
-        createMutation={createMutation}
+        addEditModalIsLoading={
+          createMutation.isPending || editMutation.isPending
+        }
         triggerSubmitForm={triggerSubmitForm}
+        editingAssignee={editingAssignee}
       />
     </>
   );

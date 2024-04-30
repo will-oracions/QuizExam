@@ -1,22 +1,24 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 interface Props {
-  onCreateTodo: () => void;
+  handleCreate: () => void;
 }
 
-const Sidebar2 = ({ onCreateTodo }: Props) => {
+const Sidebar2 = ({ handleCreate }: Props) => {
   return (
     <div>
       <div>
-        <Button
-          onClick={onCreateTodo}
-          variant="outlined"
-          color="primary"
-          style={{ marginTop: "10px" }}
-          startIcon={<AddIcon />}>
-          Create Todo
-        </Button>
+        <Box marginBottom={5}>
+          <Button
+            onClick={handleCreate}
+            variant="outlined"
+            color="primary"
+            style={{ marginTop: "10px" }}
+            startIcon={<AddIcon />}>
+            Create new Assignee
+          </Button>
+        </Box>
       </div>
 
       <div className="sidebar-tasks-list">

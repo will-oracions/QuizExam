@@ -55,12 +55,15 @@ mock.onPost("/assignees").reply(async (config) => {
   return [201, assignee];
 });
 
-mock.onPut(/\/assignees\/\d+/).reply((config) => {
+mock.onPut(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   const updatedAssignee: Assignee = JSON.parse(config.data);
   assignees = assignees.map((assignee) =>
     assignee.id === assigneeId ? updatedAssignee : assignee
   );
+
+  await sleep(3000);
+
   return [200, updatedAssignee];
 });
 

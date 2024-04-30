@@ -1,40 +1,36 @@
 import { Button, CircularProgress } from "@mui/material";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import AssigneeForm from "./AssigneeForm";
-import { UseMutationResult } from "@tanstack/react-query";
 import { Assignee } from "../models/Assignee";
 import { CustomModalType } from "../../../components/CustomModal/hooks/useCustomModal";
 import { RefObject } from "react";
 
 interface Props {
   assigneeCreateModal: CustomModalType;
-  deleteAssigreeModal: CustomModalType;
-  createMutation: UseMutationResult<
-    Partial<Assignee>,
-    Error,
-    Partial<Assignee>,
-    unknown
-  >;
+  assigneeDeleteModal: CustomModalType;
+  addEditModalIsLoading?: boolean;
   errorMessage: string;
   formRef: RefObject<{ triggerSubmit: Function }>;
   onSubmitAssigneeForm: (data: Partial<Assignee>) => void;
   triggerSubmitForm: () => void;
+  editingAssignee?: Assignee | null;
 }
 
 const AssigneeModals = ({
-  createMutation,
+  addEditModalIsLoading,
   triggerSubmitForm,
   assigneeCreateModal,
-  deleteAssigreeModal,
+  assigneeDeleteModal,
   formRef,
   errorMessage,
   onSubmitAssigneeForm,
+  editingAssignee,
 }: Props) => {
   return (
     <>
       {/* Create Assignee Modal */}
       <CustomModal
-        title="Create new Assignee"
+        title={(editingAssignee ? "Edit" : "Create new") + " Assignee"}
         footer={
           <div>
             {/* <Button
@@ -47,22 +43,23 @@ const AssigneeModals = ({
             </Button> */}
 
             <Button
-              disabled={createMutation.isPending}
+              disabled={addEditModalIsLoading}
               onClick={triggerSubmitForm}
               className="modal-action-button"
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}>
-              {createMutation.isPending && (
+              {addEditModalIsLoading && (
                 <CircularProgress size="20px" color="inherit" />
               )}
-              &nbsp; Create
+              &nbsp; {editingAssignee ? "Edit" : "Create"}
             </Button>
           </div>
         }
         isOpen={assigneeCreateModal.isOpen}
         onClose={assigneeCreateModal.closeModal}>
         <AssigneeForm
+          defaultValue={editingAssignee}
           errorMessage={errorMessage}
           ref={formRef}
           onSubmit={onSubmitAssigneeForm}
@@ -71,8 +68,8 @@ const AssigneeModals = ({
 
       {/* Delete Assignee Confirm Modal */}
       <CustomModal
-        isOpen={deleteAssigreeModal.isOpen}
-        onClose={deleteAssigreeModal.closeModal}
+        isOpen={assigneeDeleteModal.isOpen}
+        onClose={assigneeDeleteModal.closeModal}
         title="Delete Assignee"
         footer={
           <div>
