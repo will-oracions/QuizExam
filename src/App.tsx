@@ -1,13 +1,12 @@
 import React from "react";
-import axios from "axios";
 
 import Header from "./components/Header";
 
 import "./api/mockAxios";
-import { Todo } from "./modules/todos/models/Todo";
-import useTodos from "./modules/todos/hooks/useTodos";
-import Sidebar from "./components/Sidebar";
 import CustomModal from "./components/CustomModal/CustomModal";
+import useCustomModal from "./components/CustomModal/hooks/useCustomModal";
+import Sidebar from "./components/Sidebar";
+import { Todo } from "./modules/todos/models/Todo";
 // import CustomDatatable from "./components/CustomDatatable";
 
 function App() {
@@ -40,15 +39,7 @@ function App() {
   // console.log("DATA: ", data);
 
   // Modal
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  const { isOpen, openModal, closeModal } = useCustomModal();
 
   return (
     <>
