@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -10,6 +10,7 @@ import useCreateAssignee from "../hooks/useCreateAssignee";
 import { Assignee } from "../models/Assignee";
 import Sidebar2 from "../../../components/Sidebar2";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
+import exportToPdf from "../../../helpers/exporter";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
@@ -113,6 +114,16 @@ const Assignees = () => {
       <main id="app-main">
         <Box>
           <h3 className="page-title">Manage Assignees</h3>
+
+          <Box marginBottom={2} display="flex" justifyContent="flex-end">
+            <Button
+              onClick={() => exportToPdf<Assignee>(assignees, "assignees-list")}
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "10px" }}>
+              Export to PDF
+            </Button>
+          </Box>
 
           <AssigneeDatatable
             assignees={assignees}
