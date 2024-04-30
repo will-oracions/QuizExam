@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 interface AssigneeFormProps {
   onSubmit: (text: string) => void;
@@ -16,12 +16,39 @@ export default function AssigneeForm({ onSubmit }: AssigneeFormProps) {
   return (
     <div style={{ minWidth: "400px" }}>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          label="Task"
-          {...register("text", { required: true })}
-        />
+        <Box marginBottom={2}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="name"
+            {...register("text", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: "Le nom doit avoir au moins 3 charactères",
+              },
+            })}
+          />
+        </Box>
+
+        <Box marginBottom={2}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="email"
+            {...register("text", { required: true })}
+          />
+        </Box>
+
+        <Box marginBottom={2}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="phone"
+            {...register("text", { required: true })}
+          />
+        </Box>
+
         {/* <Button
         type="submit"
         variant="contained"

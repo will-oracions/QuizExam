@@ -12,6 +12,7 @@ const Assignees = () => {
   // const [assignees] = React.useState<Assignee[]>([]);
 
   const assigneeCreateModal = useCustomModal();
+  const deleteAssigreeModal = useCustomModal();
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID" },
@@ -37,7 +38,7 @@ const Assignees = () => {
       <main id="app-main">
         <h3>Manage Assignees</h3>
 
-        <Box>
+        <Box marginBottom={5}>
           <Button
             onClick={assigneeCreateModal.openModal}
             variant="outlined"
@@ -51,8 +52,8 @@ const Assignees = () => {
         <CustomDatatable<Assignee>
           rows={rows}
           columns={columns}
-          onEdit={(row) => console.log(row)}
-          onDelete={(row) => console.log(row)}
+          onEdit={(row) => assigneeCreateModal.openModal()}
+          onDelete={(row) => deleteAssigreeModal.openModal()}
         />
       </main>
 
@@ -81,6 +82,33 @@ const Assignees = () => {
         isOpen={assigneeCreateModal.isOpen}
         onClose={assigneeCreateModal.closeModal}>
         <AssigneeForm onSubmit={(data) => console.log("Data: ", data)} />
+      </CustomModal>
+
+      <CustomModal
+        isOpen={deleteAssigreeModal.isOpen}
+        onClose={deleteAssigreeModal.closeModal}
+        title="Delete Assignee"
+        footer={
+          <div>
+            <Button
+              className="modal-action-button"
+              type="submit"
+              variant="contained"
+              color="error"
+              style={{ marginTop: "10px" }}>
+              Cancel
+            </Button>
+
+            <Button
+              className="modal-action-button"
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "10px" }}>
+              Create
+            </Button>
+          </div>
+        }>
+        <h4>Voulez-vous vraiment supprimer ?</h4>
       </CustomModal>
     </>
   );
