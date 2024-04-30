@@ -1,8 +1,22 @@
-const Sidebar = () => {
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
+interface Props {
+  onCreateTodo: () => void;
+}
+
+const Sidebar = ({ onCreateTodo }: Props) => {
   return (
     <div>
       <div>
-        <button>+ Add New Task</button>
+        <Button
+          onClick={onCreateTodo}
+          variant="outlined"
+          color="primary"
+          style={{ marginTop: "10px" }}
+          startIcon={<AddIcon />}>
+          Create Todo
+        </Button>
       </div>
 
       <div className="sidebar-tasks-list">

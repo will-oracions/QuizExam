@@ -11,6 +11,7 @@ import CustomDataTable from "./components/CustomDatatable/CustomDatatable";
 import { GridColDef } from "@mui/x-data-grid";
 import CustomAutoComplete from "./components/CustomAutoComplete/CustomAutoComplete";
 import TodoForm from "./modules/todos/components/TodoForm";
+import { Button } from "@mui/material";
 // import CustomDatatable from "./components/CustomDatatable";
 
 interface Movie {
@@ -49,6 +50,7 @@ function App() {
 
   // Modal
   const { isOpen, openModal, closeModal } = useCustomModal();
+  const todoCreateModal = useCustomModal();
 
   interface Row {
     id: number;
@@ -204,6 +206,10 @@ function App() {
     { label: "Monty Python and the Holy Grail", year: 1975 },
   ];
 
+  const handleOpenTodoCreateModal = () => {
+    todoCreateModal.openModal();
+  };
+
   return (
     <>
       <div id="app-layout" className="container">
@@ -212,7 +218,7 @@ function App() {
         </div>
 
         <div id="app-sidebar">
-          <Sidebar />
+          <Sidebar onCreateTodo={handleOpenTodoCreateModal} />
         </div>
 
         <main id="app-main">
@@ -373,6 +379,33 @@ function App() {
         </p>
 
         <button onClick={closeModal}>Fermer</button>
+      </CustomModal>
+
+      <CustomModal
+        title="Create a todo"
+        footer={
+          <div>
+            <Button
+              className="modal-action-button"
+              type="submit"
+              variant="contained"
+              color="error"
+              style={{ marginTop: "10px" }}>
+              Cancel
+            </Button>
+
+            <Button
+              className="modal-action-button"
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "10px" }}>
+              Create
+            </Button>
+          </div>
+        }
+        isOpen={todoCreateModal.isOpen}
+        onClose={todoCreateModal.closeModal}>
+        <TodoForm onSubmit={(data) => console.log("Data: ", data)} />
       </CustomModal>
     </>
   );

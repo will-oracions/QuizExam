@@ -14,20 +14,22 @@ export default function TodoForm({ onSubmit }: TodoFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <TextField
-        fullWidth
-        variant="outlined"
-        label="Task"
-        {...register("text", { required: true })}
-      />
-      <Button
+    <div style={{ minWidth: "400px" }}>
+      <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          label="Task"
+          {...register("text", { required: true })}
+        />
+        {/* <Button
         type="submit"
         variant="contained"
         color="primary"
         style={{ marginTop: "10px" }}>
         Add Task
-      </Button>
-    </form>
+      </Button> */}
+      </form>
+    </div>
   );
 }
