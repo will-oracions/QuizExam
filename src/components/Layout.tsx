@@ -1,8 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import { Box } from "@mui/material";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 import "../api/mockAxios";
-import { Box } from "@mui/material";
+import Header from "./Header";
 
 function Layout() {
   return (
@@ -16,6 +19,8 @@ function Layout() {
           <Outlet />
         </Box>
       </div>
+
+      <ToastContainer />
     </>
   );
 }

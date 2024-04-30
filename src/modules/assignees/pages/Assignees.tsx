@@ -1,3 +1,5 @@
+import React from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,10 +9,10 @@ import CustomModal from "../../../components/CustomModal/CustomModal";
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
 import AssigneeForm from "../components/AssigneeForm";
 import { Assignee } from "../models/Assignee";
-import React from "react";
 
 const Assignees = () => {
   // const [assignees] = React.useState<Assignee[]>([]);
+  const notify = () => toast("Wow so easy!");
 
   const assigneeCreateModal = useCustomModal();
   const deleteAssigreeModal = useCustomModal();
@@ -36,8 +38,13 @@ const Assignees = () => {
     { id: 9, name: "Roxie", email: "Harvey", phone: "4545174421" },
   ];
 
-  const handleSubmitForm = () => {
+  const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
+  };
+
+  const onSubmitAssigneeForm = (data: Partial<Assignee>) => {
+    console.log("Data: ", data);
+    notify();
   };
 
   return (
@@ -80,7 +87,7 @@ const Assignees = () => {
 
             <Button
               disabled={false}
-              onClick={handleSubmitForm}
+              onClick={triggerSubmitForm}
               className="modal-action-button"
               variant="contained"
               color="primary"
@@ -92,10 +99,7 @@ const Assignees = () => {
         }
         isOpen={assigneeCreateModal.isOpen}
         onClose={assigneeCreateModal.closeModal}>
-        <AssigneeForm
-          ref={formRef}
-          onSubmit={(data) => console.log("Data: ", data)}
-        />
+        <AssigneeForm ref={formRef} onSubmit={onSubmitAssigneeForm} />
       </CustomModal>
 
       {/* Delete Assignee Confirm Modal */}
