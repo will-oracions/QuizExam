@@ -1,25 +1,22 @@
-import React from "react";
-
-import Header from "./components/Header";
-
-import "./api/mockAxios";
-import CustomModal from "./components/CustomModal/CustomModal";
-import useCustomModal from "./components/CustomModal/hooks/useCustomModal";
-import Sidebar from "./components/Sidebar";
-import { Todo } from "./modules/todos/models/Todo";
-import CustomDataTable from "./components/CustomDatatable/CustomDatatable";
-import { GridColDef } from "@mui/x-data-grid";
-import CustomAutoComplete from "./components/CustomAutoComplete/CustomAutoComplete";
-import TodoForm from "./modules/todos/components/TodoForm";
 import { Button } from "@mui/material";
-// import CustomDatatable from "./components/CustomDatatable";
+import { GridColDef } from "@mui/x-data-grid";
+import React from "react";
+import CustomAutoComplete from "../../../components/CustomAutoComplete/CustomAutoComplete";
+import CustomModal from "../../../components/CustomModal/CustomModal";
+import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
+import Sidebar from "../../../components/Sidebar";
+import TodoForm from "../components/TodoForm";
+import { Todo } from "../models/Todo";
+import CustomDatatable from "../../../components/CustomDatatable/CustomDatatable";
+
+import "../../../api/mockAxios";
 
 interface Movie {
   label: string;
   year: number;
 }
 
-function App() {
+const Todos = () => {
   const [todos] = React.useState<Todo[]>([]);
 
   // const { data } = useTodos();
@@ -212,40 +209,34 @@ function App() {
 
   return (
     <>
-      <div id="app-layout" className="container">
-        <div id="app-header">
-          <Header />
-        </div>
-
-        <div id="app-sidebar">
-          <Sidebar onCreateTodo={handleOpenTodoCreateModal} />
-        </div>
-
-        <main id="app-main">
-          <h1>WizeTodoList</h1>
-          <ul>
-            {todos.map((todo, index) => (
-              <li key={index}>{todo.id}</li>
-            ))}
-          </ul>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea at
-            distinctio, vel, quia ab iste optio dolores doloribus explicabo sed
-            recusandae voluptate beatae excepturi rerum mollitia sequi velit
-            blanditiis. Magnam.
-          </p>
-
-          <button onClick={openModal}>Opem Modal</button>
-
-          <CustomDataTable<Row>
-            rows={rows}
-            columns={columns}
-            onEdit={(row) => console.log(row)}
-            onDelete={(row) => console.log(row)}
-          />
-        </main>
+      <div id="app-sidebar">
+        <Sidebar onCreateTodo={handleOpenTodoCreateModal} />
       </div>
+
+      <main id="app-main">
+        <h1>WizeTodoList</h1>
+        <ul>
+          {todos.map((todo, index) => (
+            <li key={index}>{todo.id}</li>
+          ))}
+        </ul>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea at
+          distinctio, vel, quia ab iste optio dolores doloribus explicabo sed
+          recusandae voluptate beatae excepturi rerum mollitia sequi velit
+          blanditiis. Magnam.
+        </p>
+
+        <button onClick={openModal}>Opem Modal</button>
+
+        <CustomDatatable<Row>
+          rows={rows}
+          columns={columns}
+          onEdit={(row) => console.log(row)}
+          onDelete={(row) => console.log(row)}
+        />
+      </main>
 
       <CustomModal
         title="This is the WizeTodoList Modal"
@@ -409,6 +400,6 @@ function App() {
       </CustomModal>
     </>
   );
-}
+};
 
-export default App;
+export default Todos;

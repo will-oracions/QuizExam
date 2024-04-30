@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "./LanguageSwitcher";
+import React from "react";
+
 import {
   AppBar,
   Toolbar,
@@ -14,7 +14,10 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import { NavLink } from "react-router-dom";
+
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const menu = [
   {
@@ -23,11 +26,12 @@ const menu = [
   },
   {
     label: "Assignees",
-    url: "assignees",
+    url: "/assignees",
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
+// theme
+const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1,
   },
@@ -58,7 +62,7 @@ const Header = () => {
 
   const displayMenu = () => {
     return menu.map((menuItem, index) => (
-      <Button key={index} color="inherit">
+      <Button component={NavLink} to={menuItem.url} key={index} color="inherit">
         {menuItem.label}
       </Button>
     ));
