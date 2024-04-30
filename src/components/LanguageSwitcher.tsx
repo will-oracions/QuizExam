@@ -1,20 +1,37 @@
-import React from "react";
+import { FormControl, Select, MenuItem } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
-  const handleChangeLanguage = (e: React.FormEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(e.currentTarget.value);
+  // React.FormEvent<HTMLSelectElement>
+  const handleChangeLanguage = (e: any) => {
+    i18n.changeLanguage(e.target.value);
   };
 
   return (
-    <div>
+    <>
+      <FormControl fullWidth style={{ background: "white" }}>
+        {/* <InputLabel id="select-label">Select an Option</InputLabel> */}
+        <Select
+          labelId="select-label"
+          id="select"
+          value={i18n.language}
+          onChange={handleChangeLanguage}
+          // label="Select an Option"
+        >
+          {/* <MenuItem value="">None</MenuItem> */}
+          <MenuItem value="fr">Français</MenuItem>
+          <MenuItem value="en">English</MenuItem>
+        </Select>
+      </FormControl>
+      {/* <div>
       <select onChange={handleChangeLanguage} value={i18n.language}>
         <option value="fr">Français</option>
         <option value="en">English</option>
       </select>
-    </div>
+    </div> */}
+    </>
   );
 };
 
