@@ -27,15 +27,15 @@ const Assignees = () => {
   const assigneeCreateModal = useCustomModal();
   const assigneeDeleteModal = useCustomModal();
 
-  const createMutation = useCreateAssignee();
-  const editMutation = useUpdateAssignee();
-  const getListQuery = useAssignees();
+  const createAssigneeMutation = useCreateAssignee();
+  const editAssigneeMutation = useUpdateAssignee();
+  const getAssigneeListQuery = useAssignees();
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 
   React.useEffect(() => {
-    getListQuery.data && setAssignees(getListQuery.data);
-  }, [getListQuery.data]);
+    getAssigneeListQuery.data && setAssignees(getAssigneeListQuery.data);
+  }, [getAssigneeListQuery.data]);
 
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
@@ -62,7 +62,7 @@ const Assignees = () => {
 
     setErrorMessage("");
 
-    createMutation.mutate(data, {
+    createAssigneeMutation.mutate(data, {
       onSuccess: (res) => {
         // console.log("Response: ", res);
 
@@ -76,7 +76,7 @@ const Assignees = () => {
   const handleSaveUpdateAssignee = (data: Partial<Assignee>) => {
     setErrorMessage("");
 
-    editMutation.mutate(data as Assignee, {
+    editAssigneeMutation.mutate(data as Assignee, {
       onSuccess: (res) => {
         console.log("Response: ", res);
 
@@ -87,19 +87,19 @@ const Assignees = () => {
     });
   };
 
-  const handleCreateAssignee = () => {
+  const openCreateAssigneeModal = () => {
     assigneeCreateModal.openModal();
     setErrorMessage("");
   };
 
-  const handleEditAssigee = (row: Assignee) => {
-    console.log(row);
+  const opentEditAssigeeModal = (row: Assignee) => {
+    // console.log(row);
     setEditingAssignee(row);
     setErrorMessage("");
     assigneeCreateModal.openModal();
   };
 
-  const handleDeleteAssignee = (row: Assignee) => {
+  const openDeleteAssigneeModal = (row: Assignee) => {
     console.log(row);
     assigneeDeleteModal.openModal();
   };
@@ -107,7 +107,7 @@ const Assignees = () => {
   return (
     <>
       <div id="app-sidebar">
-        <Sidebar2 handleCreate={handleCreateAssignee} />
+        <Sidebar2 handleCreate={openCreateAssigneeModal} />
       </div>
 
       <main id="app-main">
@@ -116,8 +116,8 @@ const Assignees = () => {
 
           <AssigneeDatatable
             assignees={assignees}
-            handleEdit={handleEditAssigee}
-            handleDelete={handleDeleteAssignee}
+            handleEdit={opentEditAssigeeModal}
+            handleDelete={openDeleteAssigneeModal}
           />
         </Box>
       </main>
@@ -129,7 +129,7 @@ const Assignees = () => {
         formRef={formRef}
         onSubmitAssigneeForm={onSubmitAssigneeForm}
         addEditModalIsLoading={
-          createMutation.isPending || editMutation.isPending
+          createAssigneeMutation.isPending || editAssigneeMutation.isPending
         }
         triggerSubmitForm={triggerSubmitForm}
         editingAssignee={editingAssignee}
