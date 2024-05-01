@@ -2,14 +2,14 @@ import { Assignee } from "../../assignees/models/Assignee";
 
 export interface Todo {
   id: number;
-  title?: string;
-  assignee?: Assignee;
+  title: string;
+  assignee: Assignee;
   startDate?: Date | string;
   endDate?: Date | string;
-  prority?: TodoPriorityEnum;
-  labels?: TodoLabelEnum[];
+  prority: TodoPriorityEnum;
+  labels: TodoLabelEnum[];
   description?: string;
-  completed?: boolean;
+  completed: boolean;
 }
 
 export enum TodoPriorityEnum {
