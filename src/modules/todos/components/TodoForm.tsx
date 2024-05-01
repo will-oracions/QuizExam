@@ -41,6 +41,7 @@ const TodoForm = forwardRef(
       handleSubmit,
       reset,
       setValue,
+      // trigger,
       formState: { errors },
     } = useForm<Partial<Todo>>({
       defaultValues: { ...defaultValue } || {},
@@ -83,6 +84,7 @@ const TodoForm = forwardRef(
         reset();
       },
     }));
+    trigger("assignee");
 
     const handleFormSubmit: SubmitHandler<Partial<Todo>> = (data) => {
       onSubmit(data);
@@ -266,21 +268,35 @@ const TodoForm = forwardRef(
                   />
                 )}
               /> */}
+              <FormControl fullWidth error={Boolean(errors.assignee)}>
+                <Autocomplete
+                  {...register("assignee", {
+                    required: {
+                      value: true,
+                      message: "Assignee is required",
+                    },
+                  })}
+                  options={countries}
+                  // defaultValue={countries[0]}
+                  getOptionLabel={(option) => option.label}
+                  renderInput={(params) => (
+                    <TextField
+                      error={!!errors.assignee}
+                      {...params}
+                      label="Choisissez un pays"
+                    />
+                  )}
+                  // @ts-ignore
+                  onChange={(event, value) => {
+                    setValue("assignee", value as any);
+                    // trigger("assignee");
+                  }}
+                />
 
-              <Autocomplete
-                {...register("assignee")}
-                options={countries}
-                defaultValue={countries[0]}
-                getOptionLabel={(option) => option.label}
-                renderInput={(params) => (
-                  <TextField {...params} label="Choisissez un pays" />
+                {errors.assignee && (
+                  <FormHelperText>{errors.assignee.message}</FormHelperText>
                 )}
-                onChange={(event, value) => {
-                  setValue("assignee", value as any); // Mettre à jour la valeur dans React Hook Form
-                }}
-              />
-
-              {errors.assignee && <p>{errors.assignee.message}</p>}
+              </FormControl>
             </Grid>
 
             <Grid item xs={12}>
