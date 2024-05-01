@@ -46,6 +46,7 @@ export const generateFakeTodos = (
       prority: getRandomEnumValue(TodoPriorityEnum),
       labels: getRandomEnumValues(TodoLabelEnum, getRandomNumber(1, 3)),
       description: faker.lorem.paragraph(),
+      completed: (() => (getRandomNumber(0, 1) === 0 ? false : true))(),
     };
     todos.push(todo);
   }

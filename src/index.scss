@@ -72,8 +72,10 @@ body {
       #app-sidebar {
         // width: 300px;
         // padding: 10px;
-        border: 4px solid green;
+        // border: 4px solid green;
         grid-area: sidebar;
+        border-right: 2px solid #f3f3f3;
+        padding-right: 20px;
 
         font-family: "Roboto" sans-serif;
 
@@ -132,8 +134,9 @@ body {
 
       #app-main {
         padding: 10px;
-        border: 4px solid yellow;
+        // border: 4px solid yellow;
         grid-area: main;
+        margin-left: 20px;
       }
     }
   }
