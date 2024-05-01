@@ -6,20 +6,27 @@ export interface Todo {
   assignee?: Assignee;
   startDate?: Date;
   endDate?: Date;
-  prority?: TodoPrority;
-  labels?: TodoLabel[];
+  prority?: TodoPriorityEnum;
+  labels?: TodoLabelEnum[];
   description?: string;
 }
 
-export enum TodoPrority {
-  LOW,
-  MEDIUM,
-  HIGHT,
+export enum TodoPriorityEnum {
+  LOW = "1",
+  MEDIUM = "2",
+  HIGHT = "3",
 }
 
-export enum TodoLabel {
-  HTML,
-  CSS,
-  JQUERY,
-  NODEJS,
+export enum TodoLabelEnum {
+  HTML = "1",
+  CSS = "2",
+  JQUERY = "3",
+  NODEJS = "4",
+}
+
+export enum TodoFilterEnum {
+  ALL = "1",
+  PRORITY = "2",
+  TODAY = "3",
+  COMPLETED = "4",
 }

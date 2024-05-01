@@ -6,5 +6,13 @@
   "noTaskAssigned": "No tasks assigned",
   "men": "Men",
   "women": "Moman",
-  "all": "All"
+  "all": "All",
+  "todos": {
+    "low": "Low",
+    "medium": "Medium",
+    "hight": "Hight",
+    "priority": "Priority",
+    "today": "Today",
+    "completed": "Completed"
+  }
 }

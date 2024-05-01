@@ -1,0 +1,25 @@
+import { Assignee } from "../../assignees/models/Assignee";
+
+export interface Todo {
+  id: number;
+  title?: string;
+  assignee?: Assignee;
+  startDate?: Date;
+  endDate?: Date;
+  prority?: TodoPrority;
+  labels?: TodoLabel[];
+  description?: string;
+}
+
+export enum TodoPrority {
+  LOW,
+  MEDIUM,
+  HIGHT,
+}
+
+export enum TodoLabel {
+  HTML,
+  CSS,
+  JQUERY,
+  NODEJS,
+}

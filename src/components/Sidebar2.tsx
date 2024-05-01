@@ -10,6 +10,7 @@ import {
   EventAvailable,
   LabelImportant,
   Man,
+  People,
   Warning,
   Woman,
 } from "@mui/icons-material";
@@ -47,7 +48,7 @@ const Sidebar2 = ({
       case String(AssigneeFilterEnum.ALL):
         return (
           <>
-            <LabelImportant /> <span>{t("all")}</span>
+            <People /> <span>{t("all")}</span>
           </>
         );
       case String(AssigneeFilterEnum.ALL_DONE):
