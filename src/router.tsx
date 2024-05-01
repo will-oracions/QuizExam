@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
 import Todos from "./modules/todos/pages/Todos";
 import Layout from "./components/Layout";
 import Error from "./components/Error";
@@ -12,6 +12,10 @@ const routes: RouteObject[] = [
     element: <Layout />,
     errorElement: <Error />,
     children: [
+      {
+        index: true,
+        element: <Navigate to="/tasks" />,
+      },
       {
         path: "tasks",
         element: <Todos />,
