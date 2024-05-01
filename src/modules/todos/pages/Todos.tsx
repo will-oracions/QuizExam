@@ -1,12 +1,10 @@
 import { Button } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
-import React from "react";
 import CustomAutoComplete from "../../../components/CustomAutoComplete/CustomAutoComplete";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
 import Sidebar from "../../../components/Sidebar";
 import TodoForm from "../components/TodoForm";
-import { Todo } from "../models/Todo";
 import CustomDatatable from "../../../components/CustomDatatable/CustomDatatable";
 
 import "../../../api/mockAxios";
@@ -17,7 +15,7 @@ interface Movie {
 }
 
 const Todos = () => {
-  const [todos] = React.useState<Todo[]>([]);
+  // const [todos] = React.useState<Todo[]>([]);
 
   // const { data } = useTodos();
 

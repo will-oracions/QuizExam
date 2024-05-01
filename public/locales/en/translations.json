@@ -1,9 +1,10 @@
 {
   "appDescription": "Manage your tasks",
   "pageNotFoundMessage": "The page your are looking for does not exist",
-  "AllTaskDone": "All task done",
+  "allTaskDone": "All task done",
   "NoTaskDone": "No task done",
   "noTaskAssigned": "No tasks assigned",
-  "men": "men",
-  "women": "woman"
+  "men": "Men",
+  "women": "Moman",
+  "all": "All"
 }

@@ -7,6 +7,7 @@ import {
 import { useTranslation } from "react-i18next";
 import {
   ErrorOutline,
+  EventAvailable,
   LabelImportant,
   Man,
   Warning,
@@ -21,47 +22,50 @@ const Sidebar2 = ({ handleCreate }: Props) => {
   const { t } = useTranslation();
 
   const getMainFilterLabel = (value: string) => {
-    let result;
     switch (value) {
-      case String(AssigneeFilterEnum.ALL_DONE):
-        return (result = (
+      case String(AssigneeFilterEnum.ALL):
+        return (
           <>
-            <LabelImportant /> <span>{t("AllTaskDone")}</span>
+            <LabelImportant /> <span>{t("all")}</span>
           </>
-        ));
-
+        );
+      case String(AssigneeFilterEnum.ALL_DONE):
+        return (
+          <>
+            <EventAvailable /> <span>{t("allTaskDone")}</span>
+          </>
+        );
       case String(AssigneeFilterEnum.DONT_HAVE_TASK):
-        return (result = (
+        return (
           <>
             <ErrorOutline /> {t("noTaskAssigned")}
           </>
-        ));
+        );
 
       case String(AssigneeFilterEnum.NOTHING_DONE):
-        return (result = (
+        return (
           <>
             <Warning /> {t("NoTaskDone")}
           </>
-        ));
+        );
     }
   };
 
   const getSecondFilterLabel = (value: string) => {
-    let result;
     switch (value) {
       case String(AssigneeGenderEnum.MAN):
-        return (result = (
+        return (
           <>
             <Man /> {t("men")}
           </>
-        ));
+        );
 
       case String(AssigneeGenderEnum.WOMEN):
-        return (result = (
+        return (
           <>
             <Woman /> {t("women")}
           </>
-        ));
+        );
     }
   };
 

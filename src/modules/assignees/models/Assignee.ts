@@ -3,10 +3,11 @@ export interface Assignee {
   name?: string;
   email?: string;
   phone?: string;
-  gender: AssigneeGenderEnum;
+  gender?: AssigneeGenderEnum;
 }
 
 export enum AssigneeFilterEnum {
+  ALL,
   NOTHING_DONE,
   ALL_DONE,
   DONT_HAVE_TASK,
