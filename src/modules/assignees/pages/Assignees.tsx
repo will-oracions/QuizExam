@@ -139,6 +139,13 @@ const Assignees = () => {
     }
   };
 
+  const handleExportToPDF = () => {
+    exportToPdf<Assignee>(
+      filteredAssignees.length > 0 ? filteredAssignees : assignees,
+      "assignees-list"
+    );
+  };
+
   const openCreateAssigneeModal = () => {
     assigneeCreateModal.openModal();
     setErrorMessage("");
@@ -175,7 +182,7 @@ const Assignees = () => {
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
             <Button
-              onClick={() => exportToPdf<Assignee>(assignees, "assignees-list")}
+              onClick={handleExportToPDF}
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}>
