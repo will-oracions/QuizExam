@@ -13,13 +13,34 @@ import {
   Warning,
   Woman,
 } from "@mui/icons-material";
+import React from "react";
 
 interface Props {
   handleCreate: () => void;
+  mainFilter: string;
+  secondFilter: string;
+  setMainFilter: (filter: string) => void;
+  setSecondFilter: (filter: string) => void;
 }
 
-const Sidebar2 = ({ handleCreate }: Props) => {
+const Sidebar2 = ({
+  handleCreate,
+  mainFilter,
+  secondFilter,
+  setMainFilter,
+  setSecondFilter,
+}: Props) => {
   const { t } = useTranslation();
+
+  // React.useEffect(() => {
+  //   console.log("Filter: ", mainFilter);
+  //   console.log(mainFilter === String(AssigneeFilterEnum.ALL));
+  // }, [mainFilter]);
+
+  // React.useEffect(() => {
+  //   console.log("Second Filter: ", secondFilter);
+  //   console.log(secondFilter === String(AssigneeGenderEnum.MAN));
+  // }, [secondFilter]);
 
   const getMainFilterLabel = (value: string) => {
     switch (value) {
@@ -75,8 +96,12 @@ const Sidebar2 = ({ handleCreate }: Props) => {
       .map((value, i) => {
         return (
           <div
+            onClick={() => setMainFilter(value)}
             key={i}
-            className={"sidebar-tasks-list-item" + (i === 0 ? " active" : "")}>
+            className={
+              "sidebar-tasks-list-item" +
+              (mainFilter === value ? " active" : "")
+            }>
             <span>{getMainFilterLabel(value)}</span>
           </div>
         );
@@ -88,7 +113,13 @@ const Sidebar2 = ({ handleCreate }: Props) => {
       .filter((key) => !isNaN(Number(key)))
       .map((value, i) => {
         return (
-          <div key={i} className="sidebar-tasks-list-item">
+          <div
+            onClick={() => setSecondFilter(value)}
+            key={i}
+            className={
+              "sidebar-tasks-list-item" +
+              (secondFilter === value ? " active" : "")
+            }>
             <span>{getSecondFilterLabel(value)}</span>
           </div>
         );
@@ -131,6 +162,16 @@ const Sidebar2 = ({ handleCreate }: Props) => {
 
       {/* Lables Filter */}
       <div className="sidebar-tasks-list">
+        <div
+          onClick={() => setSecondFilter("")}
+          className={
+            "sidebar-tasks-list-item" + (secondFilter === "" ? " active" : "")
+          }>
+          <span>
+            <LabelImportant />
+            <span>{t("all")}</span>
+          </span>
+        </div>
         {displaySecondFilters()}
         {/* <div className="sidebar-tasks-list-item">
           <span>Men</span>

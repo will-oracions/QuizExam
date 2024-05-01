@@ -7,7 +7,7 @@ import AssigneeDatatable from "../components/AssigneeDatatable";
 import AssigneeModals from "../components/AssigneeModals";
 import useAssignees from "../hooks/useAssignees";
 import useCreateAssignee from "../hooks/useCreateAssignee";
-import { Assignee } from "../models/Assignee";
+import { Assignee, AssigneeFilterEnum } from "../models/Assignee";
 import Sidebar2 from "../../../components/Sidebar2";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
@@ -20,6 +20,12 @@ const Assignees = () => {
   );
   const [deletingAssignee, setDeletingAssignee] =
     React.useState<Assignee | null>(null);
+
+  const [mainFilter, setMainFilter] = React.useState<string>(
+    String(AssigneeFilterEnum.ALL)
+  );
+
+  const [secondFilter, setSecondFilter] = React.useState<string>("");
 
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
@@ -125,7 +131,13 @@ const Assignees = () => {
   return (
     <>
       <div id="app-sidebar">
-        <Sidebar2 handleCreate={openCreateAssigneeModal} />
+        <Sidebar2
+          mainFilter={mainFilter}
+          secondFilter={secondFilter}
+          setMainFilter={setMainFilter}
+          setSecondFilter={setSecondFilter}
+          handleCreate={openCreateAssigneeModal}
+        />
       </div>
 
       <main id="app-main">
