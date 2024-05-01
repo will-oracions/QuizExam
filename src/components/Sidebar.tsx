@@ -8,6 +8,7 @@ import {
   CallMissedOutgoing,
   DonutLarge,
   LabelImportant,
+  LabelOutlined,
   ListAlt,
   Speed,
   Straighten,
@@ -91,7 +92,8 @@ const Sidebar = ({
       case String(TodoPriorityEnum.HIGHT):
         return (
           <>
-            <DonutLarge /> {t("todos.hight")}
+            {/* <DonutLarge /> {t("todos.hight")} */}
+            <LabelOutlined style={{ color: "green" }} /> {t("todos.hight")}
           </>
         );
     }

@@ -1,9 +1,9 @@
 export interface Assignee {
   id: number;
-  name?: string;
-  email?: string;
-  phone?: string;
-  gender?: AssigneeGenderEnum;
+  name: string;
+  email: string;
+  phone: string;
+  gender: AssigneeGenderEnum;
 }
 
 export enum AssigneeFilterEnum {

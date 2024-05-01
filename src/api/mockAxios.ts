@@ -1,10 +1,7 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { Todo } from "../modules/todos/models/Todo";
-import {
-  Assignee,
-  AssigneeGenderEnum,
-} from "../modules/assignees/models/Assignee";
+import { Assignee } from "../modules/assignees/models/Assignee";
 import { generateFakeId, sleep } from "../utils";
 import { assigneeFakeData, todoFakeData } from "./fakeData";
 
@@ -19,91 +16,45 @@ const mock = new MockAdapter(axios);
 let todos: any[] = todoFakeData;
 
 let assignees: Assignee[] = assigneeFakeData;
-// [
-// {
-//   id: 1,
-//   name: "Snow",
-//   email: "Jon",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.MAN,
-// },
-// {
-//   id: 2,
-//   name: "Lannister",
-//   email: "Cersei",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.MAN,
-// },
-// {
-//   id: 3,
-//   name: "Lannister",
-//   email: "Jaime",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.WOMEN,
-// },
-// {
-//   id: 4,
-//   name: "Stark",
-//   email: "Arya",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.WOMEN,
-// },
-// {
-//   id: 5,
-//   name: "Targaryen",
-//   email: "Daenerys",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.WOMEN,
-// },
-// {
-//   id: 6,
-//   name: "Melisandre",
-//   email: "",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.MAN,
-// },
-// {
-//   id: 7,
-//   name: "Clifford",
-//   email: "Ferrara",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.WOMEN,
-// },
-// {
-//   id: 8,
-//   name: "Frances",
-//   email: "Rossini",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.MAN,
-// },
-// {
-//   id: 9,
-//   name: "Roxie",
-//   email: "Harvey",
-//   phone: "4545174421",
-//   gender: AssigneeGenderEnum.WOMEN,
-// },
-// ];
 
 // Mock Todos Api
-mock.onGet("/todos").reply(200, todos);
+mock.onGet("/todos").reply(
+  200,
+  todos.map((todo): Todo => {
+    const assigneeId = todo.assigneeId;
+    delete todo.assigneeId;
+    return {
+      ...todo,
+      assignee: assigneeFakeData.find((a) => a.id === assigneeId),
+    };
+  })
+);
 
-mock.onPost("/todos").reply((config) => {
+mock.onPost("/todos").reply(async (config) => {
   const todo = JSON.parse(config.data);
   todos.push({ ...todo, id: generateFakeId() });
+
+  await sleep(3000);
+
   return [201, todo];
 });
 
-mock.onPut(/\/todos\/\d+/).reply((config) => {
+mock.onPut(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
   const updatedTodo: Todo = JSON.parse(config.data);
   todos = todos.map((todo) => (todo.id === todoId ? updatedTodo : todo));
+
+  await sleep(3000);
+
   return [200, updatedTodo];
 });
 
-mock.onDelete(/\/todos\/\d+/).reply((config) => {
+mock.onDelete(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
   todos = todos.filter((todo) => todo.id !== todoId);
+
+  await sleep(1000);
+
   return [204];
 });
 

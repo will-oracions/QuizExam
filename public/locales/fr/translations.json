@@ -1,7 +1,7 @@
 {
   "appDescription": "Une gestion optimal de vos tâches.",
   "pageNotFoundMessage": "La page que vous demandez n'existe pas.",
-  "AllTaskDone": "Toute tâches terminéés",
+  "allTaskDone": "Toute tâches terminées",
   "NoTaskDone": "Aucune tâche terminée",
   "noTaskAssigned": "Aucune tâche assignée",
   "men": "Homme",

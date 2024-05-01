@@ -10,7 +10,7 @@ interface Props {
 
 const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", flex: 1 },
+    { field: "id", headerName: "ID", width: 90 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
     { field: "phone", headerName: "Phone", flex: 1 },

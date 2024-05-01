@@ -9,6 +9,7 @@ export interface Todo {
   prority?: TodoPriorityEnum;
   labels?: TodoLabelEnum[];
   description?: string;
+  completed?: boolean;
 }
 
 export enum TodoPriorityEnum {

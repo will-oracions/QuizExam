@@ -142,11 +142,10 @@ const AssigneeForm = forwardRef(
                   value: true,
                   message: "Le genre est requis.",
                 },
-              })} // Enregistrer le champ avec React Hook Form
+              })}
               label="Gender"
-              value={gender || ""} // Utiliser watch pour obtenir la valeur actuelle et gérer le contrôle
-              onChange={handleChange} // Gérer le changement de valeur
-            >
+              value={gender || ""}
+              onChange={handleChange}>
               <MenuItem value={AssigneeGenderEnum.MAN}>Man</MenuItem>
               <MenuItem value={AssigneeGenderEnum.WOMEN}>Woman</MenuItem>
             </Select>

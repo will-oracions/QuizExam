@@ -7,12 +7,13 @@ import TodoDatatable from "../components/TodoDatatable";
 import TodoModals from "../components/TodoModals";
 import useTodos from "../hooks/useTodos";
 import useCreateTodo from "../hooks/useCreateTodo";
-import { Todo, TodoFilterEnum, TodoLabelEnum } from "../models/Todo";
-import Sidebar2 from "../../../components/Sidebar2";
+import { Todo, TodoFilterEnum } from "../models/Todo";
 import useUpdateTodo from "../hooks/useUpdateTodo";
 import exportToPdf from "../../../helpers/exporter";
 import useDeleteTodo from "../hooks/useDeleteTodo";
 import Sidebar from "../../../components/Sidebar";
+import useAssignees from "../../assignees/hooks/useAssignees";
+import { toAssigneeAutoCompleteType } from "../components/TodoForm";
 
 const Todos = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -37,7 +38,13 @@ const Todos = () => {
   const createTodoMutation = useCreateTodo();
   const editTodoMutation = useUpdateTodo();
   const deleteTodoMutation = useDeleteTodo();
+
   const getTodoListQuery = useTodos();
+  const getAssigneesListQuery = useAssignees();
+
+  // console.log("Todolist data: ", getTodoListQuery.data);
+
+  // console.log("Assignees data: ", getAssigneesListQuery.data);
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 
@@ -54,8 +61,8 @@ const Todos = () => {
   };
 
   const onSubmitTodoForm = (data: Partial<Todo>) => {
-    // console.log("Data: ", data);
-
+    console.log("Data: ", data);
+    return;
     const handler = editingTodo ? handleSaveUpdateTodo : handleSaveTodo;
 
     handler(data);
@@ -74,7 +81,7 @@ const Todos = () => {
 
     createTodoMutation.mutate(data, {
       onSuccess: (res) => {
-        // console.log("Response: ", res);
+        console.log("Response: ", res);
 
         setTodos([res as Todo, ...todos]);
         notify();
@@ -154,6 +161,11 @@ const Todos = () => {
     todoDeleteModal.openModal();
   };
 
+  const buildAssigneeAutoCompleteFieldData = () => {
+    if (!getAssigneesListQuery.data) return [];
+    return getAssigneesListQuery.data.map((a) => toAssigneeAutoCompleteType(a));
+  };
+
   return (
     <>
       <div id="app-sidebar">
@@ -201,6 +213,7 @@ const Todos = () => {
         triggerSubmitForm={triggerSubmitForm}
         editingTodo={editingTodo}
         triggerDelete={handleDeleteTodo}
+        assignees={buildAssigneeAutoCompleteFieldData()}
       />
     </>
   );

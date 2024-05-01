@@ -1,6 +1,6 @@
 import { Button, CircularProgress } from "@mui/material";
 import CustomModal from "../../../components/CustomModal/CustomModal";
-import TodoForm from "./TodoForm";
+import TodoForm, { AssigneeAutoCompleteType } from "./TodoForm";
 import { Todo } from "../models/Todo";
 import { CustomModalType } from "../../../components/CustomModal/hooks/useCustomModal";
 import { RefObject } from "react";
@@ -16,6 +16,7 @@ interface Props {
   editingTodo?: Todo | null;
   triggerDelete: () => void;
   isDeleting?: boolean;
+  assignees: AssigneeAutoCompleteType[];
 }
 
 const TodoModals = ({
@@ -29,6 +30,7 @@ const TodoModals = ({
   editingTodo,
   triggerDelete,
   isDeleting,
+  assignees,
 }: Props) => {
   return (
     <>
@@ -67,6 +69,7 @@ const TodoModals = ({
           errorMessage={errorMessage}
           ref={formRef}
           onSubmit={onSubmitTodoForm}
+          assignees={assignees}
         />
       </CustomModal>
 

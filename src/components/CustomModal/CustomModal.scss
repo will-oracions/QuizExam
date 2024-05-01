@@ -28,11 +28,11 @@
     max-height: 80%;
     overflow: auto;
     height: fit-content;
-    max-height: 60%;
+    max-height: 90%;
     animation: modalFadeIn 0.3s forwards;
 
     display: grid;
-    grid-template-rows: 5rem 1fr 5rem;
+    grid-template-rows: 4rem 1fr 5rem;
 
     &-header {
       display: flex;
