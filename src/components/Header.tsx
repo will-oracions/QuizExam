@@ -34,6 +34,7 @@ const menu = [
 const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1,
+    color: "white",
   },
   menuButton: {
     // [theme.breakpoints.up("md")]: {

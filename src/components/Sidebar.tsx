@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 const Sidebar = ({ onCreateTodo }: Props) => {
   return (
     <div>
-      <div>
+      <Box className="app-create-button">
         <Button
           onClick={onCreateTodo}
           variant="outlined"
@@ -17,7 +17,7 @@ const Sidebar = ({ onCreateTodo }: Props) => {
           startIcon={<AddIcon />}>
           Create Todo
         </Button>
-      </div>
+      </Box>
 
       <div className="sidebar-tasks-list">
         <div className="sidebar-tasks-list-item">

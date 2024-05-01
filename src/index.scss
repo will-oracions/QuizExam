@@ -6,10 +6,20 @@
   font-size: 1rem;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #41a0ff;
+}
+
 body {
   margin: 0;
   font-size: 2rem;
   font-family: "Roboto" sans-serif;
+  color: #0008;
 
   .page-title {
     margin: 0;
@@ -47,7 +57,11 @@ body {
         "sidebar main  main"
         "sidebar main  main";
 
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 25% 1fr;
+
+      @media screen and (max-width: 800px) {
+        grid-template-columns: 300px 1fr;
+      }
 
       #app-header {
         border: 4px solid orange;
@@ -57,9 +71,61 @@ body {
 
       #app-sidebar {
         // width: 300px;
-        padding: 10px;
+        // padding: 10px;
         border: 4px solid green;
         grid-area: sidebar;
+
+        font-family: "Roboto" sans-serif;
+
+        .app-create-button {
+          margin-left: 35px;
+          margin-bottom: 2rem;
+          margin-top: 0.5rem;
+        }
+
+        .sidebar-tasks-list {
+          line-height: 2.2rem;
+          color: #0f0f0f99;
+
+          &:not(:last-of-type) {
+            margin-bottom: 4rem;
+          }
+
+          .sidebar-tasks-list-item {
+            font-size: 1.2rem;
+            cursor: pointer;
+
+            background-color: #f3f3f3;
+            padding: 5px 10px;
+            margin: 8px 0;
+            border-radius: 0 20px 20px 0;
+            // text-align: center;
+            color: #0007;
+            padding-left: 35px;
+
+            &:hover {
+              background-color: #e7f3ff;
+              color: #41a0ff;
+            }
+
+            &.active {
+              background-color: #e7f3ff;
+              border-radius: 0 20px 20px 0;
+              // text-align: center;
+              font-weight: bold;
+              color: #41a0ff;
+            }
+
+            span {
+              display: flex;
+              align-items: center;
+              svg {
+                margin-right: 0.5rem;
+                font-size: 2rem;
+              }
+            }
+          }
+        }
       }
 
       #app-main {

@@ -1,15 +1,100 @@
 import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import {
+  AssigneeFilterEnum,
+  AssigneeGenderEnum,
+} from "../modules/assignees/models/Assignee";
+import { useTranslation } from "react-i18next";
+import {
+  ErrorOutline,
+  LabelImportant,
+  Man,
+  Warning,
+  Woman,
+} from "@mui/icons-material";
 
 interface Props {
   handleCreate: () => void;
 }
 
 const Sidebar2 = ({ handleCreate }: Props) => {
+  const { t } = useTranslation();
+
+  const getMainFilterLabel = (value: string) => {
+    let result;
+    switch (value) {
+      case String(AssigneeFilterEnum.ALL_DONE):
+        return (result = (
+          <>
+            <LabelImportant /> <span>{t("AllTaskDone")}</span>
+          </>
+        ));
+
+      case String(AssigneeFilterEnum.DONT_HAVE_TASK):
+        return (result = (
+          <>
+            <ErrorOutline /> {t("noTaskAssigned")}
+          </>
+        ));
+
+      case String(AssigneeFilterEnum.NOTHING_DONE):
+        return (result = (
+          <>
+            <Warning /> {t("NoTaskDone")}
+          </>
+        ));
+    }
+  };
+
+  const getSecondFilterLabel = (value: string) => {
+    let result;
+    switch (value) {
+      case String(AssigneeGenderEnum.MAN):
+        return (result = (
+          <>
+            <Man /> {t("men")}
+          </>
+        ));
+
+      case String(AssigneeGenderEnum.WOMEN):
+        return (result = (
+          <>
+            <Woman /> {t("women")}
+          </>
+        ));
+    }
+  };
+
+  const displayMainFilters = () => {
+    return Object.keys(AssigneeFilterEnum)
+      .filter((key) => !isNaN(Number(key)))
+      .map((value, i) => {
+        return (
+          <div
+            key={i}
+            className={"sidebar-tasks-list-item" + (i === 0 ? " active" : "")}>
+            <span>{getMainFilterLabel(value)}</span>
+          </div>
+        );
+      });
+  };
+
+  const displaySecondFilters = () => {
+    return Object.keys(AssigneeGenderEnum)
+      .filter((key) => !isNaN(Number(key)))
+      .map((value, i) => {
+        return (
+          <div key={i} className="sidebar-tasks-list-item">
+            <span>{getSecondFilterLabel(value)}</span>
+          </div>
+        );
+      });
+  };
+
   return (
     <div>
       <div>
-        <Box marginBottom={5}>
+        <Box className="app-create-button">
           <Button
             onClick={handleCreate}
             variant="outlined"
@@ -22,40 +107,34 @@ const Sidebar2 = ({ handleCreate }: Props) => {
       </div>
 
       <div className="sidebar-tasks-list">
-        <div className="sidebar-tasks-list-item">
+        {displayMainFilters()}
+        {/* <div className="sidebar-tasks-list-item">
           <span>All</span>
         </div>
 
         <div className="sidebar-tasks-list-item">
-          <span>Priority</span>
+          <span>Nothing done</span>
         </div>
 
         <div className="sidebar-tasks-list-item">
-          <span>Today</span>
+          <span>All done</span>
         </div>
 
         <div className="sidebar-tasks-list-item">
-          <span>Completed</span>
-        </div>
+          <span>Don't have Task</span>
+        </div> */}
       </div>
 
       {/* Lables Filter */}
       <div className="sidebar-tasks-list">
-        <div className="sidebar-tasks-list-item">
-          <span>Html</span>
+        {displaySecondFilters()}
+        {/* <div className="sidebar-tasks-list-item">
+          <span>Men</span>
         </div>
 
         <div className="sidebar-tasks-list-item">
-          <span>Css</span>
-        </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>jQuery</span>
-        </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>Node.js</span>
-        </div>
+          <span>Women</span>
+        </div> */}
       </div>
     </div>
   );
