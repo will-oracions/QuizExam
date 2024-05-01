@@ -84,7 +84,6 @@ const TodoForm = forwardRef(
         reset();
       },
     }));
-    trigger("assignee");
 
     const handleFormSubmit: SubmitHandler<Partial<Todo>> = (data) => {
       onSubmit(data);
@@ -276,7 +275,7 @@ const TodoForm = forwardRef(
                       message: "Assignee is required",
                     },
                   })}
-                  options={countries}
+                  options={assignees}
                   // defaultValue={countries[0]}
                   getOptionLabel={(option) => option.label}
                   renderInput={(params) => (

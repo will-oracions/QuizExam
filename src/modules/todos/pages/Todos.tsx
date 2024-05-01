@@ -62,7 +62,7 @@ const Todos = () => {
 
   const onSubmitTodoForm = (data: Partial<Todo>) => {
     console.log("Data: ", data);
-    return;
+
     const handler = editingTodo ? handleSaveUpdateTodo : handleSaveTodo;
 
     handler(data);
@@ -146,6 +146,7 @@ const Todos = () => {
   const openCreateTodoModal = () => {
     todoCreateModal.openModal();
     setErrorMessage("");
+    setEditingTodo(null);
   };
 
   const opentEditAssigeeModal = (row: Todo) => {

@@ -149,6 +149,7 @@ const Assignees = () => {
   const openCreateAssigneeModal = () => {
     assigneeCreateModal.openModal();
     setErrorMessage("");
+    setEditingAssignee(null);
   };
 
   const opentEditAssigeeModal = (row: Assignee) => {

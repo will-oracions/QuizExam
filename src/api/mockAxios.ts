@@ -32,11 +32,17 @@ mock.onGet("/todos").reply(
 
 mock.onPost("/todos").reply(async (config) => {
   const todo = JSON.parse(config.data);
-  todos.push({ ...todo, id: generateFakeId() });
+  const assignee = todo.assignee;
+  delete todo.assignee;
+  const newTodo = { ...todo, assigneeId: assignee.id, id: generateFakeId() };
+  todos.push(newTodo);
+
+  delete newTodo.assigneeId;
+  newTodo.assignee = assignee;
 
   await sleep(3000);
 
-  return [201, todo];
+  return [201, newTodo];
 });
 
 mock.onPut(/\/todos\/\d+/).reply(async (config) => {
