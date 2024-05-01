@@ -7,13 +7,13 @@ export interface Assignee {
 }
 
 export enum AssigneeFilterEnum {
-  ALL,
-  NOTHING_DONE,
-  ALL_DONE,
-  DONT_HAVE_TASK,
+  ALL = "1",
+  NOTHING_DONE = "2",
+  ALL_DONE = "3",
+  DONT_HAVE_TASK = "4",
 }
 
 export enum AssigneeGenderEnum {
-  MAN,
-  WOMEN,
+  MAN = "1",
+  WOMEN = "2",
 }

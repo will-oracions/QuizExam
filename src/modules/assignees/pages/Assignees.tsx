@@ -55,7 +55,7 @@ const Assignees = () => {
 
   React.useEffect(() => {
     handleAssigneeFilters();
-  }, [mainFilter, secondFilter]);
+  }, [mainFilter, secondFilter, assignees]);
 
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
@@ -98,7 +98,7 @@ const Assignees = () => {
 
     editAssigneeMutation.mutate(data as Assignee, {
       onSuccess: (res) => {
-        console.log("Response: ", res);
+        // console.log("Response: ", res);
 
         setAssignees(assignees.map((a) => (a.id === res.id ? res : a)));
         setEditingAssignee(null);
@@ -110,7 +110,7 @@ const Assignees = () => {
 
   const handleDeleteAssignee = () => {
     if (!deletingAssignee) return;
-    console.log("Delete: ", deletingAssignee);
+    // console.log("Delete: ", deletingAssignee);
     deleteAssigneeMutation.mutate(deletingAssignee.id, {
       onSuccess: (res) => {
         console.log("Res", res);
@@ -145,7 +145,7 @@ const Assignees = () => {
   };
 
   const opentEditAssigeeModal = (row: Assignee) => {
-    // console.log(row);
+    console.log(row);
     setEditingAssignee(row);
     setErrorMessage("");
     assigneeCreateModal.openModal();

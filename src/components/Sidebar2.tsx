@@ -91,39 +91,43 @@ const Sidebar2 = ({
   };
 
   const displayMainFilters = () => {
-    return Object.keys(AssigneeFilterEnum)
-      .filter((key) => !isNaN(Number(key)))
-      .map((value, i) => {
-        return (
-          <div
-            onClick={() => setMainFilter(value)}
-            key={i}
-            className={
-              "sidebar-tasks-list-item" +
-              (mainFilter === value ? " active" : "")
-            }>
-            <span>{getMainFilterLabel(value)}</span>
-          </div>
-        );
-      });
+    return (
+      Object.values(AssigneeFilterEnum)
+        // .filter((key) => !isNaN(Number(key)))
+        .map((value, i) => {
+          return (
+            <div
+              onClick={() => setMainFilter(value)}
+              key={i}
+              className={
+                "sidebar-tasks-list-item" +
+                (mainFilter === value ? " active" : "")
+              }>
+              <span>{getMainFilterLabel(value)}</span>
+            </div>
+          );
+        })
+    );
   };
 
   const displaySecondFilters = () => {
-    return Object.keys(AssigneeGenderEnum)
-      .filter((key) => !isNaN(Number(key)))
-      .map((value, i) => {
-        return (
-          <div
-            onClick={() => setSecondFilter(value)}
-            key={i}
-            className={
-              "sidebar-tasks-list-item" +
-              (secondFilter === value ? " active" : "")
-            }>
-            <span>{getSecondFilterLabel(value)}</span>
-          </div>
-        );
-      });
+    return (
+      Object.values(AssigneeGenderEnum)
+        // .filter((key) => !isNaN(Number(key)))
+        .map((value, i) => {
+          return (
+            <div
+              onClick={() => setSecondFilter(value)}
+              key={i}
+              className={
+                "sidebar-tasks-list-item" +
+                (secondFilter === value ? " active" : "")
+              }>
+              <span>{getSecondFilterLabel(value)}</span>
+            </div>
+          );
+        })
+    );
   };
 
   return (

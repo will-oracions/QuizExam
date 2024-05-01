@@ -1,7 +1,18 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Alert, Box, Button, TextField } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from "@mui/material";
 import React, { forwardRef } from "react";
-import { Assignee } from "../models/Assignee";
+import { Assignee, AssigneeGenderEnum } from "../models/Assignee";
 
 interface Props {
   onSubmit: (data: Partial<Assignee>) => void;
@@ -18,8 +29,21 @@ const AssigneeForm = forwardRef(
       // setValue,
       formState: { errors },
     } = useForm<Partial<Assignee>>({
-      defaultValues: defaultValue || {},
+      defaultValues: { ...defaultValue, gender: AssigneeGenderEnum.MAN } || {},
     });
+
+    const [gender, setGender] = React.useState("");
+
+    const handleChange = (event: SelectChangeEvent) => {
+      setGender(event.target.value);
+      console.log("Value: ", event.target.value);
+    };
+
+    // console.log(defaultValue);
+
+    React.useEffect(() => {
+      defaultValue?.gender && setGender(defaultValue.gender);
+    }, [defaultValue?.gender]);
 
     const submitBtnRef = React.useRef<HTMLButtonElement>(null);
 
@@ -107,6 +131,51 @@ const AssigneeForm = forwardRef(
               helperText={errors.phone ? errors.phone.message : ""}
             />
           </Box>
+
+          <FormControl fullWidth error={Boolean(errors.gender)}>
+            <InputLabel id="gender-select-label">Gender</InputLabel>
+            <Select
+              labelId="gender-select-label"
+              id="gender-select"
+              {...register("gender", {
+                required: {
+                  value: true,
+                  message: "Le genre est requis.",
+                },
+              })} // Enregistrer le champ avec React Hook Form
+              label="Gender"
+              value={gender || ""} // Utiliser watch pour obtenir la valeur actuelle et gérer le contrôle
+              onChange={handleChange} // Gérer le changement de valeur
+            >
+              <MenuItem value={AssigneeGenderEnum.MAN}>Man</MenuItem>
+              <MenuItem value={AssigneeGenderEnum.WOMEN}>Woman</MenuItem>
+            </Select>
+            {errors.gender && (
+              <FormHelperText>{errors.gender.message}</FormHelperText>
+            )}
+          </FormControl>
+
+          {/* <Box>
+            <FormControl fullWidth error={Boolean(errors.gender)}>
+              <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+              <Select
+                label="Gender"
+                {...register("gender", {
+                  required: {
+                    value: true,
+                    message: "Le genre est requis.",
+                  },
+                })}
+                error={Boolean(errors.gender)}>
+                <MenuItem value="0">Man</MenuItem>
+                <MenuItem value="1">Woman</MenuItem>
+              </Select>
+
+              {errors.gender && (
+                <FormHelperText>{errors.gender.message}</FormHelperText>
+              )}
+            </FormControl>
+          </Box> */}
 
           <Button
             ref={submitBtnRef}
