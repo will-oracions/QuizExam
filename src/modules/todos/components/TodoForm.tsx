@@ -17,9 +17,8 @@ import {
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import React, { forwardRef } from "react";
-import { Todo, TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
-import CustomAutoComplete from "../../../components/CustomAutoComplete/CustomAutoComplete";
 import { Assignee } from "../../assignees/models/Assignee";
+import { Todo, TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
 
 export type AssigneeAutoCompleteType = Assignee & { label: string };
 

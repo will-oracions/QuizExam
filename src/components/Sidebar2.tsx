@@ -1,10 +1,3 @@
-import { Box, Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import {
-  AssigneeFilterEnum,
-  AssigneeGenderEnum,
-} from "../modules/assignees/models/Assignee";
-import { useTranslation } from "react-i18next";
 import {
   ErrorOutline,
   EventAvailable,
@@ -14,7 +7,13 @@ import {
   Warning,
   Woman,
 } from "@mui/icons-material";
-import React from "react";
+import AddIcon from "@mui/icons-material/Add";
+import { Box, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import {
+  AssigneeFilterEnum,
+  AssigneeGenderEnum,
+} from "../modules/assignees/models/Assignee";
 
 interface Props {
   handleCreate: () => void;
