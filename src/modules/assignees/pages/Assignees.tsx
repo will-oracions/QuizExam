@@ -7,7 +7,11 @@ import AssigneeDatatable from "../components/AssigneeDatatable";
 import AssigneeModals from "../components/AssigneeModals";
 import useAssignees from "../hooks/useAssignees";
 import useCreateAssignee from "../hooks/useCreateAssignee";
-import { Assignee, AssigneeFilterEnum } from "../models/Assignee";
+import {
+  Assignee,
+  AssigneeFilterEnum,
+  AssigneeGenderEnum,
+} from "../models/Assignee";
 import Sidebar2 from "../../../components/Sidebar2";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
@@ -15,6 +19,9 @@ import useDeleteAssignee from "../hooks/useDeleteAssignee";
 
 const Assignees = () => {
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
+  const [filteredAssignees, setFilteredAssignees] = React.useState<Assignee[]>(
+    []
+  );
   const [editingAssignee, setEditingAssignee] = React.useState<Assignee | null>(
     null
   );
@@ -45,6 +52,10 @@ const Assignees = () => {
   React.useEffect(() => {
     getAssigneeListQuery.data && setAssignees(getAssigneeListQuery.data);
   }, [getAssigneeListQuery.data]);
+
+  React.useEffect(() => {
+    handleAssigneeFilters();
+  }, [mainFilter, secondFilter]);
 
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
@@ -110,6 +121,24 @@ const Assignees = () => {
     });
   };
 
+  const handleAssigneeFilters = () => {
+    switch (secondFilter) {
+      case String(AssigneeGenderEnum.MAN):
+        setFilteredAssignees(
+          assignees.filter((a) => a.gender === AssigneeGenderEnum.MAN)
+        );
+        break;
+      case String(AssigneeGenderEnum.WOMEN):
+        setFilteredAssignees(
+          assignees.filter((a) => a.gender === AssigneeGenderEnum.WOMEN)
+        );
+        break;
+
+      default:
+        setFilteredAssignees([]);
+    }
+  };
+
   const openCreateAssigneeModal = () => {
     assigneeCreateModal.openModal();
     setErrorMessage("");
@@ -155,7 +184,9 @@ const Assignees = () => {
           </Box>
 
           <AssigneeDatatable
-            assignees={assignees}
+            assignees={
+              filteredAssignees.length > 0 ? filteredAssignees : assignees
+            }
             handleEdit={opentEditAssigeeModal}
             handleDelete={openDeleteAssigneeModal}
           />

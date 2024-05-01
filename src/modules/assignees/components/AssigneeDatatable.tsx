@@ -14,6 +14,7 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
     { field: "phone", headerName: "Phone", flex: 1 },
+    { field: "gender", headerName: "Gender", flex: 1 },
   ];
 
   return (
