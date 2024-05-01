@@ -4,8 +4,8 @@ export interface Todo {
   id: number;
   title?: string;
   assignee?: Assignee;
-  startDate?: Date;
-  endDate?: Date;
+  startDate?: Date | string;
+  endDate?: Date | string;
   prority?: TodoPriorityEnum;
   labels?: TodoLabelEnum[];
   description?: string;

@@ -3,6 +3,7 @@ import { Box, Button } from "@mui/material";
 
 import {
   AddTask,
+  Apps,
   CalendarToday,
   CallMissedOutgoing,
   DonutLarge,
@@ -46,7 +47,7 @@ const Sidebar = ({
       case String(TodoFilterEnum.ALL):
         return (
           <>
-            <ListAlt /> <span>{t("todos.all")}</span>
+            <Apps /> <span>{t("todos.all")}</span>
           </>
         );
       case String(TodoFilterEnum.PRORITY):

@@ -6,76 +6,84 @@ import {
   AssigneeGenderEnum,
 } from "../modules/assignees/models/Assignee";
 import { generateFakeId, sleep } from "../utils";
+import { assigneeFakeData, todoFakeData } from "./fakeData";
 
 const mock = new MockAdapter(axios);
 
-let todos: Todo[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+// const as = generateFakeAssignees(10);
+// console.log("ASSS", as);
 
-let assignees: Assignee[] = [
-  {
-    id: 1,
-    name: "Snow",
-    email: "Jon",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.MAN,
-  },
-  {
-    id: 2,
-    name: "Lannister",
-    email: "Cersei",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.MAN,
-  },
-  {
-    id: 3,
-    name: "Lannister",
-    email: "Jaime",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.WOMEN,
-  },
-  {
-    id: 4,
-    name: "Stark",
-    email: "Arya",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.WOMEN,
-  },
-  {
-    id: 5,
-    name: "Targaryen",
-    email: "Daenerys",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.WOMEN,
-  },
-  {
-    id: 6,
-    name: "Melisandre",
-    email: "",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.MAN,
-  },
-  {
-    id: 7,
-    name: "Clifford",
-    email: "Ferrara",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.WOMEN,
-  },
-  {
-    id: 8,
-    name: "Frances",
-    email: "Rossini",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.MAN,
-  },
-  {
-    id: 9,
-    name: "Roxie",
-    email: "Harvey",
-    phone: "4545174421",
-    gender: AssigneeGenderEnum.WOMEN,
-  },
-];
+// const td = generateFakeTodos(30, assigneeFakeData);
+// console.log(td);
+
+let todos: any[] = todoFakeData;
+
+let assignees: Assignee[] = assigneeFakeData;
+// [
+// {
+//   id: 1,
+//   name: "Snow",
+//   email: "Jon",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.MAN,
+// },
+// {
+//   id: 2,
+//   name: "Lannister",
+//   email: "Cersei",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.MAN,
+// },
+// {
+//   id: 3,
+//   name: "Lannister",
+//   email: "Jaime",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.WOMEN,
+// },
+// {
+//   id: 4,
+//   name: "Stark",
+//   email: "Arya",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.WOMEN,
+// },
+// {
+//   id: 5,
+//   name: "Targaryen",
+//   email: "Daenerys",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.WOMEN,
+// },
+// {
+//   id: 6,
+//   name: "Melisandre",
+//   email: "",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.MAN,
+// },
+// {
+//   id: 7,
+//   name: "Clifford",
+//   email: "Ferrara",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.WOMEN,
+// },
+// {
+//   id: 8,
+//   name: "Frances",
+//   email: "Rossini",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.MAN,
+// },
+// {
+//   id: 9,
+//   name: "Roxie",
+//   email: "Harvey",
+//   phone: "4545174421",
+//   gender: AssigneeGenderEnum.WOMEN,
+// },
+// ];
 
 // Mock Todos Api
 mock.onGet("/todos").reply(200, todos);
