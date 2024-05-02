@@ -167,7 +167,7 @@ const Sidebar2 = ({
       {/* Lables Filter */}
       <div className="sidebar-tasks-list">
         <div className="sidebar-tasks-list-label">Genre</div>
-        <div
+        {/* <div
           onClick={() => setSecondFilter("")}
           className={
             "sidebar-tasks-list-item" + (secondFilter === "" ? " active" : "")
@@ -176,7 +176,7 @@ const Sidebar2 = ({
             <LabelImportant />
             <span>{t("all")}</span>
           </span>
-        </div>
+        </div> */}
         {displaySecondFilters()}
         {/* <div className="sidebar-tasks-list-item">
           <span>Men</span>
