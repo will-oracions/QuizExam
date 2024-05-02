@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-import React, { forwardRef } from "react";
+import React, { SyntheticEvent, forwardRef } from "react";
 import { Assignee } from "../../assignees/models/Assignee";
 import { Todo, TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
 
@@ -25,6 +25,11 @@ export type AssigneeAutoCompleteType = Assignee & { label: string };
 export const toAssigneeAutoCompleteType = (
   a: Assignee
 ): AssigneeAutoCompleteType => ({ ...a, label: a.name });
+
+export const toAssignee = (a: AssigneeAutoCompleteType): Assignee => {
+  const { label, ...assignee } = a;
+  return assignee;
+};
 
 interface Props {
   onSubmit: (data: Partial<Todo>) => void;
@@ -35,6 +40,16 @@ interface Props {
 
 const TodoForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue, assignees }: Props, ref) => {
+    const [priority, setPriority] = React.useState("");
+    const [labels, setLabels] = React.useState<string[]>([]);
+    const [assigneeDefaultValue] = React.useState<
+      AssigneeAutoCompleteType | undefined
+    >(
+      defaultValue?.assignee
+        ? toAssigneeAutoCompleteType(defaultValue.assignee)
+        : undefined
+    );
+
     const {
       control,
       register,
@@ -51,14 +66,23 @@ const TodoForm = forwardRef(
             ? new Date(defaultValue.startDate).toISOString().split("T")[0]
             : undefined,
 
-          labels: ["1" as TodoLabelEnum],
+          labels: [TodoLabelEnum.CSS],
+          completed: true,
         } || {},
     });
 
-    console.log(defaultValue);
+    React.useEffect(() => {
+      if (!defaultValue) return;
+      console.log("defaultValue: ", defaultValue);
 
-    const [priority, setPriority] = React.useState("");
-    const [labels, setLabels] = React.useState<string[]>([]);
+      setLabels(defaultValue.labels);
+      setPriority(defaultValue.prority);
+      // setAssigneeDefaultValue(
+      //   toAssigneeAutoCompleteType(defaultValue.assignee)
+      // );
+
+      setValue("completed", true);
+    }, [defaultValue]);
 
     const handleChange = (event: SelectChangeEvent) => {
       setPriority(event.target.value);
@@ -68,6 +92,17 @@ const TodoForm = forwardRef(
     const handleLabelsChange = (event: SelectChangeEvent<string[]>) => {
       setLabels(event.target.value as string[]);
       console.log("Value: ", event.target.value);
+    };
+
+    const handleAssigneeChange = (
+      //@ts-ignore
+      event: SyntheticEvent<Element, Event>,
+      value: AssigneeAutoCompleteType | null
+    ) => {
+      if (value) {
+        setValue("assignee", toAssignee(value));
+        // trigger("assignee");
+      }
     };
 
     // console.log(defaultValue);
@@ -286,7 +321,11 @@ const TodoForm = forwardRef(
                     },
                   })}
                   options={assignees}
-                  // defaultValue={countries[0]}
+                  defaultValue={
+                    defaultValue?.assignee
+                      ? toAssigneeAutoCompleteType(defaultValue.assignee)
+                      : undefined
+                  }
                   getOptionLabel={(option) => option.label}
                   isOptionEqualToValue={(option, value) =>
                     option.id === value.id
@@ -298,11 +337,7 @@ const TodoForm = forwardRef(
                       label="Choisissez un pays"
                     />
                   )}
-                  // @ts-ignore
-                  onChange={(event, value) => {
-                    setValue("assignee", value as any);
-                    // trigger("assignee");
-                  }}
+                  onChange={handleAssigneeChange}
                 />
 
                 {errors.assignee && (
@@ -315,10 +350,15 @@ const TodoForm = forwardRef(
               <Controller
                 name="completed"
                 control={control}
-                // defaultValue={false}
+                // defaultValue={true}
                 render={({ field }) => (
                   <FormControlLabel
-                    control={<Checkbox {...field} />}
+                    control={
+                      <Checkbox
+                        {...field}
+                        checked={!!defaultValue?.completed}
+                      />
+                    }
                     label="Completed"
                   />
                 )}
