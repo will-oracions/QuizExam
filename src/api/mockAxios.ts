@@ -7,15 +7,36 @@ import { assigneeFakeData, todoFakeData } from "./fakeData";
 
 const mock = new MockAdapter(axios);
 
+const LOCAL_STORAGE_DATA_KEY = "data";
+interface IData {
+  todos: any[];
+  assignees: Assignee[];
+}
+
+const saveData = (data: IData) => {
+  localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(data));
+};
+
+const getData = (): IData | null => {
+  const savedData = localStorage.getItem(LOCAL_STORAGE_DATA_KEY);
+  if (!savedData) return null;
+  try {
+    const data = JSON.parse(savedData);
+    return data;
+  } catch (e) {
+    return null;
+  }
+};
+
 // const as = generateFakeAssignees(10);
 // console.log("ASSS", as);
 
 // const td = generateFakeTodos(30, assigneeFakeData);
 // console.log(td);
 
-let todos: any[] = todoFakeData;
+let todos: any[] = getData()?.todos || todoFakeData;
 
-let assignees: Assignee[] = assigneeFakeData;
+let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
 
 // Mock Todos Api
 mock.onGet("/todos").reply(
@@ -42,6 +63,8 @@ mock.onPost("/todos").reply(async (config) => {
   delete newTodo.assigneeId;
   newTodo.assignee = assignee;
 
+  saveData({ assignees, todos });
+
   await sleep(3000);
 
   return [201, newTodo];
@@ -52,6 +75,7 @@ mock.onPut(/\/todos\/\d+/).reply(async (config) => {
   const updatedTodo: Todo = JSON.parse(config.data);
   todos = todos.map((todo) => (todo.id === todoId ? updatedTodo : todo));
 
+  saveData({ assignees, todos });
   await sleep(3000);
 
   return [200, updatedTodo];
@@ -60,6 +84,8 @@ mock.onPut(/\/todos\/\d+/).reply(async (config) => {
 mock.onDelete(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
   todos = todos.filter((todo) => todo.id !== todoId);
+
+  saveData({ assignees, todos });
 
   await sleep(1000);
 
@@ -82,6 +108,7 @@ mock.onPost("/assignees").reply(async (config) => {
   const assignee = { ...data, id: generateFakeId() };
   assignees.push(assignee);
 
+  saveData({ assignees, todos });
   await sleep(3000);
 
   return [201, assignee];
@@ -94,6 +121,8 @@ mock.onPut(/\/assignees\/\d+/).reply(async (config) => {
     assignee.id === assigneeId ? updatedAssignee : assignee
   );
 
+  saveData({ assignees, todos });
+
   await sleep(3000);
 
   return [200, updatedAssignee];
@@ -102,6 +131,8 @@ mock.onPut(/\/assignees\/\d+/).reply(async (config) => {
 mock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   assignees = assignees.filter((assignee) => assignee.id !== assigneeId);
+
+  saveData({ assignees, todos });
 
   await sleep(1000);
 

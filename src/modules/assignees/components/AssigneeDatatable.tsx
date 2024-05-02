@@ -19,7 +19,7 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
     {
       field: "tasksDone",
       headerName: "Taks Done",
-      flex: 1,
+      width: 90,
 
       renderCell: (params) => (
         <Typography
@@ -34,7 +34,7 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
     {
       field: "tasksAssigned",
       headerName: "Taks Assigned",
-      flex: 1,
+      width: 90,
       renderCell: (params) => (
         <Typography
           display="flex"
