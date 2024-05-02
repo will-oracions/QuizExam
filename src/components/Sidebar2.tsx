@@ -1,7 +1,6 @@
 import {
   ErrorOutline,
   EventAvailable,
-  LabelImportant,
   Man,
   People,
   Warning,
@@ -31,16 +30,6 @@ const Sidebar2 = ({
   setSecondFilter,
 }: Props) => {
   const { t } = useTranslation();
-
-  // React.useEffect(() => {
-  //   console.log("Filter: ", mainFilter);
-  //   console.log(mainFilter === String(AssigneeFilterEnum.ALL));
-  // }, [mainFilter]);
-
-  // React.useEffect(() => {
-  //   console.log("Second Filter: ", secondFilter);
-  //   console.log(secondFilter === String(AssigneeGenderEnum.MAN));
-  // }, [secondFilter]);
 
   const getMainFilterLabel = (value: string) => {
     switch (value) {
@@ -91,43 +80,34 @@ const Sidebar2 = ({
   };
 
   const displayMainFilters = () => {
-    return (
-      Object.values(AssigneeFilterEnum)
-        // .filter((key) => !isNaN(Number(key)))
-        .map((value, i) => {
-          return (
-            <div
-              onClick={() => setMainFilter(value)}
-              key={i}
-              className={
-                "sidebar-tasks-list-item" +
-                (mainFilter === value ? " active" : "")
-              }>
-              <span>{getMainFilterLabel(value)}</span>
-            </div>
-          );
-        })
-    );
+    return Object.values(AssigneeFilterEnum).map((value, i) => {
+      return (
+        <div
+          onClick={() => setMainFilter(value)}
+          key={i}
+          className={
+            "sidebar-tasks-list-item" + (mainFilter === value ? " active" : "")
+          }>
+          <span>{getMainFilterLabel(value)}</span>
+        </div>
+      );
+    });
   };
 
   const displaySecondFilters = () => {
-    return (
-      Object.values(AssigneeGenderEnum)
-        // .filter((key) => !isNaN(Number(key)))
-        .map((value, i) => {
-          return (
-            <div
-              onClick={() => setSecondFilter(value)}
-              key={i}
-              className={
-                "sidebar-tasks-list-item" +
-                (secondFilter === value ? " active" : "")
-              }>
-              <span>{getSecondFilterLabel(value)}</span>
-            </div>
-          );
-        })
-    );
+    return Object.values(AssigneeGenderEnum).map((value, i) => {
+      return (
+        <div
+          onClick={() => setSecondFilter(value)}
+          key={i}
+          className={
+            "sidebar-tasks-list-item" +
+            (secondFilter === value ? " active" : "")
+          }>
+          <span>{getSecondFilterLabel(value)}</span>
+        </div>
+      );
+    });
   };
 
   return (
@@ -145,46 +125,13 @@ const Sidebar2 = ({
         </Box>
       </div>
 
-      <div className="sidebar-tasks-list">
-        {displayMainFilters()}
-        {/* <div className="sidebar-tasks-list-item">
-          <span>All</span>
-        </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>Nothing done</span>
-        </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>All done</span>
-        </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>Don't have Task</span>
-        </div> */}
-      </div>
+      <div className="sidebar-tasks-list">{displayMainFilters()}</div>
 
       {/* Lables Filter */}
       <div className="sidebar-tasks-list">
         <div className="sidebar-tasks-list-label">Genre</div>
-        {/* <div
-          onClick={() => setSecondFilter("")}
-          className={
-            "sidebar-tasks-list-item" + (secondFilter === "" ? " active" : "")
-          }>
-          <span>
-            <LabelImportant />
-            <span>{t("all")}</span>
-          </span>
-        </div> */}
-        {displaySecondFilters()}
-        {/* <div className="sidebar-tasks-list-item">
-          <span>Men</span>
-        </div>
 
-        <div className="sidebar-tasks-list-item">
-          <span>Women</span>
-        </div> */}
+        {displaySecondFilters()}
       </div>
     </div>
   );

@@ -21,34 +21,18 @@ export interface TodoFilter {
 
 interface Props {
   handleCreate: () => void;
-  // mainFilter: string;
-  // secondFilter: string;
-  // setMainFilter: (filter: string) => void;
-  // setSecondFilter: (filter: string) => void;
+
   filter: TodoFilter;
   setFilter: (filter: TodoFilter) => void;
 }
 
 const Sidebar = ({
   handleCreate,
-  // mainFilter,
-  // secondFilter,
-  // setMainFilter,
-  // setSecondFilter,
+
   filter,
   setFilter,
 }: Props) => {
   const { t } = useTranslation();
-
-  // React.useEffect(() => {
-  //   console.log("Filter: ", mainFilter);
-  //   console.log(mainFilter === String(TodoFilterEnum.ALL));
-  // }, [mainFilter]);
-
-  // React.useEffect(() => {
-  //   console.log("Second Filter: ", secondFilter);
-  //   console.log(secondFilter === String(TodoPriorityEnum.MAN));
-  // }, [secondFilter]);
 
   const getMainFilterLabel = (value: string) => {
     switch (value) {
@@ -58,12 +42,6 @@ const Sidebar = ({
             <Apps /> <span>{t("todos.all")}</span>
           </>
         );
-      // case String(TodoFilterEnum.PRORITY):
-      //   return
-      //     <>
-      //       <Straighten /> <span>{t("todos.priority")}</span>
-      //     </>
-      //   );
       case String(TodoFilterEnum.TODAY):
         return (
           <>
@@ -110,59 +88,43 @@ const Sidebar = ({
   };
 
   const getPriorityFilters = (value: string) => {
-    // switch (value) {
-    //   case String(TodoPriorityEnum.LOW):
-    return <>{todoPriorityEnumToLabel(value as TodoPriorityEnum)}</>;
-    //   case String(TodoPriorityEnum.MEDIUM):
-    //     return <>{todoPriorityEnumToLabel(value as TodoPriorityEnum)}</>;
-    //   case String(TodoPriorityEnum.HIGHT):
-    //     return <>{todoPriorityEnumToLabel(value as TodoPriorityEnum)}</>;
-    // }
+    return todoPriorityEnumToLabel(value as TodoPriorityEnum);
   };
 
   const displayMainFilters = () => {
-    return (
-      Object.values(TodoFilterEnum)
-        // .filter((key) => !isNaN(Number(key)))
-        .map((value, i) => {
-          return (
-            <div
-              onClick={() => setFilter({ ...filter, main: value })}
-              key={i}
-              className={
-                "sidebar-tasks-list-item" +
-                (filter.main === value ? " active" : "")
-              }>
-              <span>{getMainFilterLabel(value)}</span>
-            </div>
-          );
-        })
-    );
+    return Object.values(TodoFilterEnum).map((value, i) => {
+      return (
+        <div
+          onClick={() => setFilter({ ...filter, main: value })}
+          key={i}
+          className={
+            "sidebar-tasks-list-item" + (filter.main === value ? " active" : "")
+          }>
+          <span>{getMainFilterLabel(value)}</span>
+        </div>
+      );
+    });
   };
 
   const displaySecondFilters = () => {
-    return (
-      Object.values(TodoLabelEnum)
-        // .filter((key) => !isNaN(Number(key)))
-        .map((value, i) => {
-          return (
-            <div
-              onClick={() =>
-                setFilter({
-                  ...filter,
-                  label: filter.label === value ? "" : value,
-                })
-              }
-              key={i}
-              className={
-                "sidebar-tasks-list-item" +
-                (filter.label === value ? " active" : "")
-              }>
-              <span>{getSecondFilterLabel(value)}</span>
-            </div>
-          );
-        })
-    );
+    return Object.values(TodoLabelEnum).map((value, i) => {
+      return (
+        <div
+          onClick={() =>
+            setFilter({
+              ...filter,
+              label: filter.label === value ? "" : value,
+            })
+          }
+          key={i}
+          className={
+            "sidebar-tasks-list-item" +
+            (filter.label === value ? " active" : "")
+          }>
+          <span>{getSecondFilterLabel(value)}</span>
+        </div>
+      );
+    });
   };
 
   const displayPriorityFilters = () => {
