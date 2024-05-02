@@ -19,6 +19,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import React, { SyntheticEvent, forwardRef } from "react";
 import { Assignee } from "../../assignees/models/Assignee";
 import { Todo, TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
+import { toCalendarDate } from "../../../utils";
 
 export type AssigneeAutoCompleteType = Assignee & { label: string };
 
@@ -56,7 +57,7 @@ const TodoForm = forwardRef(
         {
           ...defaultValue,
           startDate: defaultValue?.startDate
-            ? new Date(defaultValue.startDate).toISOString().split("T")[0]
+            ? toCalendarDate(new Date(defaultValue.startDate))
             : undefined,
 
           labels: [TodoLabelEnum.CSS],

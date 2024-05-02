@@ -13,20 +13,30 @@ import {
   TodoPriorityEnum,
 } from "../modules/todos/models/Todo";
 
+export interface TodoFilter {
+  main: TodoFilterEnum;
+  prority: TodoPriorityEnum | "";
+  label: TodoLabelEnum | "";
+}
+
 interface Props {
   handleCreate: () => void;
-  mainFilter: string;
-  secondFilter: string;
-  setMainFilter: (filter: string) => void;
-  setSecondFilter: (filter: string) => void;
+  // mainFilter: string;
+  // secondFilter: string;
+  // setMainFilter: (filter: string) => void;
+  // setSecondFilter: (filter: string) => void;
+  filter: TodoFilter;
+  setFilter: (filter: TodoFilter) => void;
 }
 
 const Sidebar = ({
   handleCreate,
-  mainFilter,
-  secondFilter,
-  setMainFilter,
-  setSecondFilter,
+  // mainFilter,
+  // secondFilter,
+  // setMainFilter,
+  // setSecondFilter,
+  filter,
+  setFilter,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -117,11 +127,11 @@ const Sidebar = ({
         .map((value, i) => {
           return (
             <div
-              onClick={() => setMainFilter(value)}
+              onClick={() => setFilter({ ...filter, main: value })}
               key={i}
               className={
                 "sidebar-tasks-list-item" +
-                (mainFilter === value ? " active" : "")
+                (filter.main === value ? " active" : "")
               }>
               <span>{getMainFilterLabel(value)}</span>
             </div>
@@ -137,11 +147,16 @@ const Sidebar = ({
         .map((value, i) => {
           return (
             <div
-              onClick={() => setSecondFilter(value)}
+              onClick={() =>
+                setFilter({
+                  ...filter,
+                  label: filter.label === value ? "" : value,
+                })
+              }
               key={i}
               className={
                 "sidebar-tasks-list-item" +
-                (secondFilter === value ? " active" : "")
+                (filter.label === value ? " active" : "")
               }>
               <span>{getSecondFilterLabel(value)}</span>
             </div>
@@ -154,11 +169,16 @@ const Sidebar = ({
     return Object.values(TodoPriorityEnum).map((value, i) => {
       return (
         <div
-          onClick={() => setSecondFilter(value)}
+          onClick={() =>
+            setFilter({
+              ...filter,
+              prority: filter.prority === value ? "" : value,
+            })
+          }
           key={i}
           className={
             "sidebar-tasks-list-item" +
-            (secondFilter === value ? " active" : "")
+            (filter.prority === value ? " active" : "")
           }>
           <span>{getPriorityFilters(value)}</span>
         </div>

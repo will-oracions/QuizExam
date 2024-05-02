@@ -3,17 +3,18 @@ import React from "react";
 import { toast } from "react-toastify";
 
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
-import TodoDatatable from "../components/TodoDatatable";
-import TodoModals from "../components/TodoModals";
-import useTodos from "../hooks/useTodos";
-import useCreateTodo from "../hooks/useCreateTodo";
-import { Todo, TodoFilterEnum } from "../models/Todo";
-import useUpdateTodo from "../hooks/useUpdateTodo";
+import Sidebar, { TodoFilter } from "../../../components/Sidebar";
 import exportToPdf from "../../../helpers/exporter";
-import useDeleteTodo from "../hooks/useDeleteTodo";
-import Sidebar from "../../../components/Sidebar";
 import useAssignees from "../../assignees/hooks/useAssignees";
+import TodoDatatable from "../components/TodoDatatable";
 import { toAssigneeAutoCompleteType } from "../components/TodoForm";
+import TodoModals from "../components/TodoModals";
+import useCreateTodo from "../hooks/useCreateTodo";
+import useDeleteTodo from "../hooks/useDeleteTodo";
+import useTodos from "../hooks/useTodos";
+import useUpdateTodo from "../hooks/useUpdateTodo";
+import { Todo, TodoFilterEnum, TodoLabelEnum } from "../models/Todo";
+import { toCalendarDate } from "../../../utils";
 
 const Todos = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -21,11 +22,16 @@ const Todos = () => {
   const [editingTodo, setEditingTodo] = React.useState<Todo | null>(null);
   const [deletingTodo, setDeletingTodo] = React.useState<Todo | null>(null);
 
-  const [mainFilter, setMainFilter] = React.useState<string>(
-    String(TodoFilterEnum.ALL)
-  );
+  // const [mainFilter, setMainFilter] = React.useState<string>(
+  //   String(TodoFilterEnum.ALL)
+  // );
 
-  const [secondFilter, setSecondFilter] = React.useState<string>("");
+  const [todoFiltered, setTodoFiltered] = React.useState<boolean>(false);
+  const [todoFilter, setTodoFilter] = React.useState<TodoFilter>({
+    main: TodoFilterEnum.ALL,
+    prority: "",
+    label: "",
+  });
 
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
@@ -54,7 +60,7 @@ const Todos = () => {
 
   React.useEffect(() => {
     handleTodoFilters();
-  }, [mainFilter, secondFilter, todos]);
+  }, [todoFilter, todos]);
 
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
@@ -69,19 +75,11 @@ const Todos = () => {
   };
 
   const handleSaveTodo = (data: Partial<Todo>) => {
-    // const exist = todos.find(
-    //   (a) => a.name?.toLowerCase() === data.name?.toLowerCase()
-    // );
-    // if (exist) {
-    //   setErrorMessage("The name already exist.");
-    //   return;
-    // }
-
     setErrorMessage("");
 
     createTodoMutation.mutate(data, {
       onSuccess: (res) => {
-        console.log("Response: ", res);
+        // console.log("Response: ", res);
 
         setTodos([res as Todo, ...todos]);
         notify();
@@ -119,21 +117,47 @@ const Todos = () => {
   };
 
   const handleTodoFilters = () => {
-    switch (secondFilter) {
-      // case String(TodoLabelEnum.CSS):
-      //   setFilteredTodos(
-      //     todos.filter((a) => a.labels?.includes(TodoLabelEnum.CSS))
-      //   );
-      //   break;
-      // case String(TodoLabelEnum.):
-      //   setFilteredTodos(
-      //     todos.filter((a) => a.gender === TodoLabelEnum.WOMEN)
-      //   );
-      //   break;
+    // console.log(todoFilter);
+    let filteredSource = todos;
 
-      default:
-        setFilteredTodos([]);
+    if (todoFilter.main === TodoFilterEnum.ALL) {
+      filteredSource = todos;
+    } else {
+      filteredSource = todos.filter((t) => {
+        if (
+          todoFilter.main === TodoFilterEnum.COMPLETED &&
+          t.completed === true
+        ) {
+          return true;
+        }
+
+        if (
+          todoFilter.main === TodoFilterEnum.TODAY &&
+          t.startDate &&
+          toCalendarDate(new Date(t.startDate)) === toCalendarDate(new Date())
+        ) {
+          return true;
+        }
+      });
     }
+
+    // console.log("fff: ", filteredSource);
+
+    if (todoFilter.prority !== "") {
+      filteredSource = filteredSource.filter(
+        (t) => t.prority === todoFilter.prority
+      );
+    }
+
+    if (todoFilter.label !== "") {
+      filteredSource = filteredSource.filter((t) =>
+        t.labels.includes(todoFilter.label as TodoLabelEnum)
+      );
+    }
+
+    setTodoFiltered(true);
+
+    setFilteredTodos(filteredSource);
   };
 
   const handleExportToPDF = () => {
@@ -171,10 +195,12 @@ const Todos = () => {
     <>
       <div id="app-sidebar">
         <Sidebar
-          mainFilter={mainFilter}
-          secondFilter={secondFilter}
-          setMainFilter={setMainFilter}
-          setSecondFilter={setSecondFilter}
+          filter={todoFilter}
+          setFilter={setTodoFilter}
+          // mainFilter={mainFilter}
+          // secondFilter={secondFilter}
+          // setMainFilter={setMainFilter}
+          // setSecondFilter={setSecondFilter}
           handleCreate={openCreateTodoModal}
         />
       </div>
@@ -194,7 +220,7 @@ const Todos = () => {
           </Box>
 
           <TodoDatatable
-            todos={filteredTodos.length > 0 ? filteredTodos : todos}
+            todos={todoFiltered ? filteredTodos : todos}
             handleEdit={opentEditAssigeeModal}
             handleDelete={openDeleteTodoModal}
           />
