@@ -1,6 +1,10 @@
 import { GridColDef } from "@mui/x-data-grid";
 import CustomDatatable from "../../../components/CustomDatatable/CustomDatatable";
 import { Todo } from "../models/Todo";
+import {
+  todoLabelEnumToLabel,
+  todoPriorityEnumToLabel,
+} from "../helpers/EnumParsers";
 
 interface Props {
   todos: Todo[];
@@ -28,17 +32,14 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
       field: "priority",
       headerName: "Priority",
       flex: 1,
-      renderCell: (params) => {
-        return params.row.prority;
-      },
+      renderCell: (params) => todoPriorityEnumToLabel(params.row.prority),
     },
     {
       field: "label",
       headerName: "Label",
       flex: 1,
-      renderCell: (params) => {
-        return params.row.labels?.join(" | ");
-      },
+      renderCell: (params) =>
+        params.row.labels.map((l) => todoLabelEnumToLabel(l)).join(", "),
     },
     { field: "completed", headerName: "Completed", type: "boolean", flex: 1 },
   ];
