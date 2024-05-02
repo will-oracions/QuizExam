@@ -5,6 +5,7 @@ import {
   todoLabelEnumToLabel,
   todoPriorityEnumToLabel,
 } from "../helpers/EnumParsers";
+import { Box } from "@mui/material";
 
 interface Props {
   todos: Todo[];
@@ -31,15 +32,20 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
     {
       field: "priority",
       headerName: "Priority",
-      flex: 1,
+      width: 120,
       renderCell: (params) => todoPriorityEnumToLabel(params.row.prority),
     },
     {
       field: "label",
       headerName: "Label",
-      flex: 1,
-      renderCell: (params) =>
-        params.row.labels.map((l) => todoLabelEnumToLabel(l)).join(", "),
+      width: 90,
+      renderCell: (params) => (
+        <Box display="flex">
+          {params.row.labels.map((l, i) => (
+            <div key={i}>{todoLabelEnumToLabel(l)}</div>
+          ))}
+        </Box>
+      ),
     },
     { field: "completed", headerName: "Completed", type: "boolean", flex: 1 },
   ];
