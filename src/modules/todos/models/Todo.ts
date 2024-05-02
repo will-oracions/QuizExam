@@ -27,7 +27,7 @@ export enum TodoLabelEnum {
 
 export enum TodoFilterEnum {
   ALL = "1",
-  PRORITY = "2",
+  // PRORITY = "2",
   TODAY = "3",
   COMPLETED = "4",
 }

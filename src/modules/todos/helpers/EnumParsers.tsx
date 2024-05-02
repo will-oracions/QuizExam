@@ -1,6 +1,6 @@
 import { LabelOutlined } from "@mui/icons-material";
 import { TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
-import { Alert, Badge, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export const todoPriorityEnumToLabel = (
   gender: TodoPriorityEnum
@@ -23,17 +23,34 @@ export const todoPriorityEnumToLabel = (
   }
 };
 
+export const labelEnumConfig: {
+  value: TodoLabelEnum;
+  label: string | React.ReactNode;
+}[] = [
+  {
+    value: TodoLabelEnum.CSS,
+    label: <LabelOutlined style={{ color: "black" }} />,
+  },
+
+  {
+    value: TodoLabelEnum.HTML,
+    label: <LabelOutlined style={{ color: "#41a0ff" }} />,
+  },
+
+  {
+    value: TodoLabelEnum.JQUERY,
+    label: <LabelOutlined style={{ color: "purple" }} />,
+  },
+
+  {
+    value: TodoLabelEnum.NODEJS,
+    label: <LabelOutlined style={{ color: "orangered" }} />,
+  },
+];
+
 export const todoLabelEnumToLabel = (
   label: TodoLabelEnum
 ): string | React.ReactNode => {
-  switch (label) {
-    case TodoLabelEnum.CSS:
-      return <LabelOutlined style={{ color: "black" }} />;
-    case TodoLabelEnum.HTML:
-      return <LabelOutlined style={{ color: "#41a0ff" }} />;
-    case TodoLabelEnum.JQUERY:
-      return <LabelOutlined style={{ color: "purple" }} />;
-    case TodoLabelEnum.NODEJS:
-      return <LabelOutlined style={{ color: "orangered" }} />;
-  }
+  const labelValue = labelEnumConfig.find((config) => config.value === label);
+  return labelValue!.label;
 };

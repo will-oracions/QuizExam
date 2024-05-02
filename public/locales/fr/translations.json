@@ -7,6 +7,10 @@
   "men": "Homme",
   "women": "Femme",
   "all": "Tous",
+  "css": "css",
+  "html": "HTML",
+  "jquery": "JQuery",
+  "nodejs": "Node.js",
   "todos": {
     "all": "Tous",
     "low": "Minimal",

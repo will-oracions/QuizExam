@@ -1,18 +1,14 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 
-import {
-  AddTask,
-  Apps,
-  CalendarToday,
-  CallMissedOutgoing,
-  LabelImportant,
-  LabelOutlined,
-  Speed,
-  Straighten,
-} from "@mui/icons-material";
+import { AddTask, Apps, CalendarToday, Speed } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import { TodoFilterEnum, TodoPriorityEnum } from "../modules/todos/models/Todo";
+import {
+  TodoFilterEnum,
+  TodoLabelEnum,
+  TodoPriorityEnum,
+} from "../modules/todos/models/Todo";
+import { todoLabelEnumToLabel } from "../modules/todos/helpers/EnumParsers";
 
 interface Props {
   handleCreate: () => void;
@@ -49,12 +45,12 @@ const Sidebar = ({
             <Apps /> <span>{t("todos.all")}</span>
           </>
         );
-      case String(TodoFilterEnum.PRORITY):
-        return (
-          <>
-            <Straighten /> <span>{t("todos.priority")}</span>
-          </>
-        );
+      // case String(TodoFilterEnum.PRORITY):
+      //   return
+      //     <>
+      //       <Straighten /> <span>{t("todos.priority")}</span>
+      //     </>
+      //   );
       case String(TodoFilterEnum.TODAY):
         return (
           <>
@@ -73,25 +69,28 @@ const Sidebar = ({
 
   const getSecondFilterLabel = (value: string) => {
     switch (value) {
-      case String(TodoPriorityEnum.LOW):
+      case String(TodoLabelEnum.CSS):
         return (
           <>
-            <Speed /> {t("todos.low")}
+            {todoLabelEnumToLabel(value as TodoLabelEnum)} {t("css")}
           </>
         );
-
-      case String(TodoPriorityEnum.MEDIUM):
+      case String(TodoLabelEnum.HTML):
         return (
           <>
-            <CallMissedOutgoing /> {t("todos.medium")}
+            {todoLabelEnumToLabel(value as TodoLabelEnum)} {t("html")}
           </>
         );
-
-      case String(TodoPriorityEnum.HIGHT):
+      case String(TodoLabelEnum.JQUERY):
         return (
           <>
-            {/* <DonutLarge /> {t("todos.hight")} */}
-            <LabelOutlined style={{ color: "green" }} /> {t("todos.hight")}
+            {todoLabelEnumToLabel(value as TodoLabelEnum)} {t("jquery")}
+          </>
+        );
+      case String(TodoLabelEnum.NODEJS):
+        return (
+          <>
+            {todoLabelEnumToLabel(value as TodoLabelEnum)} {t("nodejs")}
           </>
         );
     }
@@ -119,7 +118,7 @@ const Sidebar = ({
 
   const displaySecondFilters = () => {
     return (
-      Object.values(TodoPriorityEnum)
+      Object.values(TodoLabelEnum)
         // .filter((key) => !isNaN(Number(key)))
         .map((value, i) => {
           return (
@@ -152,45 +151,22 @@ const Sidebar = ({
         </Box>
       </div>
 
-      <div className="sidebar-tasks-list">
-        {displayMainFilters()}
-        {/* <div className="sidebar-tasks-list-item">
-          <span>All</span>
+      <div className="sidebar-menu">
+        <div className="sidebar-tasks-list">{displayMainFilters()}</div>
+
+        {/* Priority Filter */}
+        <div className="sidebar-tasks-list">
+          <div className="sidebar-tasks-list-label">Prority</div>
+
+          {displaySecondFilters()}
         </div>
 
-        <div className="sidebar-tasks-list-item">
-          <span>Nothing done</span>
-        </div>
+        {/* Lables Filter */}
+        <div className="sidebar-tasks-list">
+          <div className="sidebar-tasks-list-label">Labels</div>
 
-        <div className="sidebar-tasks-list-item">
-          <span>All done</span>
+          {displaySecondFilters()}
         </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>Don't have Task</span>
-        </div> */}
-      </div>
-
-      {/* Lables Filter */}
-      <div className="sidebar-tasks-list">
-        <div
-          onClick={() => setSecondFilter("")}
-          className={
-            "sidebar-tasks-list-item" + (secondFilter === "" ? " active" : "")
-          }>
-          <span>
-            <LabelImportant />
-            <span>{t("todos.all")}</span>
-          </span>
-        </div>
-        {displaySecondFilters()}
-        {/* <div className="sidebar-tasks-list-item">
-          <span>Men</span>
-        </div>
-
-        <div className="sidebar-tasks-list-item">
-          <span>Women</span>
-        </div> */}
       </div>
     </div>
   );
