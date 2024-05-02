@@ -52,7 +52,7 @@ export interface ILabelEnumParser {
 export const labelEnumParserConfig: ILabelEnumParser[] = [
   {
     value: TodoLabelEnum.CSS,
-    label: <LabelOutlined style={{ color: "black" }} />,
+    label: <LabelOutlined style={{ color: "gray" }} />,
   },
 
   {
@@ -62,7 +62,7 @@ export const labelEnumParserConfig: ILabelEnumParser[] = [
 
   {
     value: TodoLabelEnum.JQUERY,
-    label: <LabelOutlined style={{ color: "purple" }} />,
+    label: <LabelOutlined style={{ color: "lightgreen" }} />,
   },
 
   {

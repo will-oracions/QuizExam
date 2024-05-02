@@ -166,7 +166,7 @@ const Sidebar2 = ({
 
       {/* Lables Filter */}
       <div className="sidebar-tasks-list">
-        <div className="sidebar-tasks-list-label">Prority</div>
+        <div className="sidebar-tasks-list-label">Genre</div>
         <div
           onClick={() => setSecondFilter("")}
           className={
