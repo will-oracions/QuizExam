@@ -1,14 +1,17 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 
-import { AddTask, Apps, CalendarToday, Speed } from "@mui/icons-material";
+import { AddTask, Apps, CalendarToday } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import {
+  todoLabelEnumToLabel,
+  todoPriorityEnumToLabel,
+} from "../modules/todos/helpers/EnumParsers";
 import {
   TodoFilterEnum,
   TodoLabelEnum,
   TodoPriorityEnum,
 } from "../modules/todos/models/Todo";
-import { todoLabelEnumToLabel } from "../modules/todos/helpers/EnumParsers";
 
 interface Props {
   handleCreate: () => void;
@@ -96,6 +99,17 @@ const Sidebar = ({
     }
   };
 
+  const getPriorityFilters = (value: string) => {
+    // switch (value) {
+    //   case String(TodoPriorityEnum.LOW):
+    return <>{todoPriorityEnumToLabel(value as TodoPriorityEnum)}</>;
+    //   case String(TodoPriorityEnum.MEDIUM):
+    //     return <>{todoPriorityEnumToLabel(value as TodoPriorityEnum)}</>;
+    //   case String(TodoPriorityEnum.HIGHT):
+    //     return <>{todoPriorityEnumToLabel(value as TodoPriorityEnum)}</>;
+    // }
+  };
+
   const displayMainFilters = () => {
     return (
       Object.values(TodoFilterEnum)
@@ -136,6 +150,22 @@ const Sidebar = ({
     );
   };
 
+  const displayPriorityFilters = () => {
+    return Object.values(TodoPriorityEnum).map((value, i) => {
+      return (
+        <div
+          onClick={() => setSecondFilter(value)}
+          key={i}
+          className={
+            "sidebar-tasks-list-item" +
+            (secondFilter === value ? " active" : "")
+          }>
+          <span>{getPriorityFilters(value)}</span>
+        </div>
+      );
+    });
+  };
+
   return (
     <div>
       <div>
@@ -158,7 +188,7 @@ const Sidebar = ({
         <div className="sidebar-tasks-list">
           <div className="sidebar-tasks-list-label">Prority</div>
 
-          {displaySecondFilters()}
+          {displayPriorityFilters()}
         </div>
 
         {/* Lables Filter */}

@@ -2,31 +2,54 @@ import { LabelOutlined } from "@mui/icons-material";
 import { TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
 import { Typography } from "@mui/material";
 
+export interface IPriorityEnumParser {
+  value: TodoPriorityEnum;
+  label: string | React.ReactNode;
+}
+
+export const priorityEnumParserConfig: IPriorityEnumParser[] = [
+  {
+    value: TodoPriorityEnum.LOW,
+    label: (
+      <Typography fontSize="1rem" style={{ color: "burlywood" }}>
+        Low
+      </Typography>
+    ),
+  },
+
+  {
+    value: TodoPriorityEnum.MEDIUM,
+    label: (
+      <Typography fontSize="1rem" style={{ color: "yellowgreen" }}>
+        Medium
+      </Typography>
+    ),
+  },
+  {
+    value: TodoPriorityEnum.HIGHT,
+    label: (
+      <Typography fontSize="1rem" style={{ color: "orangered" }}>
+        Hight
+      </Typography>
+    ),
+  },
+];
+
 export const todoPriorityEnumToLabel = (
-  gender: TodoPriorityEnum
+  priority: TodoPriorityEnum
 ): string | React.ReactNode => {
-  switch (gender) {
-    case TodoPriorityEnum.LOW:
-      return <Typography fontSize="1rem">Low</Typography>;
-    case TodoPriorityEnum.HIGHT:
-      return (
-        <Typography fontSize="xs" style={{ color: "orangered" }}>
-          Hight
-        </Typography>
-      );
-    case TodoPriorityEnum.MEDIUM:
-      return (
-        <Typography fontSize="xs" style={{ color: "#41a0ff" }}>
-          Medium
-        </Typography>
-      );
-  }
+  const result = priorityEnumParserConfig.find(
+    (config) => config.value === priority
+  );
+  return result!.label;
 };
 
-export const labelEnumConfig: {
+export interface ILabelEnumParser {
   value: TodoLabelEnum;
   label: string | React.ReactNode;
-}[] = [
+}
+
+export const labelEnumParserConfig: ILabelEnumParser[] = [
   {
     value: TodoLabelEnum.CSS,
     label: <LabelOutlined style={{ color: "black" }} />,
@@ -51,6 +74,8 @@ export const labelEnumConfig: {
 export const todoLabelEnumToLabel = (
   label: TodoLabelEnum
 ): string | React.ReactNode => {
-  const labelValue = labelEnumConfig.find((config) => config.value === label);
+  const labelValue = labelEnumParserConfig.find(
+    (config) => config.value === label
+  );
   return labelValue!.label;
 };
