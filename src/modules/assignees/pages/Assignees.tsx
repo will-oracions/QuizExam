@@ -28,12 +28,6 @@ const Assignees = () => {
   const [deletingAssignee, setDeletingAssignee] =
     React.useState<Assignee | null>(null);
 
-  // const [mainFilter, setMainFilter] = React.useState<string>(
-  //   String(AssigneeFilterEnum.ALL)
-  // );
-
-  // const [secondFilter, setSecondFilter] = React.useState<string>("");
-
   const [assigneeFiltered, setAssigneeFiltered] =
     React.useState<boolean>(false);
   const [assigneeFilter, setAssigneeFilter] = React.useState<AssigneeFilter>({
@@ -128,24 +122,6 @@ const Assignees = () => {
     });
   };
 
-  // const handleAssigneeFilters = () => {
-  //   switch (secondFilter) {
-  //     case String(AssigneeGenderEnum.MAN):
-  //       setFilteredAssignees(
-  //         assignees.filter((a) => a.gender === AssigneeGenderEnum.MAN)
-  //       );
-  //       break;
-  //     case String(AssigneeGenderEnum.WOMEN):
-  //       setFilteredAssignees(
-  //         assignees.filter((a) => a.gender === AssigneeGenderEnum.WOMEN)
-  //       );
-  //       break;
-
-  //     default:
-  //       setFilteredAssignees([]);
-  //   }
-  // };
-
   const handleAssigneeFilters = () => {
     // console.log(assigneeFilter);
     let filteredSource = assignees;
@@ -153,21 +129,31 @@ const Assignees = () => {
     if (assigneeFilter.main === AssigneeFilterEnum.ALL) {
       filteredSource = assignees;
     } else {
-      // filteredSource = assignees.filter((t) => {
-      //   if (
-      //     assigneeFilter.main === AssigneeFilterEnum.COMPLETED &&
-      //     t.completed === true
-      //   ) {
-      //     return true;
-      //   }
-      //   if (
-      //     assigneeFilter.main === AssigneeFilterEnum.TODAY &&
-      //     t.startDate &&
-      //     toCalendarDate(new Date(t.startDate)) === toCalendarDate(new Date())
-      //   ) {
-      //     return true;
-      //   }
-      // });
+      filteredSource = assignees.filter((a) => {
+        if (
+          assigneeFilter.main === AssigneeFilterEnum.ALL_DONE &&
+          a.todos &&
+          a.todos.length > 0 &&
+          a.todos.every((t) => t.completed === true)
+        ) {
+          return true;
+        }
+        if (
+          assigneeFilter.main === AssigneeFilterEnum.NOTHING_DONE &&
+          a.todos &&
+          a.todos.length > 0 &&
+          a.todos.every((t) => t.completed == false)
+        ) {
+          return true;
+        }
+
+        if (
+          assigneeFilter.main === AssigneeFilterEnum.DONT_HAVE_TASK &&
+          a.todos?.length === 0
+        ) {
+          return true;
+        }
+      });
     }
 
     if (assigneeFilter.gender !== "") {

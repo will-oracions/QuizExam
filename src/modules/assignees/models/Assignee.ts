@@ -1,9 +1,12 @@
+import { Todo } from "../../todos/models/Todo";
+
 export interface Assignee {
   id: number;
   name: string;
   email: string;
   phone: string;
   gender: AssigneeGenderEnum;
+  todos?: Todo[];
 }
 
 export enum AssigneeFilterEnum {

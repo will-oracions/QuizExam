@@ -20,14 +20,16 @@ let assignees: Assignee[] = assigneeFakeData;
 // Mock Todos Api
 mock.onGet("/todos").reply(
   200,
-  todos.map((todo): Todo => {
-    const assigneeId = todo.assigneeId;
-    delete todo.assigneeId;
-    return {
-      ...todo,
-      assignee: assigneeFakeData.find((a) => a.id === assigneeId),
-    };
-  })
+  todos
+    .map((t) => ({ ...t }))
+    .map((todo): Todo => {
+      const assigneeId = todo.assigneeId;
+      delete todo.assigneeId;
+      return {
+        ...todo,
+        assignee: assigneeFakeData.find((a) => a.id === assigneeId),
+      };
+    })
 );
 
 mock.onPost("/todos").reply(async (config) => {
@@ -65,7 +67,15 @@ mock.onDelete(/\/todos\/\d+/).reply(async (config) => {
 });
 
 // Mock Assignees API
-mock.onGet("/assignees").reply(200, assignees);
+mock.onGet("/assignees").reply(
+  200,
+  assignees.map((a) => {
+    return {
+      ...a,
+      todos: todos.filter((t) => t.assigneeId === a.id),
+    };
+  })
+);
 
 mock.onPost("/assignees").reply(async (config) => {
   const data = JSON.parse(config.data);
