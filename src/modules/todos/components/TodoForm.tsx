@@ -42,13 +42,6 @@ const TodoForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue, assignees }: Props, ref) => {
     const [priority, setPriority] = React.useState("");
     const [labels, setLabels] = React.useState<string[]>([]);
-    const [assigneeDefaultValue] = React.useState<
-      AssigneeAutoCompleteType | undefined
-    >(
-      defaultValue?.assignee
-        ? toAssigneeAutoCompleteType(defaultValue.assignee)
-        : undefined
-    );
 
     const {
       control,
@@ -73,25 +66,19 @@ const TodoForm = forwardRef(
 
     React.useEffect(() => {
       if (!defaultValue) return;
-      console.log("defaultValue: ", defaultValue);
-
+      // console.log("defaultValue: ", defaultValue);
       setLabels(defaultValue.labels);
       setPriority(defaultValue.prority);
-      // setAssigneeDefaultValue(
-      //   toAssigneeAutoCompleteType(defaultValue.assignee)
-      // );
-
-      setValue("completed", true);
     }, [defaultValue]);
 
     const handleChange = (event: SelectChangeEvent) => {
       setPriority(event.target.value);
-      console.log("Value: ", event.target.value);
+      // console.log("Value: ", event.target.value);
     };
 
     const handleLabelsChange = (event: SelectChangeEvent<string[]>) => {
       setLabels(event.target.value as string[]);
-      console.log("Value: ", event.target.value);
+      // console.log("Value: ", event.target.value);
     };
 
     const handleAssigneeChange = (
