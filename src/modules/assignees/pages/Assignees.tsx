@@ -12,7 +12,7 @@ import {
   AssigneeFilterEnum,
   AssigneeGenderEnum,
 } from "../models/Assignee";
-import Sidebar2 from "../../../components/Sidebar2";
+import Sidebar2, { AssigneeFilter } from "../../../components/Sidebar2";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
 import useDeleteAssignee from "../hooks/useDeleteAssignee";
@@ -28,11 +28,18 @@ const Assignees = () => {
   const [deletingAssignee, setDeletingAssignee] =
     React.useState<Assignee | null>(null);
 
-  const [mainFilter, setMainFilter] = React.useState<string>(
-    String(AssigneeFilterEnum.ALL)
-  );
+  // const [mainFilter, setMainFilter] = React.useState<string>(
+  //   String(AssigneeFilterEnum.ALL)
+  // );
 
-  const [secondFilter, setSecondFilter] = React.useState<string>("");
+  // const [secondFilter, setSecondFilter] = React.useState<string>("");
+
+  const [assigneeFiltered, setAssigneeFiltered] =
+    React.useState<boolean>(false);
+  const [assigneeFilter, setAssigneeFilter] = React.useState<AssigneeFilter>({
+    main: AssigneeFilterEnum.ALL,
+    gender: "",
+  });
 
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
@@ -55,7 +62,7 @@ const Assignees = () => {
 
   React.useEffect(() => {
     handleAssigneeFilters();
-  }, [mainFilter, secondFilter, assignees]);
+  }, [assigneeFilter, assignees]);
 
   const triggerSubmitForm = () => {
     formRef.current?.triggerSubmit();
@@ -121,22 +128,57 @@ const Assignees = () => {
     });
   };
 
-  const handleAssigneeFilters = () => {
-    switch (secondFilter) {
-      case String(AssigneeGenderEnum.MAN):
-        setFilteredAssignees(
-          assignees.filter((a) => a.gender === AssigneeGenderEnum.MAN)
-        );
-        break;
-      case String(AssigneeGenderEnum.WOMEN):
-        setFilteredAssignees(
-          assignees.filter((a) => a.gender === AssigneeGenderEnum.WOMEN)
-        );
-        break;
+  // const handleAssigneeFilters = () => {
+  //   switch (secondFilter) {
+  //     case String(AssigneeGenderEnum.MAN):
+  //       setFilteredAssignees(
+  //         assignees.filter((a) => a.gender === AssigneeGenderEnum.MAN)
+  //       );
+  //       break;
+  //     case String(AssigneeGenderEnum.WOMEN):
+  //       setFilteredAssignees(
+  //         assignees.filter((a) => a.gender === AssigneeGenderEnum.WOMEN)
+  //       );
+  //       break;
 
-      default:
-        setFilteredAssignees([]);
+  //     default:
+  //       setFilteredAssignees([]);
+  //   }
+  // };
+
+  const handleAssigneeFilters = () => {
+    // console.log(assigneeFilter);
+    let filteredSource = assignees;
+
+    if (assigneeFilter.main === AssigneeFilterEnum.ALL) {
+      filteredSource = assignees;
+    } else {
+      // filteredSource = assignees.filter((t) => {
+      //   if (
+      //     assigneeFilter.main === AssigneeFilterEnum.COMPLETED &&
+      //     t.completed === true
+      //   ) {
+      //     return true;
+      //   }
+      //   if (
+      //     assigneeFilter.main === AssigneeFilterEnum.TODAY &&
+      //     t.startDate &&
+      //     toCalendarDate(new Date(t.startDate)) === toCalendarDate(new Date())
+      //   ) {
+      //     return true;
+      //   }
+      // });
     }
+
+    if (assigneeFilter.gender !== "") {
+      filteredSource = filteredSource.filter(
+        (a) => a.gender === assigneeFilter.gender
+      );
+    }
+
+    setAssigneeFiltered(true);
+
+    setFilteredAssignees(filteredSource);
   };
 
   const handleExportToPDF = () => {
@@ -169,10 +211,8 @@ const Assignees = () => {
     <>
       <div id="app-sidebar">
         <Sidebar2
-          mainFilter={mainFilter}
-          secondFilter={secondFilter}
-          setMainFilter={setMainFilter}
-          setSecondFilter={setSecondFilter}
+          assigneeFilter={assigneeFilter}
+          setAssigneeFilter={setAssigneeFilter}
           handleCreate={openCreateAssigneeModal}
         />
       </div>
@@ -192,9 +232,7 @@ const Assignees = () => {
           </Box>
 
           <AssigneeDatatable
-            assignees={
-              filteredAssignees.length > 0 ? filteredAssignees : assignees
-            }
+            assignees={assigneeFiltered ? filteredAssignees : assignees}
             handleEdit={opentEditAssigeeModal}
             handleDelete={openDeleteAssigneeModal}
           />

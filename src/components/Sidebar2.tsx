@@ -14,21 +14,30 @@ import {
   AssigneeGenderEnum,
 } from "../modules/assignees/models/Assignee";
 
+export interface AssigneeFilter {
+  main: AssigneeFilterEnum | "";
+  gender: AssigneeGenderEnum | "";
+}
+
 interface Props {
   handleCreate: () => void;
-  mainFilter: string;
-  secondFilter: string;
-  setMainFilter: (filter: string) => void;
-  setSecondFilter: (filter: string) => void;
+  assigneeFilter: AssigneeFilter;
+  setAssigneeFilter: (filter: AssigneeFilter) => void;
+  // mainFilter: string;
+  // secondFilter: string;
+  // setMainFilter: (filter: string) => void;
+  // setSecondFilter: (filter: string) => void;
 }
 
 const Sidebar2 = ({
   handleCreate,
-  mainFilter,
-  secondFilter,
-  setMainFilter,
-  setSecondFilter,
-}: Props) => {
+  assigneeFilter,
+  setAssigneeFilter,
+}: // mainFilter,
+// secondFilter,
+// setMainFilter,
+// setSecondFilter,
+Props) => {
   const { t } = useTranslation();
 
   const getMainFilterLabel = (value: string) => {
@@ -83,10 +92,11 @@ const Sidebar2 = ({
     return Object.values(AssigneeFilterEnum).map((value, i) => {
       return (
         <div
-          onClick={() => setMainFilter(value)}
+          onClick={() => setAssigneeFilter({ ...assigneeFilter, main: value })}
           key={i}
           className={
-            "sidebar-tasks-list-item" + (mainFilter === value ? " active" : "")
+            "sidebar-tasks-list-item" +
+            (assigneeFilter.main === value ? " active" : "")
           }>
           <span>{getMainFilterLabel(value)}</span>
         </div>
@@ -98,11 +108,16 @@ const Sidebar2 = ({
     return Object.values(AssigneeGenderEnum).map((value, i) => {
       return (
         <div
-          onClick={() => setSecondFilter(value)}
+          onClick={() =>
+            setAssigneeFilter({
+              ...assigneeFilter,
+              gender: assigneeFilter.gender === value ? "" : value,
+            })
+          }
           key={i}
           className={
             "sidebar-tasks-list-item" +
-            (secondFilter === value ? " active" : "")
+            (assigneeFilter.gender === value ? " active" : "")
           }>
           <span>{getSecondFilterLabel(value)}</span>
         </div>

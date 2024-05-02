@@ -22,10 +22,6 @@ const Todos = () => {
   const [editingTodo, setEditingTodo] = React.useState<Todo | null>(null);
   const [deletingTodo, setDeletingTodo] = React.useState<Todo | null>(null);
 
-  // const [mainFilter, setMainFilter] = React.useState<string>(
-  //   String(TodoFilterEnum.ALL)
-  // );
-
   const [todoFiltered, setTodoFiltered] = React.useState<boolean>(false);
   const [todoFilter, setTodoFilter] = React.useState<TodoFilter>({
     main: TodoFilterEnum.ALL,
