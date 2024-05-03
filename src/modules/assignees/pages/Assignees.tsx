@@ -13,6 +13,8 @@ import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
 import useDeleteAssignee from "../hooks/useDeleteAssignee";
 import { useTranslation } from "react-i18next";
+import { toAssigneeExportable } from "../helpers/assigneeExporter";
+import { toCalendarDate } from "../../../utils";
 
 const Assignees = () => {
   const { t } = useTranslation();
@@ -169,9 +171,10 @@ const Assignees = () => {
   };
 
   const handleExportToPDF = () => {
+    const data: Assignee[] = assigneeFiltered ? filteredAssignees : assignees;
     exportToPdf<Assignee>(
-      filteredAssignees.length > 0 ? filteredAssignees : assignees,
-      "assignees-list"
+      toAssigneeExportable(data),
+      `Assignees-list-${toCalendarDate(new Date())}`
     );
   };
 

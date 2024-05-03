@@ -19,6 +19,7 @@ import useUpdateTodo from "../hooks/useUpdateTodo";
 import { Todo, TodoFilterEnum, TodoLabelEnum } from "../models/Todo";
 import { toCalendarDate } from "../../../utils";
 import { useTranslation } from "react-i18next";
+import { IExportableTodo, toExportableTodo } from "../helpers/todoExporter";
 
 const Todos = () => {
   const { t } = useTranslation();
@@ -166,9 +167,10 @@ const Todos = () => {
   };
 
   const handleExportToPDF = () => {
-    exportToPdf<Todo>(
-      filteredTodos.length > 0 ? filteredTodos : todos,
-      "todos-list"
+    const data = todoFiltered ? filteredTodos : todos;
+    exportToPdf<Partial<IExportableTodo>>(
+      toExportableTodo(data),
+      `todos-list-${toCalendarDate(new Date())}`
     );
   };
 
