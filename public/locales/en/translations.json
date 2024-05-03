@@ -17,6 +17,8 @@
   "confirmDeleteLabel": "Do you really want to delete ?",
   "create": "Create",
   "edit": "Edit",
+  "assigneesLabel": "Assignees",
+  "todosLabel": "Todos",
   "todos": {
     "priority": {
       "low": "Low",

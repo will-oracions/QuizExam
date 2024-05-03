@@ -17,6 +17,8 @@
   "confirmDeleteLabel": "Voulez-vous vraiment supprimer ?",
   "create": "Créer",
   "edit": "Editer",
+  "assigneesLabel": "Personnes",
+  "todosLabel": "Taches",
   "todos": {
     "priority": {
       "low": "Faible",

@@ -21,11 +21,11 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 const menu = [
   {
-    label: "Tasks",
+    label: "todosLabel",
     url: "/tasks",
   },
   {
-    label: "Assignees",
+    label: "assigneesLabel",
     url: "/assignees",
   },
 ];
@@ -64,7 +64,7 @@ const Header = () => {
   const displayMenu = () => {
     return menu.map((menuItem, index) => (
       <Button component={NavLink} to={menuItem.url} key={index} color="inherit">
-        {menuItem.label}
+        {t(menuItem.label)}
       </Button>
     ));
   };
