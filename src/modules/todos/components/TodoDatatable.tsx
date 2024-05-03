@@ -6,6 +6,7 @@ import {
   todoPriorityEnumToLabel,
 } from "../helpers/EnumParsers";
 import { Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   todos: Todo[];
@@ -14,30 +15,32 @@ interface Props {
 }
 
 const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
+  const { t } = useTranslation();
+
   const columns: GridColDef<Todo>[] = [
     { field: "id", headerName: "ID", width: 90 },
     {
       field: "assignee",
-      headerName: "Assigned to",
+      headerName: t("todos.assignedToLabel"),
       width: 150,
       renderCell: (params) => {
         // console.log(params.row);
         return params.row.assignee?.name;
       },
     },
-    { field: "title", headerName: "Title", width: 150 },
-    { field: "description", headerName: "description", flex: 1 },
-    { field: "startDate", headerName: "Start Date", flex: 1 },
-    { field: "endDate", headerName: "End Dates", flex: 1 },
+    { field: "title", headerName: t("todos.titleLabel"), width: 150 },
+    { field: "description", headerName: t("todos.descriptionLabel"), flex: 1 },
+    { field: "startDate", headerName: t("todos.startDateLabel"), flex: 1 },
+    { field: "endDate", headerName: t("todos.endDateLabel"), flex: 1 },
     {
       field: "priority",
-      headerName: "Priority",
+      headerName: t("todos.priorityLabel"),
       width: 120,
       renderCell: (params) => todoPriorityEnumToLabel(params.row.prority),
     },
     {
       field: "label",
-      headerName: "Label",
+      headerName: t("todos.label"),
       width: 90,
       renderCell: (params) => (
         <Box display="flex">
@@ -47,7 +50,12 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
         </Box>
       ),
     },
-    { field: "completed", headerName: "Completed", type: "boolean", flex: 1 },
+    {
+      field: "completed",
+      headerName: t("todos.completedLabel"),
+      type: "boolean",
+      flex: 1,
+    },
   ];
 
   return (
@@ -57,6 +65,7 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        noRowsLabel={t("todos.noTodos")}
       />
     </>
   );

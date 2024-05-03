@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridLocaleText } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -9,6 +9,7 @@ interface Props<TRow> {
   columns: GridColDef[];
   onEdit?: (row: TRow) => void;
   onDelete?: (row: TRow) => void;
+  localeText?: Partial<GridLocaleText>;
 }
 
 const CustomDatatable = <TRow extends Record<string, any>>({
@@ -16,6 +17,7 @@ const CustomDatatable = <TRow extends Record<string, any>>({
   columns,
   onEdit,
   onDelete,
+  localeText,
 }: Props<TRow>) => {
   const actionColumns: GridColDef[] =
     !onEdit && !onDelete
@@ -61,6 +63,7 @@ const CustomDatatable = <TRow extends Record<string, any>>({
           pagination: { paginationModel: { pageSize: 10 } },
         }}
         pageSizeOptions={[5, 10, 25]}
+        // localeText={{ footerRowPerPage: ''}}
       />
     </div>
   );

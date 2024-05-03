@@ -1,6 +1,7 @@
 import { LabelOutlined } from "@mui/icons-material";
 import { TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
 import { Typography } from "@mui/material";
+import i18n from "i18next";
 
 export interface IPriorityEnumParser {
   value: TodoPriorityEnum;
@@ -12,7 +13,7 @@ export const priorityEnumParserConfig: IPriorityEnumParser[] = [
     value: TodoPriorityEnum.LOW,
     label: (
       <Typography fontSize="1rem" style={{ color: "burlywood" }}>
-        Low
+        {`${i18n.t("todos.priority.low")}`}
       </Typography>
     ),
   },
@@ -21,7 +22,7 @@ export const priorityEnumParserConfig: IPriorityEnumParser[] = [
     value: TodoPriorityEnum.MEDIUM,
     label: (
       <Typography fontSize="1rem" style={{ color: "yellowgreen" }}>
-        Medium
+        {`${i18n.t("appDescription")}`}
       </Typography>
     ),
   },
@@ -29,7 +30,7 @@ export const priorityEnumParserConfig: IPriorityEnumParser[] = [
     value: TodoPriorityEnum.HIGHT,
     label: (
       <Typography fontSize="1rem" style={{ color: "orangered" }}>
-        Hight
+        {`${i18n.t("todos.priority.hight")}`}
       </Typography>
     ),
   },
@@ -41,6 +42,7 @@ export const todoPriorityEnumToLabel = (
   const result = priorityEnumParserConfig.find(
     (config) => config.value === priority
   );
+
   return result!.label;
 };
 

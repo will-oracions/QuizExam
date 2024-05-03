@@ -11,13 +11,77 @@
   "html": "Html",
   "jquery": "JQuery",
   "nodejs": "Node.js",
+  "exportBtnLabel": "Exporter en PDF",
+  "cancelBtnLabel": "Annuler",
+  "deleteBtnLabel": "Supprimer",
+  "confirmDeleteLabel": "Voulez-vous vraiment supprimer ?",
+  "create": "Créer",
+  "edit": "Editer",
   "todos": {
+    "priority": {
+      "low": "Minimal",
+      "medium": "Moyen",
+      "hight": "Maximale",
+      "priority": "Priorité"
+    },
+    "deleteTitle": "Supprimer la tâche",
     "all": "Tous",
-    "low": "Minimal",
-    "medium": "Moyen",
-    "hight": "Maximale",
-    "priority": "Priorité",
+    "noTodos": "Pas de tâche",
     "today": "Aujourd'hui",
-    "completed": "Terminée"
+    "completed": "Terminée",
+    "createTodoBtnLabel": "Créer une tâche",
+    "todoPageTitle": "Gestion des tâches",
+    "assignedToLabel": "Assigné à",
+    "titleLabel": "titre",
+    "descriptionLabel": "description",
+    "startDateLabel": "Date début",
+    "endDateLabel": "Date fin",
+    "priorityLabel": "Priorité",
+    "label": "label",
+    "completedLabel": "Complétée",
+    "createTodoForm": {
+      "createTodoTitle": "Création d'une tâche",
+      "editTodoTitle": "Edition d'une Todo",
+      "titleField": {
+        "label": "titre",
+        "validation": {
+          "required": "Le titre est requis"
+        }
+      },
+      "descriptionField": {
+        "label": "description",
+        "validation": {
+          "required": "La description est requise"
+        }
+      },
+      "priorityField": {
+        "label": "priorité",
+        "validation": {
+          "required": "La priorité est requise"
+        }
+      },
+      "labelsField": {
+        "label": "Labels",
+        "validation": {
+          "required": "Choisir au moins un label"
+        }
+      },
+      "startDateField": {
+        "label": "Date début",
+        "validation": {
+          "required": "La date de début est requise"
+        }
+      },
+      "assigneeField": {
+        "label": "Choisissez une personne",
+        "validation": {
+          "required": "La personne est requise"
+        }
+      },
+      "completedField": {
+        "label": "Terminée"
+      },
+      "submitButtonLabel": "Créer"
+    }
   }
 }

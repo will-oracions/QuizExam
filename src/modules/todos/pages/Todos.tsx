@@ -18,8 +18,10 @@ import useTodos from "../hooks/useTodos";
 import useUpdateTodo from "../hooks/useUpdateTodo";
 import { Todo, TodoFilterEnum, TodoLabelEnum } from "../models/Todo";
 import { toCalendarDate } from "../../../utils";
+import { useTranslation } from "react-i18next";
 
 const Todos = () => {
+  const { t } = useTranslation();
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [filteredTodos, setFilteredTodos] = React.useState<Todo[]>([]);
   const [editingTodo, setEditingTodo] = React.useState<Todo | null>(null);
@@ -210,7 +212,7 @@ const Todos = () => {
 
       <main id="app-main">
         <Box>
-          <h3 className="page-title">Manage Todos</h3>
+          <h3 className="page-title">{t("todos.todoPageTitle")}</h3>
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
             <Button
@@ -218,7 +220,7 @@ const Todos = () => {
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}>
-              Export to PDF
+              {t("exportBtnLabel")}
             </Button>
           </Box>
 

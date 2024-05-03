@@ -3,6 +3,7 @@ import CustomDatatable from "../../../components/CustomDatatable/CustomDatatable
 import { Assignee } from "../models/Assignee";
 import { genderEnumToLabel } from "../helpers/EnumParsers";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   assignees: Assignee[];
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
+  const { t } = useTranslation();
+
   const columns: GridColDef<Assignee>[] = [
     { field: "id", headerName: "ID", width: 90 },
     { field: "name", headerName: "Name", flex: 1 },
@@ -60,6 +63,10 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        localeText={{
+          noRowsLabel: t("assignees.noTodos"),
+          // footerRowPerPage: t("assignees.noTodos"),
+        }}
       />
     </>
   );

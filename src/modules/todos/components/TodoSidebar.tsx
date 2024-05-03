@@ -158,7 +158,7 @@ const TodoSidebar = ({
             color="primary"
             style={{ marginTop: "10px" }}
             startIcon={<AddIcon />}>
-            Create new todo
+            {t("todos.createTodoBtnLabel")}
           </Button>
         </Box>
       </div>
@@ -168,14 +168,18 @@ const TodoSidebar = ({
 
         {/* Priority Filter */}
         <div className="sidebar-tasks-list">
-          <div className="sidebar-tasks-list-label">Prority</div>
+          <div className="sidebar-tasks-list-label">
+            {t("todos.createTodoForm.priorityField.label")}
+          </div>
 
           {displayPriorityFilters()}
         </div>
 
         {/* Lables Filter */}
         <div className="sidebar-tasks-list">
-          <div className="sidebar-tasks-list-label">Labels</div>
+          <div className="sidebar-tasks-list-label">
+            {t("todos.createTodoForm.labelsField.label")}
+          </div>
 
           {displaySecondFilters()}
         </div>

@@ -12,8 +12,11 @@ import AssigneeSidebar, { AssigneeFilter } from "../components/AssigneeSidebar";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
 import useDeleteAssignee from "../hooks/useDeleteAssignee";
+import { useTranslation } from "react-i18next";
 
 const Assignees = () => {
+  const { t } = useTranslation();
+
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
   const [filteredAssignees, setFilteredAssignees] = React.useState<Assignee[]>(
     []
@@ -203,7 +206,7 @@ const Assignees = () => {
 
       <main id="app-main">
         <Box>
-          <h3 className="page-title">Manage Assignees</h3>
+          <h3 className="page-title">{t("assignees.assigneesPageTitle")}</h3>
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
             <Button

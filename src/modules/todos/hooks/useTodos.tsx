@@ -6,7 +6,7 @@ import { getData, toTodoModel } from "../../../api/mockAxios";
 const getTodos = async (): Promise<Todo[]> => {
   // console.log("Get the todos");
   const localData = getData();
-  console.log(localData);
+  // console.log(localData);
   if (localData) return localData.todos.map((t) => toTodoModel(t));
   const res = await axios.get<Todo[]>("/todos");
   return res.data;

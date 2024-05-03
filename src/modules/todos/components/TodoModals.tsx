@@ -4,6 +4,7 @@ import TodoForm, { AssigneeAutoCompleteType } from "./TodoForm";
 import { Todo } from "../models/Todo";
 import { CustomModalType } from "../../../components/CustomModal/hooks/useCustomModal";
 import { RefObject } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   todoCreateModal: CustomModalType;
@@ -32,11 +33,13 @@ const TodoModals = ({
   isDeleting,
   assignees,
 }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* Create Todo Modal */}
       <CustomModal
-        title={(editingTodo ? "Edit" : "Create new") + " Todo"}
+        title={t("todos.createTodoForm.createTodoTitle")}
         footer={
           <div>
             {/* <Button
@@ -58,7 +61,7 @@ const TodoModals = ({
               {addEditModalIsLoading && (
                 <CircularProgress size="20px" color="inherit" />
               )}
-              &nbsp; {editingTodo ? "Edit" : "Create"}
+              &nbsp; {editingTodo ? t("edit") : t("create")}
             </Button>
           </div>
         }
@@ -77,7 +80,7 @@ const TodoModals = ({
       <CustomModal
         isOpen={todoDeleteModal.isOpen}
         onClose={todoDeleteModal.closeModal}
-        title="Delete Todo"
+        title={t("todos.deleteTitle")}
         footer={
           <div>
             <Button
@@ -87,7 +90,7 @@ const TodoModals = ({
               variant="outlined"
               color="primary"
               style={{ marginTop: "10px" }}>
-              Cancel
+              {t("cancelBtnLabel")}
             </Button>
 
             <Button
@@ -98,11 +101,11 @@ const TodoModals = ({
               color="error"
               style={{ marginTop: "10px" }}>
               {isDeleting && <CircularProgress size="20px" color="inherit" />}
-              &nbsp; Delete
+              &nbsp; {t("deleteBtnLabel")}
             </Button>
           </div>
         }>
-        <h4>Voulez-vous vraiment supprimer ?</h4>
+        <h4>{t("confirmDeleteLabel")}</h4>
       </CustomModal>
     </>
   );

@@ -11,12 +11,76 @@
   "html": "Html",
   "jquery": "JQuery",
   "nodejs": "Node.js",
+  "exportBtnLabel": "Export to PDF",
+  "cancelBtnLabel": "Cancel",
+  "deleteBtnLabel": "Delete",
+  "confirmDeleteLabel": "Do you really want to delete ?",
+  "create": "Create",
+  "edit": "Edit",
   "todos": {
-    "low": "Low",
-    "medium": "Medium",
-    "hight": "Hight",
-    "priority": "Priority",
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "hight": "Hight",
+      "priority": "Priority"
+    },
+    "deleteTitle": "Delete todo",
+    "noTodos": "No Todo",
     "today": "Today",
-    "completed": "Completed"
+    "completed": "Completed",
+    "createTodoBtnLabel": "Create new Todo",
+    "todoPageTitle": "Manage Todos",
+    "assignedToLabel": "Assigned To",
+    "titleLabel": "title",
+    "descriptionLabel": "description",
+    "startDateLabel": "Start Date",
+    "endDateLabel": "End Date",
+    "priorityLabel": "Priority",
+    "label": "label",
+    "completedLabel": "Completed",
+    "createTodoForm": {
+      "createTodoTitle": "Create new Todo",
+      "editTodoTitle": "Edit Todo",
+      "titleField": {
+        "label": "title",
+        "validation": {
+          "required": "Title is required"
+        }
+      },
+      "descriptionField": {
+        "label": "description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "priorityField": {
+        "label": "priority",
+        "validation": {
+          "required": "Priority is required"
+        }
+      },
+      "labelsField": {
+        "label": "Labels",
+        "validation": {
+          "required": "choose at least one label"
+        }
+      },
+      "startDateField": {
+        "label": "Start Date",
+        "validation": {
+          "required": "Start Date is required"
+        }
+      },
+      "assigneeField": {
+        "label": "Choose an assginee",
+        "validation": {
+          "required": "Assignee is required"
+        }
+      },
+      "completedField": {
+        "label": "Completed"
+      },
+      "submitButtonLabel": "Create"
+    }
   }
 }

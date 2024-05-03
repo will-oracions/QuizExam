@@ -20,6 +20,7 @@ import React, { SyntheticEvent, forwardRef } from "react";
 import { Assignee } from "../../assignees/models/Assignee";
 import { Todo, TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
 import { toCalendarDate } from "../../../utils";
+import { useTranslation } from "react-i18next";
 
 export type AssigneeAutoCompleteType = Assignee & { label: string };
 
@@ -41,6 +42,8 @@ interface Props {
 
 const TodoForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue, assignees }: Props, ref) => {
+    const { t } = useTranslation();
+
     // console.log("Form Assignees: ", assignees);
     const [priority, setPriority] = React.useState("");
     const [labels, setLabels] = React.useState<string[]>([]);
@@ -141,16 +144,20 @@ const TodoForm = forwardRef(
                 <TextField
                   fullWidth
                   variant="outlined"
-                  label="title"
+                  label={t("todos.createTodoForm.titleField.label")}
                   type="text"
                   {...register("title", {
                     required: {
                       value: true,
-                      message: "Le titre est requis.",
+                      message: t(
+                        "todos.createTodoForm.titleField.validation.required"
+                      ),
                     },
                     minLength: {
                       value: 3,
-                      message: "Le titre doit avoir au moins 3 charactères",
+                      message: t(
+                        "todos.createTodoForm.titleField.validation.min3Characters"
+                      ),
                     },
                   })}
                   error={Boolean(errors.title)}
@@ -164,18 +171,21 @@ const TodoForm = forwardRef(
                 <TextField
                   fullWidth
                   variant="outlined"
-                  label="description"
+                  label={t("todos.createTodoForm.descriptionField.label")}
                   type="textarea"
                   minRows={3}
                   {...register("description", {
                     required: {
                       value: true,
-                      message: "La description est requis.",
+                      message: t(
+                        "todos.createTodoForm.descriptionField.validation.required"
+                      ),
                     },
                     minLength: {
                       value: 3,
-                      message:
-                        "La description doit avoir au moins 3 charactères",
+                      message: t(
+                        "todos.createTodoForm.titleField.validation.min3characters"
+                      ),
                     },
                   })}
                   error={Boolean(errors.description)}
@@ -188,22 +198,30 @@ const TodoForm = forwardRef(
 
             <Grid item xs={6}>
               <FormControl fullWidth error={Boolean(errors.prority)}>
-                <InputLabel id="prority-select-label">prority</InputLabel>
+                <InputLabel id="prority-select-label">
+                  {t("todos.createTodoForm.priorityField.label")}
+                </InputLabel>
                 <Select
                   labelId="prority-select-label"
                   id="prority-select"
                   {...register("prority", {
                     required: {
                       value: true,
-                      message: "La priorité est requise.",
+                      message: t(
+                        "todos.createTodoForm.priorityField.validation.required"
+                      ),
                     },
                   })}
                   label="prority"
                   value={priority || ""}
                   onChange={handleChange}>
-                  <MenuItem value={TodoPriorityEnum.LOW}>Low</MenuItem>
-                  <MenuItem value={TodoPriorityEnum.MEDIUM}>Medium</MenuItem>
-                  <MenuItem value={TodoPriorityEnum.HIGHT}>Hight</MenuItem>
+                  <MenuItem value={TodoPriorityEnum.LOW}>{t("low")}</MenuItem>
+                  <MenuItem value={TodoPriorityEnum.MEDIUM}>
+                    {t("medium")}
+                  </MenuItem>
+                  <MenuItem value={TodoPriorityEnum.HIGHT}>
+                    {t("hight")}
+                  </MenuItem>
                 </Select>
                 {errors.prority && (
                   <FormHelperText>{errors.prority.message}</FormHelperText>
@@ -213,7 +231,9 @@ const TodoForm = forwardRef(
 
             <Grid item xs={6}>
               <FormControl fullWidth error={Boolean(errors.labels)}>
-                <InputLabel id="labels-select-label">Labels</InputLabel>
+                <InputLabel id="labels-select-label">
+                  {t("todos.createTodoForm.labelsField.label")}
+                </InputLabel>
                 <Select
                   labelId="labels-select-label"
                   id="labels-select"
@@ -221,7 +241,9 @@ const TodoForm = forwardRef(
                   {...register("labels", {
                     required: {
                       value: true,
-                      message: "Les labels sont requis.",
+                      message: t(
+                        "todos.createTodoForm.labelsField.validation.required"
+                      ),
                     },
                   })}
                   label="labels"
@@ -247,7 +269,7 @@ const TodoForm = forwardRef(
                   <TextField
                     fullWidth
                     {...field}
-                    label="start Date"
+                    label={t("todos.createTodoForm.startDateField.label")}
                     type="date"
                     InputLabelProps={{
                       shrink: true,
@@ -309,7 +331,9 @@ const TodoForm = forwardRef(
                   {...register("assignee", {
                     required: {
                       value: true,
-                      message: "Assignee is required",
+                      message: t(
+                        "todos.createTodoForm.assigneeField.validation.required"
+                      ),
                     },
                   })}
                   options={assignees}
@@ -326,7 +350,7 @@ const TodoForm = forwardRef(
                     <TextField
                       error={!!errors.assignee}
                       {...params}
-                      label="Choisissez un pays"
+                      label={t("todos.createTodoForm.assigneeField.label")}
                     />
                   )}
                   onChange={handleAssigneeChange}
@@ -346,7 +370,7 @@ const TodoForm = forwardRef(
                 render={({ field }) => (
                   <FormControlLabel
                     control={<Checkbox {...field} checked={field.value} />}
-                    label="Completed"
+                    label={t("todos.createTodoForm.completedField.label")}
                   />
                 )}
               />
