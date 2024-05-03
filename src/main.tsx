@@ -8,7 +8,14 @@ import "./index.scss";
 import "./i18n/i18n.ts";
 import router from "./router.tsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: 0,
+      staleTime: 0,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

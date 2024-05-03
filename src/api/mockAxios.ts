@@ -7,6 +7,12 @@ import { assigneeFakeData, todoFakeData } from "./fakeData";
 
 // axios.defaults.headers.common["Cache-Control"] = "no-cache";
 
+// const as = generateFakeAssignees(10);
+// console.log("ASSS", as);
+
+// const td = generateFakeTodos(30, assigneeFakeData);
+// console.log(td);
+
 export const axiosMock = new MockAdapter(axios);
 
 const LOCAL_STORAGE_DATA_KEY = "data";
@@ -19,7 +25,7 @@ const saveData = (data: IData) => {
   localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(data));
 };
 
-const getData = (): IData | null => {
+export const getData = (): IData | null => {
   const savedData = localStorage.getItem(LOCAL_STORAGE_DATA_KEY);
   if (!savedData) return null;
   try {
@@ -30,29 +36,30 @@ const getData = (): IData | null => {
   }
 };
 
-// const as = generateFakeAssignees(10);
-// console.log("ASSS", as);
-
-// const td = generateFakeTodos(30, assigneeFakeData);
-// console.log(td);
-
 let todos: any[] = getData()?.todos || todoFakeData;
 
 let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
 
+export const toTodoModel = (todo: Todo & { assigneeId?: number }): Todo => {
+  const assigneeId = todo.assigneeId;
+  delete todo.assigneeId;
+  return {
+    ...todo,
+    assignee: assignees.find((a) => a.id === assigneeId)!,
+  };
+};
+
+export const toAssigneeModel = (a: Assignee): Assignee => {
+  return {
+    ...a,
+    todos: todos.filter((t) => t.assigneeId === a.id),
+  };
+};
+
 // Mock Todos Api
 axiosMock.onGet("/todos").reply(
   200,
-  todos
-    .map((t) => ({ ...t }))
-    .map((todo): Todo => {
-      const assigneeId = todo.assigneeId;
-      delete todo.assigneeId;
-      return {
-        ...todo,
-        assignee: assignees.find((a) => a.id === assigneeId),
-      };
-    })
+  todos.map((t) => ({ ...t })).map((todo): Todo => toTodoModel(todo))
 );
 
 axiosMock.onPost("/todos").reply(async (config) => {
@@ -108,12 +115,7 @@ axiosMock.onDelete(/\/todos\/\d+/).reply(async (config) => {
 // Mock Assignees API
 axiosMock.onGet("/assignees").reply(
   200,
-  assignees.map((a) => {
-    return {
-      ...a,
-      todos: todos.filter((t) => t.assigneeId === a.id),
-    };
-  })
+  assignees.map((a) => toAssigneeModel(a))
 );
 
 axiosMock.onPost("/assignees").reply(async (config) => {
