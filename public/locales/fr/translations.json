@@ -7,8 +7,8 @@
   "men": "Homme",
   "women": "Femme",
   "all": "Tous",
-  "css": "css",
-  "html": "Html",
+  "css": "CSS",
+  "html": "HTML",
   "jquery": "JQuery",
   "nodejs": "Node.js",
   "exportBtnLabel": "Exporter en PDF",
@@ -19,8 +19,8 @@
   "edit": "Editer",
   "todos": {
     "priority": {
-      "low": "Minimal",
-      "medium": "Moyen",
+      "low": "Faible",
+      "medium": "Moyenne",
       "hight": "Maximale",
       "priority": "Priorité"
     },
@@ -38,7 +38,7 @@
     "endDateLabel": "Date fin",
     "priorityLabel": "Priorité",
     "label": "label",
-    "completedLabel": "Complétée",
+    "completedLabel": "Terminée",
     "createTodoForm": {
       "createTodoTitle": "Création d'une tâche",
       "editTodoTitle": "Edition d'une Todo",

@@ -7,6 +7,8 @@ import {
 } from "../helpers/EnumParsers";
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { toCalendarDate } from "../../../utils";
+import { DatatableCelToDateCalendar } from "../../../helpers/dateHelper";
 
 interface Props {
   todos: Todo[];
@@ -30,8 +32,18 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
     },
     { field: "title", headerName: t("todos.titleLabel"), width: 150 },
     { field: "description", headerName: t("todos.descriptionLabel"), flex: 1 },
-    { field: "startDate", headerName: t("todos.startDateLabel"), flex: 1 },
-    { field: "endDate", headerName: t("todos.endDateLabel"), flex: 1 },
+    {
+      field: "startDate",
+      headerName: t("todos.startDateLabel"),
+      flex: 1,
+      renderCell: (params) => DatatableCelToDateCalendar(params, "startDate"),
+    },
+    {
+      field: "endDate",
+      headerName: t("todos.endDateLabel"),
+      flex: 1,
+      renderCell: (params) => DatatableCelToDateCalendar(params, "startDate"),
+    },
     {
       field: "priority",
       headerName: t("todos.priorityLabel"),
@@ -65,7 +77,9 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        noRowsLabel={t("todos.noTodos")}
+        localeText={{
+          noRowsLabel: t("todos.noTodos"),
+        }}
       />
     </>
   );

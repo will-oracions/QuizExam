@@ -2,6 +2,7 @@ import { LabelOutlined } from "@mui/icons-material";
 import { TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
 import { Typography } from "@mui/material";
 import i18n from "i18next";
+import ProrityLabel from "../components/ProrityLabel";
 
 export interface IPriorityEnumParser {
   value: TodoPriorityEnum;
@@ -12,26 +13,22 @@ export const priorityEnumParserConfig: IPriorityEnumParser[] = [
   {
     value: TodoPriorityEnum.LOW,
     label: (
-      <Typography fontSize="1rem" style={{ color: "burlywood" }}>
-        {`${i18n.t("todos.priority.low")}`}
-      </Typography>
+      <ProrityLabel color="burlywood" labelToTranslate="todos.priority.low" />
     ),
   },
-
   {
     value: TodoPriorityEnum.MEDIUM,
     label: (
-      <Typography fontSize="1rem" style={{ color: "yellowgreen" }}>
-        {`${i18n.t("appDescription")}`}
-      </Typography>
+      <ProrityLabel
+        color="yellowgreen"
+        labelToTranslate="todos.priority.medium"
+      />
     ),
   },
   {
     value: TodoPriorityEnum.HIGHT,
     label: (
-      <Typography fontSize="1rem" style={{ color: "orangered" }}>
-        {`${i18n.t("todos.priority.hight")}`}
-      </Typography>
+      <ProrityLabel color="orangered" labelToTranslate="todos.priority.hight" />
     ),
   },
 ];
