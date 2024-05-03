@@ -215,12 +215,14 @@ const TodoForm = forwardRef(
                   label="prority"
                   value={priority || ""}
                   onChange={handleChange}>
-                  <MenuItem value={TodoPriorityEnum.LOW}>{t("low")}</MenuItem>
+                  <MenuItem value={TodoPriorityEnum.LOW}>
+                    {t("todos.priority.low")}
+                  </MenuItem>
                   <MenuItem value={TodoPriorityEnum.MEDIUM}>
-                    {t("medium")}
+                    {t("todos.priority.medium")}
                   </MenuItem>
                   <MenuItem value={TodoPriorityEnum.HIGHT}>
-                    {t("hight")}
+                    {t("todos.priority.hight")}
                   </MenuItem>
                 </Select>
                 {errors.prority && (

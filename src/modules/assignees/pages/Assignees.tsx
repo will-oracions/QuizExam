@@ -37,7 +37,7 @@ const Assignees = () => {
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   const notify = () =>
-    toast("Assignee created", { type: "info", className: "app-toast" });
+    toast(t("assigneeCreated"), { type: "info", className: "app-toast" });
 
   const assigneeCreateModal = useCustomModal();
   const assigneeDeleteModal = useCustomModal();

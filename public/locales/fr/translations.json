@@ -19,6 +19,8 @@
   "edit": "Editer",
   "assigneesLabel": "Personnes",
   "todosLabel": "Taches",
+  "todoCreated": "Tâche créee",
+  "assigneeCreated": "Personne créee",
   "todos": {
     "priority": {
       "low": "Faible",

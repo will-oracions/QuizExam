@@ -37,7 +37,7 @@ const Todos = () => {
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   const notify = () =>
-    toast("Todo created", { type: "info", className: "app-toast" });
+    toast(t("todoCreated"), { type: "info", className: "app-toast" });
 
   const todoCreateModal = useCustomModal();
   const todoDeleteModal = useCustomModal();

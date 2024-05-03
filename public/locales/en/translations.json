@@ -19,6 +19,8 @@
   "edit": "Edit",
   "assigneesLabel": "Assignees",
   "todosLabel": "Todos",
+  "todoCreated": "Todo created",
+  "assigneeCreated": "Assignee created",
   "todos": {
     "priority": {
       "low": "Low",

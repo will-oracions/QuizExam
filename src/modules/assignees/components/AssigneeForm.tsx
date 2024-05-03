@@ -160,7 +160,7 @@ const AssigneeForm = forwardRef(
               value={gender || ""}
               onChange={handleChange}>
               <MenuItem value={AssigneeGenderEnum.MAN}>{t("men")}</MenuItem>
-              <MenuItem value={AssigneeGenderEnum.WOMEN}>{"women"}</MenuItem>
+              <MenuItem value={AssigneeGenderEnum.WOMEN}>{t("women")}</MenuItem>
             </Select>
             {errors.gender && (
               <FormHelperText>{errors.gender.message}</FormHelperText>
