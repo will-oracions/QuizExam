@@ -4,7 +4,7 @@ export const sleep = async (delay: number) =>
   });
 
 export const generateFakeId = (): number => {
-  return Math.floor(Math.random() * 1000);
+  return Math.floor(Math.random() * 1000) + 200;
 };
 
 export const toCalendarDate = (date: Date) => {

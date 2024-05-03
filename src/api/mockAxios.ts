@@ -43,19 +43,16 @@ let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
 // Mock Todos Api
 axiosMock.onGet("/todos").reply(
   200,
-  (() => {
-    console.log("Get from axiosMock...", todos);
-    return todos
-      .map((t) => ({ ...t }))
-      .map((todo): Todo => {
-        const assigneeId = todo.assigneeId;
-        delete todo.assigneeId;
-        return {
-          ...todo,
-          assignee: assigneeFakeData.find((a) => a.id === assigneeId),
-        };
-      });
-  })()
+  todos
+    .map((t) => ({ ...t }))
+    .map((todo): Todo => {
+      const assigneeId = todo.assigneeId;
+      delete todo.assigneeId;
+      return {
+        ...todo,
+        assignee: assignees.find((a) => a.id === assigneeId),
+      };
+    })
 );
 
 axiosMock.onPost("/todos").reply(async (config) => {
