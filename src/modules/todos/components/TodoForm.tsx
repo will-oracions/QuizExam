@@ -45,6 +45,8 @@ const TodoForm = forwardRef(
     const [priority, setPriority] = React.useState("");
     const [labels, setLabels] = React.useState<string[]>([]);
 
+    const today = toCalendarDate(new Date());
+
     const {
       control,
       register,
@@ -59,7 +61,7 @@ const TodoForm = forwardRef(
           ...defaultValue,
           startDate: defaultValue?.startDate
             ? toCalendarDate(new Date(defaultValue.startDate))
-            : undefined,
+            : today,
 
           labels: [TodoLabelEnum.CSS],
           completed: defaultValue?.completed,
@@ -254,6 +256,7 @@ const TodoForm = forwardRef(
                     helperText={
                       errors.startDate ? errors.startDate.message : ""
                     }
+                    inputProps={{ min: today }}
                   />
                 )}
               />
