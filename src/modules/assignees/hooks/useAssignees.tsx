@@ -12,7 +12,7 @@ const useAssignees = () => {
     queryKey: ["assignees"],
     queryFn: getAssignees,
     retry: 3,
-    gcTime: 1,
+    staleTime: 1,
   });
 };
 

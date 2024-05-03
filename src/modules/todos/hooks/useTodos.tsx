@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Todo } from "../models/Todo";
+import axios from "axios";
 
 const getTodos = async () => {
+  // await sleep(1000);
   const res = await axios.get<Todo[]>("/todos");
   return res.data;
 };
@@ -12,7 +13,7 @@ const useTodos = () => {
     queryKey: ["todos"],
     queryFn: getTodos,
     retry: 3,
-    gcTime: 1,
+    gcTime: 0,
   });
 };
 

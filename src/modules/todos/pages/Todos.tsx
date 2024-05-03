@@ -46,7 +46,7 @@ const Todos = () => {
 
   // console.log("Todolist data: ", getTodoListQuery.data);
 
-  console.log("Assignees data: ", getAssigneesListQuery.data);
+  // console.log("Assignees data: ", getAssigneesListQuery.data);
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 
@@ -63,7 +63,7 @@ const Todos = () => {
   };
 
   const onSubmitTodoForm = (data: Partial<Todo>) => {
-    console.log("Data: ", data);
+    // console.log("Data: ", data);
 
     const handler = editingTodo ? handleSaveUpdateTodo : handleSaveTodo;
 
@@ -104,7 +104,7 @@ const Todos = () => {
     // console.log("Delete: ", deletingTodo);
     deleteTodoMutation.mutate(deletingTodo.id, {
       onSuccess: (res) => {
-        console.log("Res", res);
+        // console.log("Res", res);
         setTodos((prev) => prev.filter((a) => a.id != deletingTodo.id));
         setDeletingTodo(null);
         todoDeleteModal.closeModal();
@@ -170,14 +170,14 @@ const Todos = () => {
   };
 
   const opentEditAssigeeModal = (row: Todo) => {
-    console.log(row);
+    // console.log(row);
     setEditingTodo(row);
     setErrorMessage("");
     todoCreateModal.openModal();
   };
 
   const openDeleteTodoModal = (row: Todo) => {
-    console.log(row);
+    // console.log(row);
     setDeletingTodo(row);
     todoDeleteModal.openModal();
   };

@@ -44,7 +44,7 @@ const Assignees = () => {
   const deleteAssigneeMutation = useDeleteAssignee();
   const getAssigneeListQuery = useAssignees();
 
-  console.log("Asss: ", getAssigneeListQuery.data);
+  // console.log("Asss: ", getAssigneeListQuery.data);
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 
@@ -112,7 +112,7 @@ const Assignees = () => {
     // console.log("Delete: ", deletingAssignee);
     deleteAssigneeMutation.mutate(deletingAssignee.id, {
       onSuccess: (res) => {
-        console.log("Res", res);
+        // console.log("Res", res);
         setAssignees((prev) => prev.filter((a) => a.id != deletingAssignee.id));
         setDeletingAssignee(null);
         assigneeDeleteModal.closeModal();
@@ -179,14 +179,14 @@ const Assignees = () => {
   };
 
   const opentEditAssigeeModal = (row: Assignee) => {
-    console.log(row);
+    // console.log(row);
     setEditingAssignee(row);
     setErrorMessage("");
     assigneeCreateModal.openModal();
   };
 
   const openDeleteAssigneeModal = (row: Assignee) => {
-    console.log(row);
+    // console.log(row);
     setDeletingAssignee(row);
     assigneeDeleteModal.openModal();
   };

@@ -5,7 +5,9 @@ import { Assignee } from "../modules/assignees/models/Assignee";
 import { generateFakeId, sleep } from "../utils";
 import { assigneeFakeData, todoFakeData } from "./fakeData";
 
-const mock = new MockAdapter(axios);
+axios.defaults.headers.common["Cache-Control"] = "no-cache";
+
+export const axiosMock = new MockAdapter(axios);
 
 const LOCAL_STORAGE_DATA_KEY = "data";
 interface IData {
@@ -39,21 +41,24 @@ let todos: any[] = getData()?.todos || todoFakeData;
 let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
 
 // Mock Todos Api
-mock.onGet("/todos").reply(
+axiosMock.onGet("/todos").reply(
   200,
-  todos
-    .map((t) => ({ ...t }))
-    .map((todo): Todo => {
-      const assigneeId = todo.assigneeId;
-      delete todo.assigneeId;
-      return {
-        ...todo,
-        assignee: assigneeFakeData.find((a) => a.id === assigneeId),
-      };
-    })
+  (() => {
+    console.log("Get from axiosMock...", todos);
+    return todos
+      .map((t) => ({ ...t }))
+      .map((todo): Todo => {
+        const assigneeId = todo.assigneeId;
+        delete todo.assigneeId;
+        return {
+          ...todo,
+          assignee: assigneeFakeData.find((a) => a.id === assigneeId),
+        };
+      });
+  })()
 );
 
-mock.onPost("/todos").reply(async (config) => {
+axiosMock.onPost("/todos").reply(async (config) => {
   const todo = JSON.parse(config.data);
   const assignee = todo.assignee;
   delete todo.assignee;
@@ -75,7 +80,7 @@ mock.onPost("/todos").reply(async (config) => {
   return [201, newTodo];
 });
 
-mock.onPut(/\/todos\/\d+/).reply(async (config) => {
+axiosMock.onPut(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
 
   const updatedTodo: Todo = JSON.parse(config.data);
@@ -92,7 +97,7 @@ mock.onPut(/\/todos\/\d+/).reply(async (config) => {
   return [200, updatedTodo];
 });
 
-mock.onDelete(/\/todos\/\d+/).reply(async (config) => {
+axiosMock.onDelete(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
   todos = todos.filter((todo) => todo.id !== todoId);
 
@@ -104,7 +109,7 @@ mock.onDelete(/\/todos\/\d+/).reply(async (config) => {
 });
 
 // Mock Assignees API
-mock.onGet("/assignees").reply(
+axiosMock.onGet("/assignees").reply(
   200,
   assignees.map((a) => {
     return {
@@ -114,7 +119,7 @@ mock.onGet("/assignees").reply(
   })
 );
 
-mock.onPost("/assignees").reply(async (config) => {
+axiosMock.onPost("/assignees").reply(async (config) => {
   const data = JSON.parse(config.data);
   const assignee = { ...data, id: generateFakeId() };
   assignees.push(assignee);
@@ -125,7 +130,7 @@ mock.onPost("/assignees").reply(async (config) => {
   return [201, assignee];
 });
 
-mock.onPut(/\/assignees\/\d+/).reply(async (config) => {
+axiosMock.onPut(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   const updatedAssignee: Assignee = JSON.parse(config.data);
   assignees = assignees.map((assignee) =>
@@ -139,7 +144,7 @@ mock.onPut(/\/assignees\/\d+/).reply(async (config) => {
   return [200, updatedAssignee];
 });
 
-mock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
+axiosMock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   assignees = assignees.filter((assignee) => assignee.id !== assigneeId);
 
@@ -150,4 +155,4 @@ mock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
   return [204];
 });
 
-export default mock;
+export default axiosMock;
