@@ -71,7 +71,7 @@ const Todos = () => {
   const onSubmitTodoForm = (data: Partial<Todo>) => {
     // console.log("Data: ", data);
 
-    if (data.completed) {
+    if (!data.endDate && data.completed) {
       data.endDate = new Date().toDateString();
     }
 

@@ -76,6 +76,12 @@
           "required": "Start Date is required"
         }
       },
+      "endDateField": {
+        "label": "End Date",
+        "validation": {
+          "required": "End Date is required"
+        }
+      },
       "assigneeField": {
         "label": "Choose an assginee",
         "validation": {

@@ -66,6 +66,10 @@ const TodoForm = forwardRef(
             ? toCalendarDate(new Date(defaultValue.startDate))
             : today,
 
+          endDate: defaultValue?.endDate
+            ? toCalendarDate(new Date(defaultValue.endDate))
+            : today,
+
           labels: [TodoLabelEnum.CSS],
           completed: defaultValue?.completed,
         } || {},
@@ -287,6 +291,29 @@ const TodoForm = forwardRef(
             </Grid>
 
             <Grid item xs={6}>
+              <Controller
+                name="endDate"
+                control={control}
+                // defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    fullWidth
+                    {...field}
+                    label={t("todos.createTodoForm.endDateField.label")}
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={!!errors.endDate}
+                    helperText={errors.endDate ? errors.endDate.message : ""}
+                    inputProps={{ min: today }}
+                    disabled={defaultValue?.completed === true}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={6}>
               {/* <CustomAutoComplete<Assignee> data={assignees} label="Assignee" /> */}
 
               {/* <Autocomplete
@@ -364,7 +391,7 @@ const TodoForm = forwardRef(
               </FormControl>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Controller
                 name="completed"
                 control={control}

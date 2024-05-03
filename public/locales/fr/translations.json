@@ -72,9 +72,15 @@
         }
       },
       "startDateField": {
-        "label": "Date début",
+        "label": "Date de début",
         "validation": {
           "required": "La date de début est requise"
+        }
+      },
+      "endDateField": {
+        "label": "Date de Fin",
+        "validation": {
+          "required": "La date de fin est requise"
         }
       },
       "assigneeField": {
