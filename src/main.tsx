@@ -8,12 +8,7 @@ import "./index.scss";
 import "./i18n/i18n.ts";
 import router from "./router.tsx";
 
-const queryClient = new QueryClient({
-  // defaultOptions: {
-  //   queries: {
-  //   },
-  // },
-});
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -21,7 +16,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* <ThemeProvider theme={theme}> */}
       {/* <App /> */}
       <RouterProvider router={router} />
-      {/* </ThemeProvider> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

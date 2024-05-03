@@ -12,7 +12,6 @@ const useAssignees = () => {
     queryKey: ["assignees"],
     queryFn: getAssignees,
     retry: 3,
-    staleTime: 1,
   });
 };
 

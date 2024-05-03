@@ -13,7 +13,6 @@ const useTodos = () => {
     queryKey: ["todos"],
     queryFn: getTodos,
     retry: 3,
-    gcTime: 0,
   });
 };
 

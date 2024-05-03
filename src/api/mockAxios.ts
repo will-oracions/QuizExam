@@ -5,7 +5,7 @@ import { Assignee } from "../modules/assignees/models/Assignee";
 import { generateFakeId, sleep } from "../utils";
 import { assigneeFakeData, todoFakeData } from "./fakeData";
 
-axios.defaults.headers.common["Cache-Control"] = "no-cache";
+// axios.defaults.headers.common["Cache-Control"] = "no-cache";
 
 export const axiosMock = new MockAdapter(axios);
 
