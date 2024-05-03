@@ -12,7 +12,6 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { NavLink } from "react-router-dom";
 
@@ -95,7 +94,7 @@ const Header = () => {
                 aria-label="menu"
                 onClick={toggleDrawer}
                 className={classes.menuButton}>
-                <MenuIcon />
+                {/* <MenuIcon /> */}
               </IconButton>
               <div className={classes.menuButton}>
                 <Drawer

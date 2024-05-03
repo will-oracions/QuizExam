@@ -18,6 +18,7 @@ h6 {
 body {
   margin: 0;
   font-size: 2rem;
+  // font-size: 1rem;
   font-family: "Roboto" sans-serif;
   color: #0008;
 
@@ -82,6 +83,25 @@ body {
         padding-right: 20px;
 
         font-family: "Roboto" sans-serif;
+        position: relative;
+        // border: 4px solid greenyellow;
+
+        .sidebar-header {
+          display: flex;
+          justify-content: center;
+          // border: 4px solid orange;
+
+          .app-menu-icon {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+            cursor: pointer;
+
+            svg {
+              font-size: 1.6rem;
+            }
+          }
+        }
 
         .sidebar-menu {
           display: flex;
@@ -158,6 +178,15 @@ body {
         // border: 4px solid yellow;
         grid-area: main;
         margin-left: 20px;
+        overflow-y: auto;
+        height: calc(100vh - 100px);
+        // border: 4px solid palegreen;
+
+        // .app-datatable {
+        //   border: 4px solid purple;
+        //   overflow-y: auto;
+        //   height: 10px;
+        // }
       }
     }
   }

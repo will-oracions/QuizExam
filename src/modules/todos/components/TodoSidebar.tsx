@@ -1,7 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 
-import { AddTask, Apps, CalendarToday } from "@mui/icons-material";
+import { AddTask, Apps, CalendarToday, Menu } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import {
   todoLabelEnumToLabel,
@@ -150,7 +150,7 @@ const TodoSidebar = ({
 
   return (
     <div>
-      <div>
+      <div className="sidebar-header">
         <Box className="app-create-button">
           <Button
             onClick={handleCreate}
@@ -161,6 +161,9 @@ const TodoSidebar = ({
             {t("todos.createTodoBtnLabel")}
           </Button>
         </Box>
+        {/* <Box className="app-menu-icon">
+          <Menu />
+        </Box> */}
       </div>
 
       <div className="sidebar-menu">
