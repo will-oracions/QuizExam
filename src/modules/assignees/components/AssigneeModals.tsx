@@ -4,6 +4,7 @@ import AssigneeForm from "./AssigneeForm";
 import { Assignee } from "../models/Assignee";
 import { CustomModalType } from "../../../components/CustomModal/hooks/useCustomModal";
 import { RefObject } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   assigneeCreateModal: CustomModalType;
@@ -30,11 +31,16 @@ const AssigneeModals = ({
   triggerDelete,
   isDeleting,
 }: Props) => {
+  const { t } = useTranslation();
   return (
     <>
       {/* Create Assignee Modal */}
       <CustomModal
-        title={(editingAssignee ? "Edit" : "Create new") + " Assignee"}
+        title={
+          editingAssignee
+            ? t("assignees.assigneeForm.editTitle")
+            : t("assignees.assigneeForm.createTitle")
+        }
         footer={
           <div>
             {/* <Button
@@ -56,7 +62,7 @@ const AssigneeModals = ({
               {addEditModalIsLoading && (
                 <CircularProgress size="20px" color="inherit" />
               )}
-              &nbsp; {editingAssignee ? "Edit" : "Create"}
+              &nbsp; {editingAssignee ? t("edit") : t("create")}
             </Button>
           </div>
         }
@@ -74,7 +80,7 @@ const AssigneeModals = ({
       <CustomModal
         isOpen={assigneeDeleteModal.isOpen}
         onClose={assigneeDeleteModal.closeModal}
-        title="Delete Assignee"
+        title={t("assignees.deleteTitle")}
         footer={
           <div>
             <Button
@@ -95,11 +101,11 @@ const AssigneeModals = ({
               color="error"
               style={{ marginTop: "10px" }}>
               {isDeleting && <CircularProgress size="20px" color="inherit" />}
-              &nbsp; Delete
+              &nbsp; {t("deleteBtnLabel")}
             </Button>
           </div>
         }>
-        <h4>Voulez-vous vraiment supprimer ?</h4>
+        <h4>{t("confirmDeleteLabel")}</h4>
       </CustomModal>
     </>
   );

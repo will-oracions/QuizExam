@@ -83,5 +83,47 @@
       },
       "submitButtonLabel": "Créer"
     }
+  },
+  "assignees": {
+    "deleteTitle": "Supprimer la personne",
+    "assigneesPageTitle": "Gestion des personnes",
+    "createAssgineeBtnLabel": "Créer une personne",
+    "nameLabel": "Nom",
+    "emailLabel": "Adresse Email",
+    "phoneLabel": "Téléphone",
+    "tasksDoneLabel": "Tache terminées",
+    "tasksAssignedLabel": "Taches Assignées",
+    "genderLabel": "Genre",
+    "noAssignees": "Pas de personnes",
+    "assigneeForm": {
+      "createTitle": "Créer une personne",
+      "editTitle": "Editer une personne",
+      "nameField": {
+        "label": "Nom",
+        "validation": {
+          "required": "Le nom est requis",
+          "min3characters": "Le nom doit avoir au moins 3 caractères"
+        }
+      },
+      "phoneField": {
+        "label": "Numéro de Téléphone",
+        "validation": {
+          "required": "Le Numéro de Téléphone est requis"
+        }
+      },
+      "emailField": {
+        "label": "Adresse Email",
+        "validation": {
+          "required": "L'adresse email est requise",
+          "invalid": "L'adresse email est invalide"
+        }
+      },
+      "genderField": {
+        "label": "Genre",
+        "validation": {
+          "required": "Le genre est requis"
+        }
+      }
+    }
   }
 }

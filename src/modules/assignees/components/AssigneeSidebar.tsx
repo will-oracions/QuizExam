@@ -132,7 +132,7 @@ Props) => {
             color="primary"
             style={{ marginTop: "10px" }}
             startIcon={<AddIcon />}>
-            Create new Assignee
+            {t("assignees.createAssgineeBtnLabel")}
           </Button>
         </Box>
       </div>
@@ -141,7 +141,9 @@ Props) => {
 
       {/* Lables Filter */}
       <div className="sidebar-tasks-list">
-        <div className="sidebar-tasks-list-label">Genre</div>
+        <div className="sidebar-tasks-list-label">
+          {t("assignees.genderLabel")}
+        </div>
 
         {displaySecondFilters()}
       </div>

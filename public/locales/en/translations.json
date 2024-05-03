@@ -5,7 +5,7 @@
   "NoTaskDone": "No task done",
   "noTaskAssigned": "No tasks assigned",
   "men": "Men",
-  "women": "Moman",
+  "women": "Woman",
   "all": "All",
   "css": "CSS",
   "html": "HTML",
@@ -81,6 +81,48 @@
         "label": "Completed"
       },
       "submitButtonLabel": "Create"
+    }
+  },
+  "assignees": {
+    "deleteTitle": "Delete Assignee",
+    "assigneesPageTitle": "Manage Assignees",
+    "createAssgineeBtnLabel": "Create Assignee",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "tasksDoneLabel": "Tasks done",
+    "tasksAssignedLabel": "Assigned tasks",
+    "genderLabel": "Gender",
+    "noAssignees": "No Assignees",
+    "assigneeForm": {
+      "createTitle": "Create new Assignee",
+      "editTitle": "Edit Assignee",
+      "nameField": {
+        "label": "Name",
+        "validation": {
+          "required": "name is required",
+          "min3characters": "name must have at least 3 characters"
+        }
+      },
+      "phoneField": {
+        "label": "Phone",
+        "validation": {
+          "required": "phone is required"
+        }
+      },
+      "emailField": {
+        "label": "Email",
+        "validation": {
+          "required": "email is required",
+          "invalid": "The email is invalid"
+        }
+      },
+      "genderField": {
+        "label": "Gender",
+        "validation": {
+          "required": "gender is required"
+        }
+      }
     }
   }
 }

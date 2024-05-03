@@ -1,10 +1,13 @@
+import GenderLabel from "../components/GenderLabel";
 import { AssigneeGenderEnum } from "../models/Assignee";
 
-export const genderEnumToLabel = (gender: AssigneeGenderEnum): string => {
+export const genderEnumToLabel = (
+  gender: AssigneeGenderEnum
+): React.ReactNode => {
   switch (gender) {
     case AssigneeGenderEnum.MAN:
-      return "Homme";
+      return <GenderLabel labelToTranslate="men" />;
     case AssigneeGenderEnum.WOMEN:
-      return "Femme";
+      return <GenderLabel labelToTranslate="women" />;
   }
 };

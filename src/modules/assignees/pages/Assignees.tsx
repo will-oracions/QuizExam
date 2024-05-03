@@ -214,7 +214,7 @@ const Assignees = () => {
               variant="contained"
               color="primary"
               style={{ marginTop: "10px" }}>
-              Export to PDF
+              {t("exportBtnLabel")}
             </Button>
           </Box>
 

@@ -16,12 +16,16 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
 
   const columns: GridColDef<Assignee>[] = [
     { field: "id", headerName: "ID", width: 90 },
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "phone", headerName: "Phone", flex: 1 },
+    {
+      field: "name",
+      headerName: t("assignees.assigneeForm.nameField.label"),
+      flex: 1,
+    },
+    { field: "email", headerName: t("assignees.nameLabel"), flex: 1 },
+    { field: "phone", headerName: t("assignees.phoneLabel"), flex: 1 },
     {
       field: "tasksDone",
-      headerName: "Taks Done",
+      headerName: t("assignees.tasksDoneLabel"),
       width: 90,
 
       renderCell: (params) => (
@@ -36,7 +40,7 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
     },
     {
       field: "tasksAssigned",
-      headerName: "Taks Assigned",
+      headerName: t("assignees.tasksAssignedLabel"),
       width: 90,
       renderCell: (params) => (
         <Typography
@@ -50,7 +54,7 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
     },
     {
       field: "gender",
-      headerName: "Gender",
+      headerName: t("assignees.genderLabel"),
       flex: 1,
       renderCell: (params) => <>{genderEnumToLabel(params.row.gender)}</>,
     },
@@ -64,7 +68,7 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         localeText={{
-          noRowsLabel: t("assignees.noTodos"),
+          noRowsLabel: t("assignees.noAssignees"),
           // footerRowPerPage: t("assignees.noTodos"),
         }}
       />

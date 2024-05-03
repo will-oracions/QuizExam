@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import React, { forwardRef } from "react";
 import { Assignee, AssigneeGenderEnum } from "../models/Assignee";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onSubmit: (data: Partial<Assignee>) => void;
@@ -22,6 +23,8 @@ interface Props {
 
 const AssigneeForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue }: Props, ref) => {
+    const { t } = useTranslation();
+
     const {
       register,
       handleSubmit,
@@ -82,16 +85,20 @@ const AssigneeForm = forwardRef(
             <TextField
               fullWidth
               variant="outlined"
-              label="name"
+              label={t("assignees.assigneeForm.nameField.label")}
               type="text"
               {...register("name", {
                 required: {
                   value: true,
-                  message: "Le nom est requis.",
+                  message: t(
+                    "assignees.assigneeForm.nameField.validation.required"
+                  ),
                 },
                 minLength: {
                   value: 3,
-                  message: "Le nom doit avoir au moins 3 charactères",
+                  message: t(
+                    "assignees.assigneeForm.nameField.validation.min3charactersf"
+                  ),
                 },
               })}
               error={Boolean(errors.name)}
@@ -104,11 +111,13 @@ const AssigneeForm = forwardRef(
               fullWidth
               type="email"
               variant="outlined"
-              label="email"
+              label={t("assignees.assigneeForm.emailField.label")}
               {...register("email", {
                 required: {
                   value: true,
-                  message: "Le email est requis.",
+                  message: t(
+                    "assignees.assigneeForm.emailField.validation.required"
+                  ),
                 },
               })}
               error={Boolean(errors.email)}
@@ -120,11 +129,13 @@ const AssigneeForm = forwardRef(
             <TextField
               fullWidth
               variant="outlined"
-              label="phone"
+              label={t("assignees.assigneeForm.phoneField.label")}
               {...register("phone", {
                 required: {
                   value: true,
-                  message: "Le Numéro de téléphone est requis.",
+                  message: t(
+                    "assignees.assigneeForm.phoneField.validation.required"
+                  ),
                 },
               })}
               error={Boolean(errors.phone)}
@@ -133,7 +144,9 @@ const AssigneeForm = forwardRef(
           </Box>
 
           <FormControl fullWidth error={Boolean(errors.gender)}>
-            <InputLabel id="gender-select-label">Gender</InputLabel>
+            <InputLabel id="gender-select-label">
+              {t("assignees.assigneeForm.genderField.label")}
+            </InputLabel>
             <Select
               labelId="gender-select-label"
               id="gender-select"
@@ -146,8 +159,8 @@ const AssigneeForm = forwardRef(
               label="Gender"
               value={gender || ""}
               onChange={handleChange}>
-              <MenuItem value={AssigneeGenderEnum.MAN}>Man</MenuItem>
-              <MenuItem value={AssigneeGenderEnum.WOMEN}>Woman</MenuItem>
+              <MenuItem value={AssigneeGenderEnum.MAN}>{t("men")}</MenuItem>
+              <MenuItem value={AssigneeGenderEnum.WOMEN}>{"women"}</MenuItem>
             </Select>
             {errors.gender && (
               <FormHelperText>{errors.gender.message}</FormHelperText>
