@@ -1,7 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 
-import { AddTask, Apps, CalendarToday, Menu } from "@mui/icons-material";
+import { AddTask, Apps, CalendarToday } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import {
   todoLabelEnumToLabel,
@@ -33,6 +33,8 @@ const TodoSidebar = ({
   setFilter,
 }: Props) => {
   const { t } = useTranslation();
+
+  const isSmallScreen = useMediaQuery("(max-width:1400px)");
 
   const getMainFilterLabel = (value: string) => {
     switch (value) {
@@ -153,6 +155,7 @@ const TodoSidebar = ({
       <div className="sidebar-header">
         <Box className="app-create-button">
           <Button
+            size={isSmallScreen ? "small" : "medium"}
             onClick={handleCreate}
             variant="outlined"
             color="primary"
