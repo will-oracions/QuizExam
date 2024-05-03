@@ -90,7 +90,9 @@ const Header = () => {
                   <Typography variant="h6" className={classes.title}>
                     WizeTodoList
                   </Typography>
-                  <Typography fontSize={16}>{t("appDescription")}</Typography>
+                  <Typography className="brand-description">
+                    {t("appDescription")}
+                  </Typography>
                 </Box>
               </div>
 
