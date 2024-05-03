@@ -50,6 +50,23 @@ body {
     overflow-y: hidden;
     height: 100vh;
 
+    #app-header {
+      // border: 4px solid orange;
+      grid-area: header;
+      height: 5rem;
+
+      .app-header-brand {
+        display: flex;
+        margin-top: 5px;
+        // border: 4px solid green;
+
+        svg {
+          font-size: 3rem;
+          margin-right: 1rem;
+        }
+      }
+    }
+
     .app-main-content {
       padding: 20px;
       display: grid;
@@ -74,12 +91,6 @@ body {
 
       @media screen and (max-width: 800px) {
         grid-template-columns: 300px 1fr;
-      }
-
-      #app-header {
-        border: 4px solid orange;
-        grid-area: header;
-        height: 5rem;
       }
 
       #app-sidebar {

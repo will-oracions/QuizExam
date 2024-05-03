@@ -17,6 +17,7 @@ import { NavLink } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { SupportAgent } from "@mui/icons-material";
 
 const menu = [
   {
@@ -81,12 +82,17 @@ const Header = () => {
               display="flex"
               justifyContent="space-between"
               alignItems="center">
-              <Box marginRight={5}>
-                <Typography variant="h6" className={classes.title}>
-                  WizeTodoList
-                </Typography>
-                <Typography fontSize={10}>{t("appDescription")}</Typography>
-              </Box>
+              <div className="app-header-brand">
+                <Box>
+                  <SupportAgent />
+                </Box>
+                <Box>
+                  <Typography variant="h6" className={classes.title}>
+                    WizeTodoList
+                  </Typography>
+                  <Typography fontSize={16}>{t("appDescription")}</Typography>
+                </Box>
+              </div>
 
               <IconButton
                 edge="start"
