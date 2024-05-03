@@ -76,7 +76,7 @@ axiosMock.onPost("/todos").reply(async (config) => {
 
   delete newTodo.assigneeId;
   newTodo.assignee = assignee;
-  console.log(newTodo, todos);
+  // console.log(newTodo, todos);
   saveData({ assignees, todos });
 
   await sleep(3000);
@@ -94,7 +94,7 @@ axiosMock.onPut(/\/todos\/\d+/).reply(async (config) => {
       : todo
   );
 
-  console.log(updatedTodo);
+  // console.log(updatedTodo);
   saveData({ assignees, todos });
   await sleep(3000);
 
