@@ -41,7 +41,7 @@ interface Props {
 
 const TodoForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue, assignees }: Props, ref) => {
-    console.log("Form Assignees: ", assignees);
+    // console.log("Form Assignees: ", assignees);
     const [priority, setPriority] = React.useState("");
     const [labels, setLabels] = React.useState<string[]>([]);
 
@@ -62,7 +62,7 @@ const TodoForm = forwardRef(
             : undefined,
 
           labels: [TodoLabelEnum.CSS],
-          completed: true,
+          completed: defaultValue?.completed,
         } || {},
     });
 
@@ -342,12 +342,7 @@ const TodoForm = forwardRef(
                 // defaultValue={true}
                 render={({ field }) => (
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        {...field}
-                        checked={!!defaultValue?.completed}
-                      />
-                    }
+                    control={<Checkbox {...field} checked={field.value} />}
                     label="Completed"
                   />
                 )}

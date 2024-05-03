@@ -63,7 +63,7 @@ const Todos = () => {
   };
 
   const onSubmitTodoForm = (data: Partial<Todo>) => {
-    // console.log("Data: ", data);
+    console.log("Data: ", data);
 
     const handler = editingTodo ? handleSaveUpdateTodo : handleSaveTodo;
 
