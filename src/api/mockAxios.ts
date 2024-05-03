@@ -57,12 +57,17 @@ mock.onPost("/todos").reply(async (config) => {
   const todo = JSON.parse(config.data);
   const assignee = todo.assignee;
   delete todo.assignee;
-  const newTodo = { ...todo, assigneeId: assignee.id, id: generateFakeId() };
-  todos.push(newTodo);
+  const newTodo = {
+    ...todo,
+    assigneeId: assignee.id,
+    completed: todo.completed === true,
+    id: generateFakeId(),
+  };
+  todos.push({ ...newTodo });
 
   delete newTodo.assigneeId;
   newTodo.assignee = assignee;
-
+  console.log(newTodo, todos);
   saveData({ assignees, todos });
 
   await sleep(3000);
@@ -72,9 +77,15 @@ mock.onPost("/todos").reply(async (config) => {
 
 mock.onPut(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
-  const updatedTodo: Todo = JSON.parse(config.data);
-  todos = todos.map((todo) => (todo.id === todoId ? updatedTodo : todo));
 
+  const updatedTodo: Todo = JSON.parse(config.data);
+  todos = todos.map((todo) =>
+    todo.id === todoId
+      ? { ...updatedTodo, assignee: null, assigneeId: updatedTodo.assignee.id }
+      : todo
+  );
+
+  console.log(updatedTodo);
   saveData({ assignees, todos });
   await sleep(3000);
 

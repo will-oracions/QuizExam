@@ -41,6 +41,7 @@ interface Props {
 
 const TodoForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue, assignees }: Props, ref) => {
+    console.log("Form Assignees: ", assignees);
     const [priority, setPriority] = React.useState("");
     const [labels, setLabels] = React.useState<string[]>([]);
 

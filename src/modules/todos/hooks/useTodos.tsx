@@ -8,7 +8,12 @@ const getTodos = async () => {
 };
 
 const useTodos = () => {
-  return useQuery({ queryKey: ["todos"], queryFn: getTodos, retry: 3 });
+  return useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+    retry: 3,
+    gcTime: 1,
+  });
 };
 
 export default useTodos;

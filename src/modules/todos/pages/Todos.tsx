@@ -46,7 +46,7 @@ const Todos = () => {
 
   // console.log("Todolist data: ", getTodoListQuery.data);
 
-  // console.log("Assignees data: ", getAssigneesListQuery.data);
+  console.log("Assignees data: ", getAssigneesListQuery.data);
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 

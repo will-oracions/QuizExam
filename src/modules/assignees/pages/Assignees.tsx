@@ -7,11 +7,7 @@ import AssigneeDatatable from "../components/AssigneeDatatable";
 import AssigneeModals from "../components/AssigneeModals";
 import useAssignees from "../hooks/useAssignees";
 import useCreateAssignee from "../hooks/useCreateAssignee";
-import {
-  Assignee,
-  AssigneeFilterEnum,
-  AssigneeGenderEnum,
-} from "../models/Assignee";
+import { Assignee, AssigneeFilterEnum } from "../models/Assignee";
 import Sidebar2, { AssigneeFilter } from "../../../components/Sidebar2";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
@@ -47,6 +43,8 @@ const Assignees = () => {
   const editAssigneeMutation = useUpdateAssignee();
   const deleteAssigneeMutation = useDeleteAssignee();
   const getAssigneeListQuery = useAssignees();
+
+  console.log("Asss: ", getAssigneeListQuery.data);
 
   const formRef = React.useRef<{ triggerSubmit: Function }>(null);
 

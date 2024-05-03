@@ -8,7 +8,12 @@ const getAssignees = async () => {
 };
 
 const useAssignees = () => {
-  return useQuery({ queryKey: ["assignees"], queryFn: getAssignees, retry: 3 });
+  return useQuery({
+    queryKey: ["assignees"],
+    queryFn: getAssignees,
+    retry: 3,
+    gcTime: 1,
+  });
 };
 
 export default useAssignees;
