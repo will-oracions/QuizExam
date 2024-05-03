@@ -7,7 +7,10 @@ import TodoSidebar, { TodoFilter } from "../components/TodoSidebar";
 import exportToPdf from "../../../helpers/exporter";
 import useAssignees from "../../assignees/hooks/useAssignees";
 import TodoDatatable from "../components/TodoDatatable";
-import { toAssigneeAutoCompleteType } from "../components/TodoForm";
+import {
+  AssigneeAutoCompleteType,
+  toAssigneeAutoCompleteType,
+} from "../components/TodoForm";
 import TodoModals from "../components/TodoModals";
 import useCreateTodo from "../hooks/useCreateTodo";
 import useDeleteTodo from "../hooks/useDeleteTodo";
@@ -64,6 +67,10 @@ const Todos = () => {
 
   const onSubmitTodoForm = (data: Partial<Todo>) => {
     // console.log("Data: ", data);
+
+    if (data.completed) {
+      data.endDate = new Date().toDateString();
+    }
 
     const handler = editingTodo ? handleSaveUpdateTodo : handleSaveTodo;
 
@@ -182,7 +189,7 @@ const Todos = () => {
     todoDeleteModal.openModal();
   };
 
-  const buildAssigneeAutoCompleteFieldData = () => {
+  const buildAssigneeAutoCompleteFieldData = (): AssigneeAutoCompleteType[] => {
     if (!getAssigneesListQuery.data) return [];
     return getAssigneesListQuery.data.map((a) => toAssigneeAutoCompleteType(a));
   };
