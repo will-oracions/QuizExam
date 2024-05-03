@@ -10,7 +10,7 @@ import useCreateAssignee from "../hooks/useCreateAssignee";
 import { Assignee, AssigneeFilterEnum } from "../models/Assignee";
 import AssigneeSidebar, { AssigneeFilter } from "../components/AssigneeSidebar";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
-import exportToPdf from "../../../helpers/exporter";
+import exportToPdf, { exportToExcel } from "../../../helpers/exporter";
 import useDeleteAssignee from "../hooks/useDeleteAssignee";
 import { useTranslation } from "react-i18next";
 import { toAssigneeExportable } from "../helpers/assigneeExporter";
@@ -178,6 +178,14 @@ const Assignees = () => {
     );
   };
 
+  const handleExportToExcel = () => {
+    const data: Assignee[] = assigneeFiltered ? filteredAssignees : assignees;
+    exportToExcel<Assignee>(
+      toAssigneeExportable(data),
+      `Assignees-list-${toCalendarDate(new Date())}`
+    );
+  };
+
   const openCreateAssigneeModal = () => {
     assigneeCreateModal.openModal();
     setErrorMessage("");
@@ -212,6 +220,14 @@ const Assignees = () => {
           <h3 className="page-title">{t("assignees.assigneesPageTitle")}</h3>
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
+            <Button
+              onClick={handleExportToExcel}
+              variant="contained"
+              color="inherit"
+              style={{ marginTop: "10px", marginRight: "1rem" }}>
+              {t("exportExcelBtnLabel")}
+            </Button>
+
             <Button
               onClick={handleExportToPDF}
               variant="contained"

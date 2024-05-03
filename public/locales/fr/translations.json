@@ -12,6 +12,7 @@
   "jquery": "JQuery",
   "nodejs": "Node.js",
   "exportBtnLabel": "Exporter en PDF",
+  "exportExcelBtnLabel": "Exporter en Excel",
   "cancelBtnLabel": "Annuler",
   "deleteBtnLabel": "Supprimer",
   "confirmDeleteLabel": "Voulez-vous vraiment supprimer ?",

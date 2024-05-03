@@ -10,3 +10,6 @@ export const generateFakeId = (): number => {
 export const toCalendarDate = (date: Date) => {
   return new Date(date).toISOString().split("T")[0];
 };
+
+export const emailRegex =
+  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;

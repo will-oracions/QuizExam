@@ -14,6 +14,7 @@ import {
 import React, { forwardRef } from "react";
 import { Assignee, AssigneeGenderEnum } from "../models/Assignee";
 import { useTranslation } from "react-i18next";
+import { emailRegex } from "../../../utils";
 
 interface Props {
   onSubmit: (data: Partial<Assignee>) => void;
@@ -117,6 +118,12 @@ const AssigneeForm = forwardRef(
                   value: true,
                   message: t(
                     "assignees.assigneeForm.emailField.validation.required"
+                  ),
+                },
+                pattern: {
+                  value: emailRegex,
+                  message: t(
+                    "assignees.assigneeForm.emailField.validation.invalid"
                   ),
                 },
               })}

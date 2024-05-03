@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import * as XLSX from "xlsx";
 
 export default function exportToPdf<T extends Record<string, any>>(
   data: T[],
@@ -15,3 +16,10 @@ export default function exportToPdf<T extends Record<string, any>>(
   });
   doc.save(`${name}.pdf`);
 }
+
+export const exportToExcel = <T>(data: T[], name: string) => {
+  const sheet = XLSX.utils.json_to_sheet(data);
+  const book = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(book, sheet, "Sheet 1");
+  XLSX.writeFile(book, name + ".xlsx");
+};

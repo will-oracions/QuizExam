@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
 import TodoSidebar, { TodoFilter } from "../components/TodoSidebar";
-import exportToPdf from "../../../helpers/exporter";
+import exportToPdf, { exportToExcel } from "../../../helpers/exporter";
 import useAssignees from "../../assignees/hooks/useAssignees";
 import TodoDatatable from "../components/TodoDatatable";
 import {
@@ -174,6 +174,14 @@ const Todos = () => {
     );
   };
 
+  const handleExportToExcel = () => {
+    const data = todoFiltered ? filteredTodos : todos;
+    exportToExcel<Partial<IExportableTodo>>(
+      toExportableTodo(data),
+      `todos-list-${toCalendarDate(new Date())}`
+    );
+  };
+
   const openCreateTodoModal = () => {
     todoCreateModal.openModal();
     setErrorMessage("");
@@ -217,6 +225,14 @@ const Todos = () => {
           <h3 className="page-title">{t("todos.todoPageTitle")}</h3>
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
+            <Button
+              onClick={handleExportToExcel}
+              variant="contained"
+              color="inherit"
+              style={{ marginTop: "10px", marginRight: "1rem" }}>
+              {t("exportExcelBtnLabel")}
+            </Button>
+
             <Button
               onClick={handleExportToPDF}
               variant="contained"
