@@ -6,12 +6,12 @@ import { useTranslation } from "react-i18next";
 import {
   todoLabelEnumToLabel,
   todoPriorityEnumToLabel,
-} from "../modules/todos/helpers/EnumParsers";
+} from "../helpers/EnumParsers";
 import {
   TodoFilterEnum,
   TodoLabelEnum,
   TodoPriorityEnum,
-} from "../modules/todos/models/Todo";
+} from "../models/Todo";
 
 export interface TodoFilter {
   main: TodoFilterEnum;
@@ -26,7 +26,7 @@ interface Props {
   setFilter: (filter: TodoFilter) => void;
 }
 
-const Sidebar = ({
+const TodoSidebar = ({
   handleCreate,
 
   filter,
@@ -184,4 +184,4 @@ const Sidebar = ({
   );
 };
 
-export default Sidebar;
+export default TodoSidebar;

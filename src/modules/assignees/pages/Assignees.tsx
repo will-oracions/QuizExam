@@ -8,7 +8,7 @@ import AssigneeModals from "../components/AssigneeModals";
 import useAssignees from "../hooks/useAssignees";
 import useCreateAssignee from "../hooks/useCreateAssignee";
 import { Assignee, AssigneeFilterEnum } from "../models/Assignee";
-import Sidebar2, { AssigneeFilter } from "../../../components/Sidebar2";
+import AssigneeSidebar, { AssigneeFilter } from "../components/AssigneeSidebar";
 import useUpdateAssignee from "../hooks/useUpdateAssignee";
 import exportToPdf from "../../../helpers/exporter";
 import useDeleteAssignee from "../hooks/useDeleteAssignee";
@@ -111,7 +111,7 @@ const Assignees = () => {
     if (!deletingAssignee) return;
     // console.log("Delete: ", deletingAssignee);
     deleteAssigneeMutation.mutate(deletingAssignee.id, {
-      onSuccess: (res) => {
+      onSuccess: () => {
         // console.log("Res", res);
         setAssignees((prev) => prev.filter((a) => a.id != deletingAssignee.id));
         setDeletingAssignee(null);
@@ -194,7 +194,7 @@ const Assignees = () => {
   return (
     <>
       <div id="app-sidebar">
-        <Sidebar2
+        <AssigneeSidebar
           assigneeFilter={assigneeFilter}
           setAssigneeFilter={setAssigneeFilter}
           handleCreate={openCreateAssigneeModal}

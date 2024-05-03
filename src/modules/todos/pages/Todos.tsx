@@ -3,7 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 
 import useCustomModal from "../../../components/CustomModal/hooks/useCustomModal";
-import Sidebar, { TodoFilter } from "../../../components/Sidebar";
+import TodoSidebar, { TodoFilter } from "../components/TodoSidebar";
 import exportToPdf from "../../../helpers/exporter";
 import useAssignees from "../../assignees/hooks/useAssignees";
 import TodoDatatable from "../components/TodoDatatable";
@@ -103,7 +103,7 @@ const Todos = () => {
     if (!deletingTodo) return;
     // console.log("Delete: ", deletingTodo);
     deleteTodoMutation.mutate(deletingTodo.id, {
-      onSuccess: (res) => {
+      onSuccess: () => {
         // console.log("Res", res);
         setTodos((prev) => prev.filter((a) => a.id != deletingTodo.id));
         setDeletingTodo(null);
@@ -190,7 +190,7 @@ const Todos = () => {
   return (
     <>
       <div id="app-sidebar">
-        <Sidebar
+        <TodoSidebar
           filter={todoFilter}
           setFilter={setTodoFilter}
           // mainFilter={mainFilter}

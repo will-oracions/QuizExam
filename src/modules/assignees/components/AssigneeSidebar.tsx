@@ -9,10 +9,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import {
-  AssigneeFilterEnum,
-  AssigneeGenderEnum,
-} from "../modules/assignees/models/Assignee";
+import { AssigneeFilterEnum, AssigneeGenderEnum } from "../models/Assignee";
 
 export interface AssigneeFilter {
   main: AssigneeFilterEnum | "";
@@ -29,7 +26,7 @@ interface Props {
   // setSecondFilter: (filter: string) => void;
 }
 
-const Sidebar2 = ({
+const AssigneeSidebar = ({
   handleCreate,
   assigneeFilter,
   setAssigneeFilter,
@@ -152,4 +149,4 @@ Props) => {
   );
 };
 
-export default Sidebar2;
+export default AssigneeSidebar;

@@ -4,8 +4,6 @@ import Layout from "./components/Layout";
 import Error from "./components/Error";
 import Assignees from "./modules/assignees/pages/Assignees";
 
-import TestTodos from "./modules/todoss/pages/Todos";
-
 const routes: RouteObject[] = [
   {
     path: "/",
@@ -23,10 +21,6 @@ const routes: RouteObject[] = [
       {
         path: "assignees",
         element: <Assignees />,
-      },
-      {
-        path: "test",
-        element: <TestTodos />,
       },
     ],
   },
