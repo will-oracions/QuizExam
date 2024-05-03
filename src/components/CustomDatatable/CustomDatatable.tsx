@@ -63,7 +63,7 @@ const CustomDatatable = <TRow extends Record<string, any>>({
           pagination: { paginationModel: { pageSize: 10 } },
         }}
         pageSizeOptions={[5, 10, 25]}
-        // localeText={{ footerRowPerPage: ''}}
+        localeText={localeText}
       />
     </div>
   );

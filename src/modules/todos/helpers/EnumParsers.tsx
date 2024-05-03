@@ -1,7 +1,5 @@
 import { LabelOutlined } from "@mui/icons-material";
 import { TodoLabelEnum, TodoPriorityEnum } from "../models/Todo";
-import { Typography } from "@mui/material";
-import i18n from "i18next";
 import ProrityLabel from "../components/ProrityLabel";
 
 export interface IPriorityEnumParser {
