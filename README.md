@@ -4,10 +4,10 @@
 
 
 ## Description
-Ce dépôt contient le code source d'une application simple de liste de tâches construite en utilisant Node.js, React et MUI. L'application permet aux utilisateurs de créer, mettre à jour et supprimer des tâches de leur liste de tâches. Elle offre une interface propre et intuitive pour la gestion des tâches, avec des fonctionnalités telles que la priorisation des tâches et les dates d'échéance. L'application est conçue pour être légère et facile à utiliser, ce qui la rend adaptée aux besoins de gestion des tâches personnels et professionnels.
+Ce dépôt contient le code source d'une application simple de liste de tâches construite en utilisant, React et MUI. L'application permet aux utilisateurs de créer, mettre à jour et supprimer des tâches de leur liste de tâches. Elle offre une interface propre et intuitive pour la gestion des tâches, avec des fonctionnalités telles que la priorisation des tâches et les dates d'échéance. L'application est conçue pour être légère et facile à utiliser, ce qui la rend adaptée aux besoins de gestion des tâches personnels et professionnels.
 
 
-Ce guide contient les fichiers nécessaires pour exécuter une application Node.js à l'aide de Docker Compose, avec des configurations distinctes pour les environnements de développement et de production.
+Ce guide contient les fichiers nécessaires pour exécuter une application React à l'aide de Docker Compose, avec des configurations distinctes pour les environnements de développement et de production.
 
 ## Utilisation de l'image Docker depuis Docker Hub
 
