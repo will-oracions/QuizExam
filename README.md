@@ -2,6 +2,8 @@
 
 ![Capture d'écran](screenshoot.png)
 
+## Video de demo
+[Lien vers la video de demo](https://drive.google.com/file/d/1yoACVV8V3kU-yqHPlLRckaWeBx7br3cy/view?usp=sharing)
 
 ## Description
 Ce dépôt contient le code source d'une application simple de liste de tâches construite en utilisant, React et MUI. L'application permet aux utilisateurs de créer, mettre à jour et supprimer des tâches de leur liste de tâches. Elle offre une interface propre et intuitive pour la gestion des tâches, avec des fonctionnalités telles que la priorisation des tâches et les dates d'échéance. L'application est conçue pour être légère et facile à utiliser, ce qui la rend adaptée aux besoins de gestion des tâches personnels et professionnels.
