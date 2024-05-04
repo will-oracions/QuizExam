@@ -11,7 +11,7 @@ Ce guide contient les fichiers nécessaires pour exécuter une application Node.
 
 ## Utilisation de l'image Docker depuis Docker Hub
 
-(https://hub.docker.com/r/oracions/wizetodolist)
+Lien vers l'image [https://hub.docker.com/r/oracions/wizetodolist](https://hub.docker.com/r/oracions/wizetodolist)
 
 Vous pouvez exécuter l'image Docker `oracions/wizetodolist` directement depuis Docker Hub en suivant ces étapes simples :
 
