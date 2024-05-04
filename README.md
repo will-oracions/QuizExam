@@ -64,7 +64,7 @@ Pour lancer l'application en environnement de développement, exécutez la comma
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
-L'application est accessible sur le port 7777 en locale (`http://localhost:7777`).
+L'application est accessible sur le port 7770 en locale (`http://localhost:7770`).
 
 
 #### Environnement de développement
@@ -76,4 +76,4 @@ Pour lancer l'application en environnement de développement, exécutez la comma
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
-L'application est accessible sur le port 7770 en locale (`http://localhost:7770`).
+L'application est accessible sur le port 7777 en locale (`http://localhost:7777`).
