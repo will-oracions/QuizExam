@@ -43,7 +43,7 @@ Assurez-vous également d'avoir Docker et Docker Compose installés sur votre sy
 - Docker Compose : [Guide d'installation Docker Compose](https://docs.docker.com/compose/install/)
 
 
-### Clonage du dépôt
+### Clonner du dépôt
 
 Clonez ce dépôt sur votre machine locale en utilisant la commande suivante :
 
@@ -51,7 +51,7 @@ Clonez ce dépôt sur votre machine locale en utilisant la commande suivante :
 git clone https://github.com/will-oracions/wizeTodoList
 ```
 
-### Utilisation
+### Lancement de l'application
 
 #### Environnement de développement
 L'environnement de développement est conçu pour faciliter le processus de développement de l'application. Il utilise le Dockerfile de développement et expose l'application sur le port 7777. Dans cet environnement, vous pouvez modifier le code source de l'application en temps réel, et les changements seront reflétés instantanément. De plus, les fichiers sont montés en tant que volume, ce qui permet une intégration transparente avec les outils de développement locaux. 
