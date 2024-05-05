@@ -58,7 +58,7 @@ git clone https://github.com/will-oracions/wizeTodoList
 ### Lancement de l'application
 
 #### Environnement de développement
-L'environnement de développement est conçu pour faciliter le processus de développement de l'application. Il utilise le Dockerfile de développement et expose l'application sur le port 7777. Dans cet environnement, vous pouvez modifier le code source de l'application en temps réel, et les changements seront reflétés instantanément. De plus, les fichiers sont montés en tant que volume, ce qui permet une intégration transparente avec les outils de développement locaux. 
+L'environnement de développement est conçu pour faciliter le processus de développement de l'application. Il utilise le Dockerfile de développement et expose l'application sur le port 7770. Dans cet environnement, vous pouvez modifier le code source de l'application en temps réel, et les changements seront reflétés instantanément. De plus, les fichiers sont montés en tant que volume, ce qui permet une intégration transparente avec les outils de développement locaux. 
 
 Pour lancer l'application en environnement de développement, exécutez la commande suivante :
 
@@ -70,7 +70,7 @@ L'application est accessible sur le port 7770 en locale (`http://localhost:7770`
 
 
 #### Environnement de développement
-L'environnement de production est optimisé pour déployer l'application dans un environnement de production. Il utilise le Dockerfile de production et expose l'application sur le port 7770. Dans cet environnement, l'application est construite avec les optimisations de production et est prête à être déployée sur un serveur en production. Le Dockerfile.prod utilise une stratégie multi-étapes pour construire une image Docker légère et sécurisée, en utilisant une image Nginx Alpine pour le déploiement. Pour lancer l'application en environnement de production, exécutez la commande suivante
+L'environnement de production est optimisé pour déployer l'application dans un environnement de production. Il utilise le Dockerfile de production et expose l'application sur le port 7777. Dans cet environnement, l'application est construite avec les optimisations de production et est prête à être déployée sur un serveur en production. Le Dockerfile.prod utilise une stratégie multi-étapes pour construire une image Docker légère et sécurisée, en utilisant une image Nginx Alpine pour le déploiement. Pour lancer l'application en environnement de production, exécutez la commande suivante
 
 Pour lancer l'application en environnement de développement, exécutez la commande suivante :
 
