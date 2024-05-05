@@ -41,8 +41,8 @@ const Assignees = () => {
   const notify = () =>
     toast(t("assigneeCreated"), { type: "info", className: "app-toast" });
 
-  const assigneeCreateModal = useCustomModal();
-  const assigneeDeleteModal = useCustomModal();
+  const openAssigneeCreateEditModal = useCustomModal();
+  const openAssigneeDeleteModal = useCustomModal();
 
   const createAssigneeMutation = useCreateAssignee();
   const editAssigneeMutation = useUpdateAssignee();
@@ -51,7 +51,7 @@ const Assignees = () => {
 
   // console.log("Asss: ", getAssigneeListQuery.data);
 
-  const formRef = React.useRef<{ triggerSubmit: Function }>(null);
+  const assigneeFormRef = React.useRef<{ triggerSubmit: Function }>(null);
 
   React.useEffect(() => {
     getAssigneeListQuery.data && setAssignees(getAssigneeListQuery.data);
@@ -62,7 +62,7 @@ const Assignees = () => {
   }, [assigneeFilter, assignees]);
 
   const triggerSubmitForm = () => {
-    formRef.current?.triggerSubmit();
+    assigneeFormRef.current?.triggerSubmit();
   };
 
   const onSubmitAssigneeForm = (data: Partial<Assignee>) => {
@@ -92,7 +92,7 @@ const Assignees = () => {
 
         setAssignees([res as Assignee, ...assignees]);
         notify();
-        assigneeCreateModal.closeModal();
+        openAssigneeCreateEditModal.closeModal();
       },
     });
   };
@@ -107,7 +107,7 @@ const Assignees = () => {
         setAssignees(assignees.map((a) => (a.id === res.id ? res : a)));
         setEditingAssignee(null);
         // notify();
-        assigneeCreateModal.closeModal();
+        openAssigneeCreateEditModal.closeModal();
       },
     });
   };
@@ -120,7 +120,7 @@ const Assignees = () => {
         // console.log("Res", res);
         setAssignees((prev) => prev.filter((a) => a.id != deletingAssignee.id));
         setDeletingAssignee(null);
-        assigneeDeleteModal.closeModal();
+        openAssigneeDeleteModal.closeModal();
       },
     });
   };
@@ -187,7 +187,7 @@ const Assignees = () => {
   };
 
   const openCreateAssigneeModal = () => {
-    assigneeCreateModal.openModal();
+    openAssigneeCreateEditModal.openModal();
     setErrorMessage("");
     setEditingAssignee(null);
   };
@@ -196,13 +196,13 @@ const Assignees = () => {
     // console.log(row);
     setEditingAssignee(row);
     setErrorMessage("");
-    assigneeCreateModal.openModal();
+    openAssigneeCreateEditModal.openModal();
   };
 
   const openDeleteAssigneeModal = (row: Assignee) => {
     // console.log(row);
     setDeletingAssignee(row);
-    assigneeDeleteModal.openModal();
+    openAssigneeDeleteModal.openModal();
   };
 
   return (
@@ -246,10 +246,10 @@ const Assignees = () => {
       </main>
 
       <AssigneeModals
-        assigneeCreateModal={assigneeCreateModal}
-        assigneeDeleteModal={assigneeDeleteModal}
+        openAssigneeCreateEditModal={openAssigneeCreateEditModal}
+        openAssigneeDeleteModal={openAssigneeDeleteModal}
         errorMessage={errorMessage}
-        formRef={formRef}
+        assigneeFormRef={assigneeFormRef}
         onSubmitAssigneeForm={onSubmitAssigneeForm}
         addEditModalIsLoading={
           createAssigneeMutation.isPending || editAssigneeMutation.isPending

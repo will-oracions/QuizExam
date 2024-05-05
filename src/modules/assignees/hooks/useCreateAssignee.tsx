@@ -7,6 +7,10 @@ const createAssignee = async (data: Partial<Assignee>) => {
   return res.data;
 };
 
+/**
+ * Create assignee
+ * @returns created assignee
+ */
 const useCreateAssignee = () => {
   return useMutation({
     mutationFn: createAssignee,

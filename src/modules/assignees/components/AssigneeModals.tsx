@@ -7,11 +7,11 @@ import { RefObject } from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  assigneeCreateModal: CustomModalType;
-  assigneeDeleteModal: CustomModalType;
+  openAssigneeCreateEditModal: CustomModalType;
+  openAssigneeDeleteModal: CustomModalType;
   addEditModalIsLoading?: boolean;
   errorMessage: string;
-  formRef: RefObject<{ triggerSubmit: Function }>;
+  assigneeFormRef: RefObject<{ triggerSubmit: Function }>;
   onSubmitAssigneeForm: (data: Partial<Assignee>) => void;
   triggerSubmitForm: () => void;
   editingAssignee?: Assignee | null;
@@ -20,15 +20,48 @@ interface Props {
 }
 
 const AssigneeModals = ({
+  /**
+   * Manage the form loading state
+   */
   addEditModalIsLoading,
+  /**
+   * Trigger form submittion from the modal
+   */
   triggerSubmitForm,
-  assigneeCreateModal,
-  assigneeDeleteModal,
-  formRef,
+  /**
+   * Open modal to create or edit assignee
+   */
+  openAssigneeCreateEditModal,
+  /**
+   * Open modal to create or edit assignee
+   */
+  openAssigneeDeleteModal,
+  /**
+   * AssigneeForm ref,
+   * connected to the submit btn in the form
+   */
+  assigneeFormRef,
+  /**
+   * Server message error to display in the modal
+   * when the request failed
+   */
   errorMessage,
+  /**
+   * AssigneeForm submittion handler for creation and edition
+   * called when user press the modal submit button
+   */
   onSubmitAssigneeForm,
+  /**
+   * Boolean that tell if we do open the form for edition or for creation
+   */
   editingAssignee,
+  /**
+   * Trigger delete button
+   */
   triggerDelete,
+  /**
+   * Boolean that tell if Assignee is deleting
+   */
   isDeleting,
 }: Props) => {
   const { t } = useTranslation();
@@ -43,15 +76,6 @@ const AssigneeModals = ({
         }
         footer={
           <div>
-            {/* <Button
-              className="modal-action-button"
-              type="submit"
-              variant="contained"
-              color="error"
-              style={{ marginTop: "10px" }}>
-              Cancel
-            </Button> */}
-
             <Button
               disabled={addEditModalIsLoading}
               onClick={triggerSubmitForm}
@@ -66,25 +90,25 @@ const AssigneeModals = ({
             </Button>
           </div>
         }
-        isOpen={assigneeCreateModal.isOpen}
-        onClose={assigneeCreateModal.closeModal}>
+        isOpen={openAssigneeCreateEditModal.isOpen}
+        onClose={openAssigneeCreateEditModal.closeModal}>
         <AssigneeForm
           defaultValue={editingAssignee}
           errorMessage={errorMessage}
-          ref={formRef}
+          ref={assigneeFormRef}
           onSubmit={onSubmitAssigneeForm}
         />
       </CustomModal>
 
       {/* Delete Assignee Confirm Modal */}
       <CustomModal
-        isOpen={assigneeDeleteModal.isOpen}
-        onClose={assigneeDeleteModal.closeModal}
+        isOpen={openAssigneeDeleteModal.isOpen}
+        onClose={openAssigneeDeleteModal.closeModal}
         title={t("assignees.deleteTitle")}
         footer={
           <div>
             <Button
-              onClick={() => assigneeDeleteModal.closeModal()}
+              onClick={() => openAssigneeDeleteModal.closeModal()}
               className="modal-action-button"
               type="submit"
               variant="outlined"

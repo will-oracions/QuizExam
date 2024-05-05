@@ -7,6 +7,10 @@ const updateAssignee = async (data: Assignee) => {
   return res.data;
 };
 
+/**
+ * Edit an assignee from it's id
+ * @returns edited assignee
+ */
 const useUpdateAssignee = () => {
   return useMutation({
     // mutationKey: ["assignee"],

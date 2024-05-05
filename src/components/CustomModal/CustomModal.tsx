@@ -9,6 +9,12 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Dynamic multi use case modal
+ * @param param0
+ * @returns
+ * @author will-oracions <oracions.dev@gmail.com>
+ */
 const CustomModal: FC<Props> = ({
   isOpen,
   onClose,

@@ -36,8 +36,15 @@ const AssigneeForm = forwardRef(
       defaultValues: { ...defaultValue, gender: AssigneeGenderEnum.MAN } || {},
     });
 
+    /**
+     * State to manage the input gender
+     */
     const [gender, setGender] = React.useState("");
 
+    /**
+     * Handler for the gender input
+     * @param event
+     */
     const handleChange = (event: SelectChangeEvent) => {
       setGender(event.target.value);
       console.log("Value: ", event.target.value);
@@ -49,20 +56,24 @@ const AssigneeForm = forwardRef(
       defaultValue?.gender && setGender(defaultValue.gender);
     }, [defaultValue?.gender]);
 
+    /**
+     * Submit button ref
+     * to handle the submission of the form from the parent
+     * with useImperativeHandler hook
+     */
     const submitBtnRef = React.useRef<HTMLButtonElement>(null);
 
-    // React.useEffect(() => {
-    //   const values = defaultValue;
-    //   delete values?.id;
-    //   for (const key in values) {
-    //     setValue(key, values[key]);
-    //   }
-    // }, [defaultValue]);
-
     React.useImperativeHandle(ref, () => ({
+      /**
+       * Trigger the form submittion form the parent
+       */
       triggerSubmit: () => {
         submitBtnRef.current?.click();
       },
+
+      /**
+       * Reset the form from the parent
+       */
       resetForm: () => {
         reset();
       },
@@ -82,6 +93,7 @@ const AssigneeForm = forwardRef(
         )}
 
         <form onSubmit={handleSubmit(handleFormSubmit)}>
+          {/* Assignee name field */}
           <Box marginBottom={2}>
             <TextField
               fullWidth
@@ -106,6 +118,8 @@ const AssigneeForm = forwardRef(
               helperText={errors.name ? errors.name.message : ""}
             />
           </Box>
+
+          {/* Assignee email field */}
 
           <Box marginBottom={2}>
             <TextField
@@ -132,6 +146,8 @@ const AssigneeForm = forwardRef(
             />
           </Box>
 
+          {/* Assignee phone field */}
+
           <Box marginBottom={2}>
             <TextField
               fullWidth
@@ -149,6 +165,8 @@ const AssigneeForm = forwardRef(
               helperText={errors.phone ? errors.phone.message : ""}
             />
           </Box>
+
+          {/* Assignee gender field */}
 
           <FormControl fullWidth error={Boolean(errors.gender)}>
             <InputLabel id="gender-select-label">

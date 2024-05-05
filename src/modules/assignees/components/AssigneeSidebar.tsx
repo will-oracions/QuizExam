@@ -20,23 +20,31 @@ interface Props {
   handleCreate: () => void;
   assigneeFilter: AssigneeFilter;
   setAssigneeFilter: (filter: AssigneeFilter) => void;
-  // mainFilter: string;
-  // secondFilter: string;
-  // setMainFilter: (filter: string) => void;
-  // setSecondFilter: (filter: string) => void;
 }
 
 const AssigneeSidebar = ({
+  /**
+   * Handler to create a new Assignee
+   */
   handleCreate,
+  /**
+   * Filter to apply to the assignees list data
+   */
   assigneeFilter,
+  /**
+   * Change Assignee filter
+   */
   setAssigneeFilter,
-}: // mainFilter,
-// secondFilter,
-// setMainFilter,
-// setSecondFilter,
-Props) => {
+}: Props) => {
   const { t } = useTranslation();
 
+  /**
+   * Convert assignee main filter enum to appropriate template
+   * to appropriate template to render in the list
+   * @param value assignee enum
+   * @returns template to render to assignee filters list
+   * with style and translation
+   */
   const getMainFilterLabel = (value: string) => {
     switch (value) {
       case String(AssigneeFilterEnum.ALL):
@@ -67,7 +75,14 @@ Props) => {
     }
   };
 
-  const getSecondFilterLabel = (value: string) => {
+  /**
+   * Convert assignee gender filter to appropriate template
+   * to appropriate template to render in the list
+   * @param value
+   * @returns template to render to assignee gender filters list
+   * with style and translation
+   */
+  const getGenderFilterLabel = (value: string) => {
     switch (value) {
       case String(AssigneeGenderEnum.MAN):
         return (
@@ -85,6 +100,11 @@ Props) => {
     }
   };
 
+  /**
+   * Display the list of Assignee filters list
+   * @returns template to display the filter in the list
+   * with style and translation.
+   */
   const displayMainFilters = () => {
     return Object.values(AssigneeFilterEnum).map((value, i) => {
       return (
@@ -101,7 +121,12 @@ Props) => {
     });
   };
 
-  const displaySecondFilters = () => {
+  /**
+   * Display assignee gender filters list
+   * @returns Template to render assignee gender filters in the list
+   * with style and translation
+   */
+  const displayGenderFilters = () => {
     return Object.values(AssigneeGenderEnum).map((value, i) => {
       return (
         <div
@@ -116,7 +141,7 @@ Props) => {
             "sidebar-tasks-list-item" +
             (assigneeFilter.gender === value ? " active" : "")
           }>
-          <span>{getSecondFilterLabel(value)}</span>
+          <span>{getGenderFilterLabel(value)}</span>
         </div>
       );
     });
@@ -145,7 +170,7 @@ Props) => {
           {t("assignees.genderLabel")}
         </div>
 
-        {displaySecondFilters()}
+        {displayGenderFilters()}
       </div>
     </div>
   );

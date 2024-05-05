@@ -7,6 +7,11 @@ export const generateFakeId = (): number => {
   return Math.floor(Math.random() * 1000) + 200;
 };
 
+/**
+ * Convert a date to ISO format
+ * @param date
+ * @returns formated date
+ */
 export const toCalendarDate = (date: Date) => {
   return new Date(date).toISOString().split("T")[0];
 };

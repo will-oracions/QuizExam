@@ -11,6 +11,10 @@ const getAssignees = async (): Promise<Assignee[]> => {
   return res.data;
 };
 
+/**
+ * Get the list assignees
+ * @returns the list of assignees
+ */
 const useAssignees = () => {
   return useQuery<Assignee[]>({
     queryKey: ["assignees"],

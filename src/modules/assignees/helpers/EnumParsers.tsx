@@ -1,6 +1,11 @@
 import GenderLabel from "../components/GenderLabel";
 import { AssigneeGenderEnum } from "../models/Assignee";
 
+/**
+ * Convert gender enum to appropriate template
+ * @param gender
+ * @returns
+ */
 export const genderEnumToLabel = (
   gender: AssigneeGenderEnum
 ): React.ReactNode => {

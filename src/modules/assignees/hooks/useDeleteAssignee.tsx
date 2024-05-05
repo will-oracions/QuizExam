@@ -6,6 +6,10 @@ const deleteAssignee = async (id: number) => {
   return res.data;
 };
 
+/**
+ * Delete assignee
+ * @returns nothing, 204 http status
+ */
 const useDeleteAssignee = () => {
   return useMutation({
     // mutationKey: ["assignee"],

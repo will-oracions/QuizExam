@@ -12,13 +12,38 @@ interface Props<TRow> {
   localeText?: Partial<GridLocaleText>;
 }
 
+/**
+ * MUI dynamic configurable datatable, can display any type of data
+ * @param param0
+ * @returns
+ * @author will-oracions <oracions.dev@gmail.com>
+ */
 const CustomDatatable = <TRow extends Record<string, any>>({
+  /**
+   * Array of data of type TRow
+   */
   rows,
+  /**
+   * Table column header
+   */
   columns,
+  /**
+   * Action to execute when user click the edit button on the table
+   */
   onEdit,
+  /**
+   *  Action to execute when user click the delete button on the table
+   */
   onDelete,
+  /**
+   * Table label text, for translation
+   */
   localeText,
 }: Props<TRow>) => {
+  /**
+   * Template for Edit and Delete buttons
+   * it's optional
+   */
   const actionColumns: GridColDef[] =
     !onEdit && !onDelete
       ? []
