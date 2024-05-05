@@ -50,7 +50,8 @@
       "titleField": {
         "label": "titre",
         "validation": {
-          "required": "Le titre est requis"
+          "required": "Le titre est requis",
+          "min3Characters": "Le nom doit avoir au moins 3 caractères"
         }
       },
       "descriptionField": {

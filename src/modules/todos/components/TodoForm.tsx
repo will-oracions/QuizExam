@@ -178,6 +178,8 @@ const TodoForm = forwardRef(
                 <TextField
                   fullWidth
                   size={isSmallScreen ? "small" : "medium"}
+                  multiline
+                  rows={3}
                   variant="outlined"
                   label={t("todos.createTodoForm.descriptionField.label")}
                   type="textarea"

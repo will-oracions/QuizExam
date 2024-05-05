@@ -49,7 +49,8 @@
       "titleField": {
         "label": "title",
         "validation": {
-          "required": "Title is required"
+          "required": "Title is required",
+          "min3Characters": "Le nom doit avoir au moins 3 caractères"
         }
       },
       "descriptionField": {
