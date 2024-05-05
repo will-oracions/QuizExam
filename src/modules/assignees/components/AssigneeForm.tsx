@@ -87,7 +87,7 @@ const AssigneeForm = forwardRef(
     };
 
     return (
-      <div style={{ minWidth: "400px" }}>
+      <div>
         {errorMessage && (
           <Box marginBottom={2}>
             <Alert severity="error">{errorMessage}</Alert>
