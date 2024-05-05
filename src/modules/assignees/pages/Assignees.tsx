@@ -209,7 +209,7 @@ const Assignees = () => {
 
   return (
     <>
-      <div id="app-sidebar">
+      <div id="app-sidebar" className="mobile">
         <AssigneeSidebar
           assigneeFilter={assigneeFilter}
           setAssigneeFilter={setAssigneeFilter}

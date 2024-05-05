@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import "./CustomModal.scss";
+import { Close } from "@mui/icons-material";
 
 interface Props {
   title: string;
@@ -43,7 +44,7 @@ const CustomModal: FC<Props> = ({
             <div className="modal-header">
               <h4 className="modal-header-title">{title}</h4>
               <button className="close-btn" onClick={closeModal}>
-                &times;
+                <Close />
               </button>
             </div>
             <div className="modal-body">{children}</div>
