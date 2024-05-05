@@ -10,6 +10,9 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { AssigneeFilterEnum, AssigneeGenderEnum } from "../models/Assignee";
+import { useOutletContext } from "react-router-dom";
+import { IOutletContext } from "../../../components/Layout";
+import React from "react";
 
 export interface AssigneeFilter {
   main: AssigneeFilterEnum | "";
@@ -37,6 +40,10 @@ const AssigneeSidebar = ({
   setAssigneeFilter,
 }: Props) => {
   const { t } = useTranslation();
+
+  const { closeSidebar } = useOutletContext<IOutletContext>();
+
+  React.useEffect(() => closeSidebar(), [assigneeFilter]);
 
   /**
    * Convert assignee main filter enum to appropriate template

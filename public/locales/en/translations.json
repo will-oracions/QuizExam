@@ -95,6 +95,7 @@
     }
   },
   "assignees": {
+    "nameAlreadyExist": "The name already exist",
     "deleteTitle": "Delete Assignee",
     "assigneesPageTitle": "Manage Assignees",
     "createAssgineeBtnLabel": "Create Assignee",

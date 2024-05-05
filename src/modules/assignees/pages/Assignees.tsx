@@ -15,8 +15,12 @@ import useDeleteAssignee from "../hooks/useDeleteAssignee";
 import { useTranslation } from "react-i18next";
 import { toAssigneeExportable } from "../helpers/assigneeExporter";
 import { toCalendarDate } from "../../../utils";
+import { useOutletContext } from "react-router-dom";
+import { IOutletContext } from "../../../components/Layout";
 
 const Assignees = () => {
+  const { closeSidebar } = useOutletContext<IOutletContext>();
+
   const isSmallScreen = useMediaQuery("(max-width:1400px)");
 
   const { t } = useTranslation();
@@ -82,7 +86,7 @@ const Assignees = () => {
       (a) => a.name?.toLowerCase() === data.name?.toLowerCase()
     );
     if (exist) {
-      setErrorMessage("The name already exist.");
+      setErrorMessage(t("assignees.nameAlreadyExist"));
       return;
     }
 
@@ -192,12 +196,14 @@ const Assignees = () => {
     openAssigneeCreateEditModal.openModal();
     setErrorMessage("");
     setEditingAssignee(null);
+    closeSidebar();
   };
 
   const opentEditAssigeeModal = (row: Assignee) => {
     // console.log(row);
     setEditingAssignee(row);
     setErrorMessage("");
+    // closeSidebar();
     openAssigneeCreateEditModal.openModal();
   };
 

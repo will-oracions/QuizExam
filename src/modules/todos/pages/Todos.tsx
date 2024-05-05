@@ -20,9 +20,12 @@ import { Todo, TodoFilterEnum, TodoLabelEnum } from "../models/Todo";
 import { toCalendarDate } from "../../../utils";
 import { useTranslation } from "react-i18next";
 import { IExportableTodo, toExportableTodo } from "../helpers/todoExporter";
+import { useOutletContext } from "react-router-dom";
+import { IOutletContext } from "../../../components/Layout";
 
 const Todos = () => {
   const isSmallScreen = useMediaQuery("(max-width:1400px)");
+  const { closeSidebar } = useOutletContext<IOutletContext>();
 
   const { t } = useTranslation();
   const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -187,6 +190,7 @@ const Todos = () => {
   const openCreateTodoModal = () => {
     todoCreateModal.openModal();
     setErrorMessage("");
+    closeSidebar();
     setEditingTodo(null);
   };
 

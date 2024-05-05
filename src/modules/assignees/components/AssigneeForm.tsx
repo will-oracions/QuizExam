@@ -10,6 +10,7 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 import React, { forwardRef } from "react";
 import { Assignee, AssigneeGenderEnum } from "../models/Assignee";
@@ -25,6 +26,7 @@ interface Props {
 const AssigneeForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue }: Props, ref) => {
     const { t } = useTranslation();
+    const isSmallScreen = useMediaQuery("(max-width:1400px)");
 
     const {
       register,
@@ -97,6 +99,7 @@ const AssigneeForm = forwardRef(
           <Box marginBottom={2}>
             <TextField
               fullWidth
+              size={isSmallScreen ? "small" : "medium"}
               variant="outlined"
               label={t("assignees.assigneeForm.nameField.label")}
               type="text"
@@ -110,7 +113,7 @@ const AssigneeForm = forwardRef(
                 minLength: {
                   value: 3,
                   message: t(
-                    "assignees.assigneeForm.nameField.validation.min3charactersf"
+                    "assignees.assigneeForm.nameField.validation.min3characters"
                   ),
                 },
               })}
@@ -124,6 +127,7 @@ const AssigneeForm = forwardRef(
           <Box marginBottom={2}>
             <TextField
               fullWidth
+              size={isSmallScreen ? "small" : "medium"}
               type="email"
               variant="outlined"
               label={t("assignees.assigneeForm.emailField.label")}
@@ -151,6 +155,7 @@ const AssigneeForm = forwardRef(
           <Box marginBottom={2}>
             <TextField
               fullWidth
+              size={isSmallScreen ? "small" : "medium"}
               variant="outlined"
               label={t("assignees.assigneeForm.phoneField.label")}
               {...register("phone", {
@@ -169,10 +174,14 @@ const AssigneeForm = forwardRef(
           {/* Assignee gender field */}
 
           <FormControl fullWidth error={Boolean(errors.gender)}>
-            <InputLabel id="gender-select-label">
+            <InputLabel
+              id="gender-select-label"
+              // @ts-ignore
+              size={isSmallScreen ? "small" : "medium"}>
               {t("assignees.assigneeForm.genderField.label")}
             </InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               labelId="gender-select-label"
               id="gender-select"
               {...register("gender", {

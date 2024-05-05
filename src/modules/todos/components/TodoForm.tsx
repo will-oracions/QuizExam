@@ -13,6 +13,7 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
@@ -43,6 +44,7 @@ interface Props {
 const TodoForm = forwardRef(
   ({ onSubmit, errorMessage, defaultValue, assignees }: Props, ref) => {
     const { t } = useTranslation();
+    const isSmallScreen = useMediaQuery("(max-width:1400px)");
 
     // console.log("Form Assignees: ", assignees);
     const [priority, setPriority] = React.useState("");
@@ -134,7 +136,7 @@ const TodoForm = forwardRef(
     };
 
     return (
-      <div style={{ minWidth: "400px" }}>
+      <div>
         {errorMessage && (
           <Box marginBottom={2}>
             <Alert severity="error">{errorMessage}</Alert>
@@ -147,6 +149,7 @@ const TodoForm = forwardRef(
               <Box marginBottom={2}>
                 <TextField
                   fullWidth
+                  size={isSmallScreen ? "small" : "medium"}
                   variant="outlined"
                   label={t("todos.createTodoForm.titleField.label")}
                   type="text"
@@ -174,6 +177,7 @@ const TodoForm = forwardRef(
               <Box marginBottom={2}>
                 <TextField
                   fullWidth
+                  size={isSmallScreen ? "small" : "medium"}
                   variant="outlined"
                   label={t("todos.createTodoForm.descriptionField.label")}
                   type="textarea"
@@ -200,7 +204,7 @@ const TodoForm = forwardRef(
               </Box>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <FormControl fullWidth error={Boolean(errors.prority)}>
                 <InputLabel id="prority-select-label">
                   {t("todos.createTodoForm.priorityField.label")}
@@ -235,7 +239,7 @@ const TodoForm = forwardRef(
               </FormControl>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <FormControl fullWidth error={Boolean(errors.labels)}>
                 <InputLabel id="labels-select-label">
                   {t("todos.createTodoForm.labelsField.label")}
@@ -266,7 +270,7 @@ const TodoForm = forwardRef(
               </FormControl>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Controller
                 name="startDate"
                 control={control}
@@ -290,7 +294,7 @@ const TodoForm = forwardRef(
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Controller
                 name="endDate"
                 control={control}
@@ -313,7 +317,7 @@ const TodoForm = forwardRef(
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               {/* <CustomAutoComplete<Assignee> data={assignees} label="Assignee" /> */}
 
               {/* <Autocomplete
@@ -391,7 +395,7 @@ const TodoForm = forwardRef(
               </FormControl>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Controller
                 name="completed"
                 control={control}

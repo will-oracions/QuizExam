@@ -12,6 +12,9 @@ import {
   TodoLabelEnum,
   TodoPriorityEnum,
 } from "../models/Todo";
+import { useOutletContext } from "react-router-dom";
+import { IOutletContext } from "../../../components/Layout";
+import React from "react";
 
 export interface TodoFilter {
   main: TodoFilterEnum;
@@ -35,6 +38,9 @@ const TodoSidebar = ({
   const { t } = useTranslation();
 
   const isSmallScreen = useMediaQuery("(max-width:1400px)");
+  const { closeSidebar } = useOutletContext<IOutletContext>();
+
+  React.useEffect(() => closeSidebar(), [filter]);
 
   const getMainFilterLabel = (value: string) => {
     switch (value) {

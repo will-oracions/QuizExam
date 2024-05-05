@@ -96,6 +96,7 @@
     }
   },
   "assignees": {
+    "nameAlreadyExist": "Ce nom existe déjà",
     "deleteTitle": "Supprimer la personne",
     "assigneesPageTitle": "Gestion des personnes",
     "createAssgineeBtnLabel": "Créer une personne",
