@@ -11,6 +11,7 @@ const LanguageSwitcher = () => {
     <>
       <FormControl fullWidth style={{ background: "white" }}>
         <Select
+          size="small"
           style={{ height: "2rem" }}
           labelId="select-label"
           id="select"

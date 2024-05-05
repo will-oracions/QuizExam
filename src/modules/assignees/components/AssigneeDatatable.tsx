@@ -19,10 +19,21 @@ const AssigneeDatatable = ({ assignees, handleEdit, handleDelete }: Props) => {
     {
       field: "name",
       headerName: t("assignees.assigneeForm.nameField.label"),
+      minWidth: 120,
       flex: 1,
     },
-    { field: "email", headerName: t("assignees.nameLabel"), flex: 1 },
-    { field: "phone", headerName: t("assignees.phoneLabel"), flex: 1 },
+    {
+      field: "email",
+      headerName: t("assignees.nameLabel"),
+      flex: 1,
+      minWidth: 120,
+    },
+    {
+      field: "phone",
+      headerName: t("assignees.phoneLabel"),
+      flex: 1,
+      minWidth: 120,
+    },
     {
       field: "tasksDone",
       headerName: t("assignees.tasksDoneLabel"),

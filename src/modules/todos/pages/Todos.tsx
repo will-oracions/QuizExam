@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -22,6 +22,8 @@ import { useTranslation } from "react-i18next";
 import { IExportableTodo, toExportableTodo } from "../helpers/todoExporter";
 
 const Todos = () => {
+  const isSmallScreen = useMediaQuery("(max-width:1400px)");
+
   const { t } = useTranslation();
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [filteredTodos, setFilteredTodos] = React.useState<Todo[]>([]);
@@ -226,6 +228,7 @@ const Todos = () => {
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
             <Button
+              size={isSmallScreen ? "small" : "medium"}
               onClick={handleExportToExcel}
               variant="contained"
               color="inherit"
@@ -234,6 +237,7 @@ const Todos = () => {
             </Button>
 
             <Button
+              size={isSmallScreen ? "small" : "medium"}
               onClick={handleExportToPDF}
               variant="contained"
               color="primary"

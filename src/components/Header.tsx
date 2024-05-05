@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { SupportAgent } from "@mui/icons-material";
+import { Menu, SupportAgent } from "@mui/icons-material";
 
 const menu = [
   {
@@ -36,11 +36,7 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     color: "white",
   },
-  menuButton: {
-    // [theme.breakpoints.up("md")]: {
-    //   display: "none",
-    // },
-  },
+  menuButton: {},
 }));
 
 const Header = () => {
@@ -55,8 +51,12 @@ const Header = () => {
 
   const displayMobileMenu = () => {
     return menu.map((menuItem, index) => (
-      <ListItem key={index} onClick={toggleDrawer}>
-        <ListItemText primary={menuItem.label} />
+      <ListItem
+        component={NavLink}
+        to={menuItem.url}
+        key={index}
+        onClick={toggleDrawer}>
+        <ListItemText primary={t(menuItem.label)} />
       </ListItem>
     ));
   };
@@ -102,32 +102,18 @@ const Header = () => {
                 aria-label="menu"
                 onClick={toggleDrawer}
                 className={classes.menuButton}>
-                {/* <MenuIcon /> */}
+                <Menu className="app-menu" />
               </IconButton>
               <div className={classes.menuButton}>
                 <Drawer
                   anchor="right"
                   open={isDrawerOpen}
                   onClose={toggleDrawer}>
-                  <List>
-                    {displayMobileMenu()}
-                    {/* <ListItem onClick={toggleDrawer}>
-                      <ListItemText primary="Home" />
-                    </ListItem>
-                    <ListItem onClick={toggleDrawer}>
-                      <ListItemText primary="About" />
-                    </ListItem>
-                    <ListItem onClick={toggleDrawer}>
-                      <ListItemText primary="Contact" />
-                    </ListItem> */}
-                  </List>
+                  <List>{displayMobileMenu()}</List>
                 </Drawer>
               </div>
 
-              {displayMenu()}
-              {/* <Button color="inherit">Home</Button>
-              <Button color="inherit">About</Button>
-              <Button color="inherit">Contact</Button> */}
+              <Box className="app-nav">{displayMenu()}</Box>
             </Box>
             <Box>
               <LanguageSwitcher />

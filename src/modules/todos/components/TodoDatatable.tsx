@@ -30,29 +30,38 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
       },
     },
     { field: "title", headerName: t("todos.titleLabel"), width: 150 },
-    { field: "description", headerName: t("todos.descriptionLabel"), flex: 1 },
+    {
+      field: "description",
+      headerName: t("todos.descriptionLabel"),
+      minWidth: 120,
+      flex: 1,
+    },
     {
       field: "startDate",
       headerName: t("todos.startDateLabel"),
+      minWidth: 120,
       flex: 1,
       renderCell: (params) => DatatableCelToDateCalendar(params, "startDate"),
     },
     {
       field: "endDate",
       headerName: t("todos.endDateLabel"),
+      minWidth: 120,
       flex: 1,
       renderCell: (params) => DatatableCelToDateCalendar(params, "startDate"),
     },
     {
       field: "priority",
       headerName: t("todos.priorityLabel"),
-      width: 120,
+      minWidth: 120,
+      flex: 1,
       renderCell: (params) => todoPriorityEnumToLabel(params.row.prority),
     },
     {
       field: "label",
       headerName: t("todos.label"),
-      width: 90,
+      minWidth: 120,
+      flex: 1,
       renderCell: (params) => (
         <Box display="flex">
           {params.row.labels.map((l, i) => (

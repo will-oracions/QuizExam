@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -17,6 +17,8 @@ import { toAssigneeExportable } from "../helpers/assigneeExporter";
 import { toCalendarDate } from "../../../utils";
 
 const Assignees = () => {
+  const isSmallScreen = useMediaQuery("(max-width:1400px)");
+
   const { t } = useTranslation();
 
   const [assignees, setAssignees] = React.useState<Assignee[]>([]);
@@ -172,7 +174,7 @@ const Assignees = () => {
 
   const handleExportToPDF = () => {
     const data: Assignee[] = assigneeFiltered ? filteredAssignees : assignees;
-    exportToPdf<Assignee>(
+    exportToPdf<Partial<Assignee>>(
       toAssigneeExportable(data),
       `Assignees-list-${toCalendarDate(new Date())}`
     );
@@ -180,7 +182,7 @@ const Assignees = () => {
 
   const handleExportToExcel = () => {
     const data: Assignee[] = assigneeFiltered ? filteredAssignees : assignees;
-    exportToExcel<Assignee>(
+    exportToExcel<Partial<Assignee>>(
       toAssigneeExportable(data),
       `Assignees-list-${toCalendarDate(new Date())}`
     );
@@ -221,6 +223,7 @@ const Assignees = () => {
 
           <Box marginBottom={2} display="flex" justifyContent="flex-end">
             <Button
+              size={isSmallScreen ? "small" : "medium"}
               onClick={handleExportToExcel}
               variant="contained"
               color="inherit"
@@ -229,6 +232,7 @@ const Assignees = () => {
             </Button>
 
             <Button
+              size={isSmallScreen ? "small" : "medium"}
               onClick={handleExportToPDF}
               variant="contained"
               color="primary"
