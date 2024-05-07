@@ -28,6 +28,10 @@ const menu = [
     label: "assigneesLabel",
     url: "/assignees",
   },
+  {
+    label: "usersLabel",
+    url: "/users",
+  },
 ];
 
 // theme

@@ -1,5 +1,5 @@
 {
-  "appDescription": "Une gestion optimale de vos tâches",
+  "appDescription": "Vos évaluations en ligne",
   "pageNotFoundMessage": "La page que vous demandez n'existe pas.",
   "allTaskDone": "Toute tâches terminées",
   "NoTaskDone": "Aucune tâche terminée",
@@ -19,9 +19,11 @@
   "create": "Créer",
   "edit": "Editer",
   "assigneesLabel": "Personnes",
+  "assigneeCreated": "Personne créee",
   "todosLabel": "Taches",
   "todoCreated": "Tâche créee",
-  "assigneeCreated": "Personne créee",
+  "usersLabel": "Utilisateurs",
+  "userCreated": "Utilisateur créé",
   "todos": {
     "priority": {
       "low": "Faible",
@@ -111,6 +113,47 @@
     "assigneeForm": {
       "createTitle": "Créer une personne",
       "editTitle": "Editer une personne",
+      "nameField": {
+        "label": "Nom",
+        "validation": {
+          "required": "Le nom est requis",
+          "min3characters": "Le nom doit avoir au moins 3 caractères"
+        }
+      },
+      "phoneField": {
+        "label": "Numéro de Téléphone",
+        "validation": {
+          "required": "Le Numéro de Téléphone est requis"
+        }
+      },
+      "emailField": {
+        "label": "Adresse Email",
+        "validation": {
+          "required": "L'adresse email est requise",
+          "invalid": "L'adresse email est invalide"
+        }
+      },
+      "genderField": {
+        "label": "Genre",
+        "validation": {
+          "required": "Le genre est requis"
+        }
+      }
+    }
+  },
+  "users": {
+    "nameAlreadyExist": "Ce nom existe déjà",
+    "deleteTitle": "Supprimer la utilisateur",
+    "usersPageTitle": "Gestion des utilisateurs",
+    "createUserBtnLabel": "Créer une utilisateur",
+    "nameLabel": "Nom",
+    "emailLabel": "Adresse Email",
+    "phoneLabel": "Téléphone",
+    "genderLabel": "Genre",
+    "noUsers": "Pas de utilisateurs",
+    "userForm": {
+      "createTitle": "Créer un utilisateur",
+      "editTitle": "Editer un utilisateur",
       "nameField": {
         "label": "Nom",
         "validation": {

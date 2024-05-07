@@ -1,5 +1,5 @@
 {
-  "appDescription": "Manage your tasks",
+  "appDescription": "Your quiz exams online",
   "pageNotFoundMessage": "The page your are looking for does not exist",
   "allTaskDone": "All task done",
   "NoTaskDone": "No task done",
@@ -18,10 +18,12 @@
   "confirmDeleteLabel": "Do you really want to delete ?",
   "create": "Create",
   "edit": "Edit",
-  "assigneesLabel": "Assignees",
   "todosLabel": "Todos",
   "todoCreated": "Todo created",
+  "assigneesLabel": "Assignees",
   "assigneeCreated": "Assignee created",
+  "usersLabel": "Users",
+  "userCreated": "User created",
   "todos": {
     "priority": {
       "low": "Low",
@@ -110,6 +112,47 @@
     "assigneeForm": {
       "createTitle": "Create new Assignee",
       "editTitle": "Edit Assignee",
+      "nameField": {
+        "label": "Name",
+        "validation": {
+          "required": "name is required",
+          "min3characters": "name must have at least 3 characters"
+        }
+      },
+      "phoneField": {
+        "label": "Phone",
+        "validation": {
+          "required": "phone is required"
+        }
+      },
+      "emailField": {
+        "label": "Email",
+        "validation": {
+          "required": "email is required",
+          "invalid": "The email is invalid"
+        }
+      },
+      "genderField": {
+        "label": "Gender",
+        "validation": {
+          "required": "gender is required"
+        }
+      }
+    }
+  },
+  "users": {
+    "nameAlreadyExist": "The name already exist",
+    "deleteTitle": "Delete User",
+    "usersPageTitle": "Manage Users",
+    "createUserBtnLabel": "Create User",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "genderLabel": "Gender",
+    "noUsers": "No Users",
+    "userForm": {
+      "createTitle": "Create new User",
+      "editTitle": "Edit User",
       "nameField": {
         "label": "Name",
         "validation": {

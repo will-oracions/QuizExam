@@ -36,6 +36,14 @@ body {
     overflow: hidden;
   }
 
+  .app-form {
+    min-width: 500px;
+
+    @media screen and (max-width: 550px) {
+      min-width: 80vw;
+    }
+  }
+
   #app-layout {
     .app-icon-button {
       background-color: transparent;

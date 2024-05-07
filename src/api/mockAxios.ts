@@ -4,6 +4,7 @@ import { Todo } from "../modules/todos/models/Todo";
 import { Assignee } from "../modules/assignees/models/Assignee";
 import { generateFakeId, sleep } from "../utils";
 import { assigneeFakeData, todoFakeData } from "./fakeData";
+import { User } from "../modules/users/models/User";
 
 // axios.defaults.headers.common["Cache-Control"] = "no-cache";
 
@@ -19,9 +20,10 @@ const LOCAL_STORAGE_DATA_KEY = "data";
 interface IData {
   todos: any[];
   assignees: Assignee[];
+  users: User[];
 }
 
-const saveData = (data: IData) => {
+export const saveData = (data: IData) => {
   localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(data));
 };
 
@@ -37,8 +39,10 @@ export const getData = (): IData | null => {
 };
 
 let todos: any[] = getData()?.todos || todoFakeData;
-
 let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
+let users: User[] = getData()?.users || [];
+
+// Mappers
 
 export const toTodoModel = (todo: Todo & { assigneeId?: number }): Todo => {
   const assigneeId = todo.assigneeId;
@@ -53,6 +57,13 @@ export const toAssigneeModel = (a: Assignee): Assignee => {
   return {
     ...a,
     todos: todos.filter((t) => t.assigneeId === a.id),
+  };
+};
+
+export const toUserModel = (a: User): User => {
+  return {
+    ...a,
+    // users: users.filter((t) => t.userId === a.id),
   };
 };
 
@@ -77,8 +88,7 @@ axiosMock.onPost("/todos").reply(async (config) => {
   delete newTodo.assigneeId;
   newTodo.assignee = assignee;
   // console.log(newTodo, todos);
-  saveData({ assignees, todos });
-
+  saveData({ assignees, todos, users });
   await sleep(3000);
 
   return [201, newTodo];
@@ -95,7 +105,7 @@ axiosMock.onPut(/\/todos\/\d+/).reply(async (config) => {
   );
 
   // console.log(updatedTodo);
-  saveData({ assignees, todos });
+  saveData({ assignees, todos, users });
   await sleep(3000);
 
   return [200, updatedTodo];
@@ -105,8 +115,7 @@ axiosMock.onDelete(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
   todos = todos.filter((todo) => todo.id !== todoId);
 
-  saveData({ assignees, todos });
-
+  saveData({ assignees, todos, users });
   await sleep(1000);
 
   return [204];
@@ -123,7 +132,7 @@ axiosMock.onPost("/assignees").reply(async (config) => {
   const assignee = { ...data, id: generateFakeId() };
   assignees.push(assignee);
 
-  saveData({ assignees, todos });
+  saveData({ assignees, todos, users });
   await sleep(3000);
 
   return [201, assignee];
@@ -136,8 +145,7 @@ axiosMock.onPut(/\/assignees\/\d+/).reply(async (config) => {
     assignee.id === assigneeId ? updatedAssignee : assignee
   );
 
-  saveData({ assignees, todos });
-
+  saveData({ assignees, todos, users });
   await sleep(3000);
 
   return [200, updatedAssignee];
@@ -147,7 +155,46 @@ axiosMock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   assignees = assignees.filter((assignee) => assignee.id !== assigneeId);
 
-  saveData({ assignees, todos });
+  saveData({ assignees, todos, users });
+  await sleep(1000);
+
+  return [204];
+});
+
+// Mock Users API
+axiosMock.onGet("/users").reply(
+  200,
+  users.map((a) => toUserModel(a))
+);
+
+axiosMock.onPost("/users").reply(async (config) => {
+  const data = JSON.parse(config.data);
+  const user: User = { ...data, id: generateFakeId() };
+  users.push(user);
+
+  saveData({ users, todos, assignees });
+  await sleep(3000);
+
+  return [201, user];
+});
+
+axiosMock.onPut(/\/users\/\d+/).reply(async (config) => {
+  const userId = parseInt(config.url!.split("/").pop()!);
+  const updatedUser: User = JSON.parse(config.data);
+  users = users.map((user) => (user.id === userId ? updatedUser : user));
+
+  saveData({ users, todos, assignees });
+
+  await sleep(3000);
+
+  return [200, updatedUser];
+});
+
+axiosMock.onDelete(/\/users\/\d+/).reply(async (config) => {
+  const userId = parseInt(config.url!.split("/").pop()!);
+  users = users.filter((user) => user.id !== userId);
+
+  saveData({ users, todos, assignees });
 
   await sleep(1000);
 
