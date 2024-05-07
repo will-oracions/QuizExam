@@ -107,7 +107,7 @@
     "phoneLabel": "Phone",
     "tasksDoneLabel": "Tasks done",
     "tasksAssignedLabel": "Assigned tasks",
-    "genderLabel": "Gender",
+    "levelLabel": "Levels",
     "noAssignees": "No Assignees",
     "assigneeForm": {
       "createTitle": "Create new Assignee",
@@ -177,6 +177,49 @@
         "label": "Gender",
         "validation": {
           "required": "gender is required"
+        }
+      }
+    }
+  },
+  "courses": {
+    "coursesLabel": "courses",
+    "courseCreated": "course created",
+    "nameAlreadyExist": "The name already exist",
+    "deleteTitle": "Delete Course",
+    "coursesPageTitle": "Manage Courses",
+    "createCourseBtnLabel": "Create Course",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description",
+    "teacherLabel": "Teacher",
+    "levelLabel": "Gender",
+    "noCourses": "No Courses",
+    "courseForm": {
+      "createTitle": "Create new Course",
+      "editTitle": "Edit Course",
+      "nameField": {
+        "label": "Name",
+        "validation": {
+          "required": "name is required",
+          "min3characters": "name must have at least 3 characters"
+        }
+      },
+      "teacherField": {
+        "label": "Teacher",
+        "validation": {
+          "required": "teacher is required"
+        }
+      },
+      "descriptionField": {
+        "label": "Description",
+        "validation": {
+          "required": "description is required",
+          "invalid": "The description is invalid"
+        }
+      },
+      "levelField": {
+        "label": "Level",
+        "validation": {
+          "required": "level is required"
         }
       }
     }

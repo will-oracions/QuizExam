@@ -32,6 +32,10 @@ const menu = [
     label: "usersLabel",
     url: "/users",
   },
+  {
+    label: "coursesLabel",
+    url: "/courses",
+  },
 ];
 
 // theme

@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import Error from "./components/Error";
 import Assignees from "./modules/assignees/pages/Assignees";
 import Users from "./modules/users/pages/Users";
+import Courses from "./modules/courses/pages/Courses";
 
 const routes: RouteObject[] = [
   {
@@ -26,6 +27,10 @@ const routes: RouteObject[] = [
       {
         path: "users",
         element: <Users />,
+      },
+      {
+        path: "courses",
+        element: <Courses />,
       },
     ],
   },

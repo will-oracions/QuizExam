@@ -181,5 +181,48 @@
         }
       }
     }
+  },
+  "courses": {
+    "coursesLabel": "cours",
+    "courseCreated": "cours créé",
+    "nameAlreadyExist": "Ce nom existe déjà",
+    "deleteTitle": "Supprimer la cour",
+    "coursesPageTitle": "Gestion des cours",
+    "createCourseBtnLabel": "Créer une cours",
+    "nameLabel": "Nom",
+    "descriptionLabel": "Description",
+    "teacherLabel": "Enseignant",
+    "levelLabel": "Niveau",
+    "noCourses": "Pas de cours",
+    "courseForm": {
+      "createTitle": "Créer un cours",
+      "editTitle": "Editer un cours",
+      "nameField": {
+        "label": "Nom",
+        "validation": {
+          "required": "Le nom est requis",
+          "min3characters": "Le nom doit avoir au moins 3 caractères"
+        }
+      },
+      "teacherField": {
+        "label": "L'enseignant",
+        "validation": {
+          "required": "L'enseignant est requis"
+        }
+      },
+      "descriptionField": {
+        "label": "Description",
+        "validation": {
+          "required": "La description est requise",
+          "invalid": "La description est invalide"
+        }
+      },
+      "levelField": {
+        "label": "Niveau",
+        "validation": {
+          "required": "Le niveau est requis"
+        }
+      }
+    }
   }
 }
