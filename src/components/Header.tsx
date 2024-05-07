@@ -88,7 +88,7 @@ const Header = () => {
                 </Box>
                 <Box>
                   <Typography variant="h6" className={classes.title}>
-                    WizeTodoList
+                    QuizExam
                   </Typography>
                   <Typography className="brand-description">
                     {t("appDescription")}
