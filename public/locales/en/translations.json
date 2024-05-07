@@ -223,5 +223,61 @@
         }
       }
     }
+  },
+  "quizs": {
+    "difficulty": {
+      "low": "Easy",
+      "medium": "Medium",
+      "hard": "hard",
+      "difficulty": "Difficulty"
+    },
+    "quizsLabel": "quizs",
+    "quizCreated": "quiz created",
+    "nameAlreadyExist": "The name already exist",
+    "deleteTitle": "Delete Quiz",
+    "quizsPageTitle": "Manage Quizs",
+    "createQuizBtnLabel": "Create Quiz",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description",
+    "conceptsLabel": "Concepts",
+    "difficultyLabel": "Difficulty",
+    "noQuizs": "No Quiz",
+    "quizForm": {
+      "createTitle": "Create new Quiz",
+      "editTitle": "Edit Quiz",
+      "nameField": {
+        "label": "Name",
+        "validation": {
+          "required": "name is required",
+          "min3characters": "name must have at least 3 characters"
+        }
+      },
+      "conceptsField": {
+        "label": "Concepts",
+        "validation": {
+          "required": "you have to provide one or more concept"
+        }
+      },
+      "descriptionField": {
+        "label": "Description",
+        "validation": {
+          "required": "description is required",
+          "invalid": "The description is invalid"
+        }
+      },
+      "dateField": {
+        "label": "Date",
+        "validation": {
+          "required": "date is required",
+          "invalid": "The date is invalid"
+        }
+      },
+      "difficultyField": {
+        "label": "Difficulty",
+        "validation": {
+          "required": "difficulty is required"
+        }
+      }
+    }
   }
 }

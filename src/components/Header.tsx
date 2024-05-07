@@ -33,8 +33,12 @@ const menu = [
     url: "/users",
   },
   {
-    label: "coursesLabel",
+    label: "courses.coursesLabel",
     url: "/courses",
+  },
+  {
+    label: "quiz.quizsLabel",
+    url: "/quiz",
   },
 ];
 

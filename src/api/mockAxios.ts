@@ -6,6 +6,7 @@ import { generateFakeId, sleep } from "../utils";
 import { assigneeFakeData, todoFakeData } from "./fakeData";
 import { User } from "../modules/users/models/User";
 import { Course } from "../modules/courses/models/Course";
+import { Quiz } from "../modules/exams/quiz/models/Quiz";
 
 // axios.defaults.headers.common["Cache-Control"] = "no-cache";
 
@@ -23,6 +24,7 @@ interface IData {
   assignees: Assignee[];
   users: User[];
   courses: Course[];
+  quizs: Quiz[];
 }
 
 export const saveData = (data: IData) => {
@@ -44,6 +46,7 @@ let todos: any[] = getData()?.todos || todoFakeData;
 let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
 let users: User[] = getData()?.users || [];
 let courses: Course[] = getData()?.courses || [];
+let quizs: Quiz[] = getData()?.quizs || [];
 
 // Mappers
 
@@ -77,6 +80,13 @@ export const toCourseModel = (a: Course): Course => {
   };
 };
 
+export const toQuizModel = (a: Quiz): Quiz => {
+  return {
+    ...a,
+    // users: users.filter((t) => t.userId === a.id),
+  };
+};
+
 // Mock Todos Api
 axiosMock.onGet("/todos").reply(
   200,
@@ -98,7 +108,7 @@ axiosMock.onPost("/todos").reply(async (config) => {
   delete newTodo.assigneeId;
   newTodo.assignee = assignee;
   // console.log(newTodo, todos);
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -116,7 +126,7 @@ axiosMock.onPut(/\/todos\/\d+/).reply(async (config) => {
   );
 
   // console.log(updatedTodo);
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -127,7 +137,7 @@ axiosMock.onDelete(/\/todos\/\d+/).reply(async (config) => {
   const todoId = parseInt(config.url!.split("/").pop()!);
   todos = todos.filter((todo) => todo.id !== todoId);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(1000);
 
@@ -145,7 +155,7 @@ axiosMock.onPost("/assignees").reply(async (config) => {
   const assignee = { ...data, id: generateFakeId() };
   assignees.push(assignee);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -159,7 +169,7 @@ axiosMock.onPut(/\/assignees\/\d+/).reply(async (config) => {
     assignee.id === assigneeId ? updatedAssignee : assignee
   );
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -170,7 +180,7 @@ axiosMock.onDelete(/\/assignees\/\d+/).reply(async (config) => {
   const assigneeId = parseInt(config.url!.split("/").pop()!);
   assignees = assignees.filter((assignee) => assignee.id !== assigneeId);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(1000);
 
@@ -188,7 +198,7 @@ axiosMock.onPost("/users").reply(async (config) => {
   const user: User = { ...data, id: generateFakeId() };
   users.push(user);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -200,7 +210,7 @@ axiosMock.onPut(/\/users\/\d+/).reply(async (config) => {
   const updatedUser: User = JSON.parse(config.data);
   users = users.map((user) => (user.id === userId ? updatedUser : user));
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -211,7 +221,7 @@ axiosMock.onDelete(/\/users\/\d+/).reply(async (config) => {
   const userId = parseInt(config.url!.split("/").pop()!);
   users = users.filter((user) => user.id !== userId);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(1000);
 
@@ -229,7 +239,7 @@ axiosMock.onPost("/courses").reply(async (config) => {
   const course: Course = { ...data, id: generateFakeId() };
   courses.push(course);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -243,7 +253,7 @@ axiosMock.onPut(/\/courses\/\d+/).reply(async (config) => {
     course.id === courseId ? updatedCourse : course
   );
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
 
   await sleep(3000);
 
@@ -254,7 +264,48 @@ axiosMock.onDelete(/\/courses\/\d+/).reply(async (config) => {
   const courseId = parseInt(config.url!.split("/").pop()!);
   courses = courses.filter((course) => course.id !== courseId);
 
-  saveData({ courses, assignees, todos, users });
+  saveData({ courses, assignees, todos, users, quizs });
+
+  await sleep(1000);
+
+  return [204];
+});
+
+// Mock Quizs API
+axiosMock.onGet("/quizs").reply(
+  200,
+  quizs.map((a) => toQuizModel(a))
+);
+
+axiosMock.onPost("/quizs").reply(async (config) => {
+  const data = JSON.parse(config.data);
+  const quiz: Quiz = { ...data, id: generateFakeId() };
+  quizs.push(quiz);
+
+  saveData({ quizs, assignees, todos, users, courses });
+
+  await sleep(3000);
+
+  return [201, quiz];
+});
+
+axiosMock.onPut(/\/quizs\/\d+/).reply(async (config) => {
+  const quizId = parseInt(config.url!.split("/").pop()!);
+  const updatedQuiz: Quiz = JSON.parse(config.data);
+  quizs = quizs.map((quiz) => (quiz.id === quizId ? updatedQuiz : quiz));
+
+  saveData({ quizs, assignees, todos, users, courses });
+
+  await sleep(3000);
+
+  return [200, updatedQuiz];
+});
+
+axiosMock.onDelete(/\/quizs\/\d+/).reply(async (config) => {
+  const quizId = parseInt(config.url!.split("/").pop()!);
+  quizs = quizs.filter((quiz) => quiz.id !== quizId);
+
+  saveData({ quizs, assignees, todos, users, courses });
 
   await sleep(1000);
 

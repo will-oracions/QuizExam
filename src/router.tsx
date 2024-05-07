@@ -5,6 +5,7 @@ import Error from "./components/Error";
 import Assignees from "./modules/assignees/pages/Assignees";
 import Users from "./modules/users/pages/Users";
 import Courses from "./modules/courses/pages/Courses";
+import Quizs from "./modules/exams/quiz/pages/Quizs";
 
 const routes: RouteObject[] = [
   {
@@ -31,6 +32,10 @@ const routes: RouteObject[] = [
       {
         path: "courses",
         element: <Courses />,
+      },
+      {
+        path: "quiz",
+        element: <Quizs />,
       },
     ],
   },
