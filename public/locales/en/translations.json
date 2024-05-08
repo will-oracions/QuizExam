@@ -278,5 +278,29 @@
         }
       }
     }
+  },
+  "quizQuestions": {
+    "quizQuestionsLabel": "quizQuestion",
+    "quizQuestionCreated": "quizQuestion created",
+    "nameAlreadyExist": "The name already exist",
+    "deleteTitle": "Delete QuizQuestion",
+    "quizQuestionsPageTitle": "Manage QuizQuestions",
+    "createQuizQuestionBtnLabel": "Create question",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description",
+    "conceptsLabel": "Concepts",
+    "difficultyLabel": "Difficulty",
+    "noQuizQuestions": "No Question",
+    "quizQuestionForm": {
+      "createTitle": "Create new QuizQuestion",
+      "editTitle": "Edit QuizQuestion",
+      "questionTextField": {
+        "label": "Question text",
+        "validation": {
+          "required": "name is required",
+          "min3characters": "name must have at least 3 characters"
+        }
+      }
+    }
   }
 }

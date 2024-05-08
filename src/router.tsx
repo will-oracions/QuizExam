@@ -6,6 +6,7 @@ import Assignees from "./modules/assignees/pages/Assignees";
 import Users from "./modules/users/pages/Users";
 import Courses from "./modules/courses/pages/Courses";
 import Quizs from "./modules/exams/quiz/pages/Quizs";
+import Quizquestions from "./modules/exams/quizQuestions/pages/Quizquestions";
 
 const routes: RouteObject[] = [
   {
@@ -36,6 +37,10 @@ const routes: RouteObject[] = [
       {
         path: "quiz",
         element: <Quizs />,
+      },
+      {
+        path: "quiz-questions",
+        element: <Quizquestions />,
       },
     ],
   },

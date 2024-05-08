@@ -40,6 +40,10 @@ const menu = [
     label: "quizs.quizsLabel",
     url: "/quiz",
   },
+  {
+    label: "quizQuestions.quizQuestionsLabel",
+    url: "/quiz-questions",
+  },
 ];
 
 // theme
