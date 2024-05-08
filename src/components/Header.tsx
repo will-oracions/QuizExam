@@ -44,6 +44,10 @@ const menu = [
     label: "quizQuestions.quizQuestionsLabel",
     url: "/quiz-questions",
   },
+  {
+    label: "quizAnswers.quizAnswersLabel",
+    url: "/quiz-answers",
+  },
 ];
 
 // theme

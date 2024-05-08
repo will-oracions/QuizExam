@@ -280,7 +280,7 @@
     }
   },
   "quizQuestions": {
-    "quizQuestionsLabel": "quizQuestion",
+    "quizQuestionsLabel": "Question",
     "quizQuestionCreated": "quizQuestion created",
     "nameAlreadyExist": "The name already exist",
     "deleteTitle": "Delete QuizQuestion",
@@ -296,6 +296,30 @@
       "editTitle": "Edit QuizQuestion",
       "questionTextField": {
         "label": "Question text",
+        "validation": {
+          "required": "name is required",
+          "min3characters": "name must have at least 3 characters"
+        }
+      }
+    }
+  },
+  "quizAnswers": {
+    "quizAnswersLabel": "Answer",
+    "quizAnswerCreated": "quizAnswer created",
+    "nameAlreadyExist": "The name already exist",
+    "deleteTitle": "Delete QuizAnswer",
+    "quizAnswersPageTitle": "Manage QuizAnswers",
+    "createQuizAnswerBtnLabel": "Create answer",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description",
+    "conceptsLabel": "Concepts",
+    "difficultyLabel": "Difficulty",
+    "noQuizAnswers": "No Answer",
+    "quizAnswerForm": {
+      "createTitle": "Create new Answer",
+      "editTitle": "Edit Answer",
+      "answerTextField": {
+        "label": "Answer text",
         "validation": {
           "required": "name is required",
           "min3characters": "name must have at least 3 characters"

@@ -7,6 +7,7 @@ import Users from "./modules/users/pages/Users";
 import Courses from "./modules/courses/pages/Courses";
 import Quizs from "./modules/exams/quiz/pages/Quizs";
 import Quizquestions from "./modules/exams/quizQuestions/pages/Quizquestions";
+import Quizanswers from "./modules/exams/quizAnswers/pages/Quizanswers";
 
 const routes: RouteObject[] = [
   {
@@ -41,6 +42,10 @@ const routes: RouteObject[] = [
       {
         path: "quiz-questions",
         element: <Quizquestions />,
+      },
+      {
+        path: "quiz-answers",
+        element: <Quizanswers />,
       },
     ],
   },

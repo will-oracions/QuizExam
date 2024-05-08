@@ -280,7 +280,7 @@
     }
   },
   "quizQuestions": {
-    "quizQuestionsLabel": "quizQuestion",
+    "quizQuestionsLabel": "Question",
     "quizQuestionCreated": "quizQuestion créé",
     "nameAlreadyExist": "Ce nom existe déjà",
     "deleteTitle": "Supprimer la quizQuestion",
@@ -299,6 +299,30 @@
         "validation": {
           "required": "La question est requis",
           "min3characters": "La question doit avoir au moins 3 caractères"
+        }
+      }
+    }
+  },
+  "quizAnswers": {
+    "quizAnswersLabel": "Réponses",
+    "quizAnswerCreated": "quizAnswer créé",
+    "nameAlreadyExist": "Ce nom existe déjà",
+    "deleteTitle": "Supprimer la réponse",
+    "quizAnswersPageTitle": "Gestion des réponses",
+    "createQuizAnswerBtnLabel": "Créer une réponse",
+    "nameLabel": "Nom",
+    "descriptionLabel": "Description",
+    "conceptsLabel": "Concepts",
+    "difficultyLabel": "Difficulté",
+    "noQuizAnswers": "Pas de Answers",
+    "quizAnswerForm": {
+      "createTitle": "Créer une réponse",
+      "editTitle": "Editer une réponse",
+      "answerTextField": {
+        "label": "Réponses",
+        "validation": {
+          "required": "La réponse est requis",
+          "min3characters": "La réponse doit avoir au moins 3 caractères"
         }
       }
     }
