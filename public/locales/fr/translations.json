@@ -229,8 +229,7 @@
     "difficulty": {
       "low": "Facile",
       "medium": "Moyenne",
-      "hight": "Difficile",
-      "difficulty": "Difficulté"
+      "hard": "Difficulté"
     },
     "quizsLabel": "quiz",
     "quizCreated": "quiz créé",

@@ -37,7 +37,7 @@ const menu = [
     url: "/courses",
   },
   {
-    label: "quiz.quizsLabel",
+    label: "quizs.quizsLabel",
     url: "/quiz",
   },
 ];

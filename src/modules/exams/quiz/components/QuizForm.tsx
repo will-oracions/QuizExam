@@ -240,13 +240,13 @@ const QuizForm = forwardRef(
                 onChange={handleChangeDifficulty}>
                 <MenuItem value={QuizDifficulty.LOW}>
                   {" "}
-                  {t("quiz.difficulty.low")}
+                  {t("quizs.difficulty.low")}
                 </MenuItem>
                 <MenuItem value={QuizDifficulty.MEDIUM}>
-                  {t("quiz.difficulty.medium")}
+                  {t("quizs.difficulty.medium")}
                 </MenuItem>
                 <MenuItem value={QuizDifficulty.HARD}>
-                  {t("quiz.difficulty.hard")}
+                  {t("quizs.difficulty.hard")}
                 </MenuItem>
               </Select>
               {errors.difficulty && (

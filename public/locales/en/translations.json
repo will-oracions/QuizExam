@@ -228,10 +228,9 @@
     "difficulty": {
       "low": "Easy",
       "medium": "Medium",
-      "hard": "hard",
-      "difficulty": "Difficulty"
+      "hard": "hard"
     },
-    "quizsLabel": "quizs",
+    "quizsLabel": "quiz",
     "quizCreated": "quiz created",
     "nameAlreadyExist": "The name already exist",
     "deleteTitle": "Delete Quiz",
