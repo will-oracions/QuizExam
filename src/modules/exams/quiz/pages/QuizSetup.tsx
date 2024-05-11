@@ -13,8 +13,10 @@ const QuizSetup = () => {
         <Box className="app-quiz-setup">
           <h3>Quiz Setup</h3>
 
-          {[1, 2, 3, 4].map(() => (
-            <QuestionManger />
+          {[1, 2, 3, 4].map((_, i) => (
+            <Box key={i} mb={10}>
+              <QuestionManger />
+            </Box>
           ))}
         </Box>
       </main>

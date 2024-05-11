@@ -3,7 +3,7 @@ import QuizSetupItem from "./QuizSetupItem";
 
 const QuestionManger = () => {
   return (
-    <QuizSetupItem>
+    <QuizSetupItem expandable={true}>
       <Box className="app-quiz-answers-box">
         <Box className="app-quiz-answers-box-title">Réponses à la question</Box>
         <Box>

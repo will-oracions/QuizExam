@@ -1,39 +1,64 @@
-import { Box, Typography } from "@mui/material";
-import QuizSetupInput from "./QuizSetupInput";
-import QuizSetupItemHeader from "./QuizSetupItemHeader";
 import React from "react";
+import QuizSetupItemHeader from "./QuizSetupItemHeader";
 
 interface Props {
   children?: React.ReactNode;
+  expandable?: boolean;
 }
 
-const QuizSetupItem = ({ children }: Props) => {
+const QuizSetupItem = ({ children, expandable }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [editing, setEditing] = React.useState(false);
+
+  const handleEditing = (value: boolean) => {
+    setIsOpen(false);
+    setEditing(value);
+  };
+
+  const handleCancel = () => {
+    setEditing(false);
+    setIsOpen(false);
+  };
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-      <Box className="app-quiz-setup-section">
-        <Box onClick={() => setIsOpen(!isOpen)}>
-          <QuizSetupItemHeader />
-        </Box>
+      <div className={"app-quiz-setup-section"}>
+        <div onClick={toggleOpen}>
+          <QuizSetupItemHeader
+            // toggleOpen={() => setIsOpen(!isOpen)}
+            cancelAddEdit={handleCancel}
+            editing={editing}
+            setEditing={handleEditing}
+          />
+        </div>
 
-        {isOpen && (
-          <Box className="app-quiz-question-section-content">
-            <Box>
+        {expandable && (
+          <div
+            className={
+              "app-quiz-question-section-content" +
+              (!editing && isOpen ? " opened" : "")
+            }>
+            {/* <Box>
               <Box className="app-quiz-question-text">
-                <Typography>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Voluptate a earum doloribus vel hic quae nulla, doloremque
-                  quos harum ipsam?
-                </Typography>
+                {!editing && (
+                  <Typography>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Voluptate a earum doloribus vel hic quae nulla, doloremque
+                    quos harum ipsam?
+                  </Typography>
+                )}
 
-                <QuizSetupInput />
+                {editing && <QuizSetupInput />}
               </Box>
-            </Box>
+            </Box> */}
             {children}
-          </Box>
+          </div>
         )}
-      </Box>
+      </div>
     </>
   );
 };
