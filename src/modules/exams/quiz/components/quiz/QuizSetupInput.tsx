@@ -1,10 +1,13 @@
 import { Box, TextField, Button } from "@mui/material";
 
+export type SetupInputType = "QUESTION" | "ANSWER";
+
 interface Props {
   defaultValue?: string;
   cancelAddEdit: () => void;
+  type: SetupInputType;
 }
-const QuizSetupInput = ({ defaultValue, cancelAddEdit }: Props) => {
+const QuizSetupInput = ({ defaultValue, cancelAddEdit, type }: Props) => {
   const handleCancel = (e: any) => {
     e.stopPropagation();
     cancelAddEdit();
@@ -15,7 +18,7 @@ const QuizSetupInput = ({ defaultValue, cancelAddEdit }: Props) => {
         <Box className="app-quiz-question-text-input">
           <div className="app-quiz-input">
             <TextField
-              label="Add Answer"
+              label={type === "QUESTION" ? "Add Question" : "Add Answer"}
               variant="outlined"
               fullWidth
               multiline

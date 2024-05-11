@@ -1,42 +1,38 @@
-import { Man, People, Woman } from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
-import { Box, Button } from "@mui/material";
-import React from "react";
+import {
+  InterestsRounded,
+  Man,
+  People,
+  QuestionAnswer,
+  Woman,
+} from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router-dom";
-import { IOutletContext } from "../../../../components/Layout";
-import { QuizFilterEnum, QuizLevel } from "../models/Quiz";
-
-export interface QuizFilter {
-  main: QuizFilterEnum | "";
-  level: QuizLevel | "";
-}
+import { QuizFilterEnum, QuizLevel } from "../../models/Quiz";
+import { Box } from "@mui/material";
 
 interface Props {
-  handleCreate: () => void;
-  quizFilter: QuizFilter;
-  setQuizFilter: (filter: QuizFilter) => void;
+  // handleCreate: () => void;
+  // quizFilter: QuizFilter;
+  // setQuizFilter: (filter: QuizFilter) => void;
 }
 
-const QuizSidebar = ({
-  /**
-   * Handler to create a new Quiz
-   */
-  handleCreate,
-  /**
-   * Filter to apply to the quizs list data
-   */
-  quizFilter,
-  /**
-   * Change Quiz filter
-   */
-  setQuizFilter,
-}: Props) => {
+const QuizSetupSidebar = ({}: /**
+ * Handler to create a new Quiz
+ */
+// handleCreate,
+/**
+ * Filter to apply to the quizs list data
+ */
+// quizFilter,
+/**
+ * Change Quiz filter
+ */
+// setQuizFilter,
+Props) => {
   const { t } = useTranslation();
 
-  const { closeSidebar } = useOutletContext<IOutletContext>();
+  // const { closeSidebar } = useOutletContext<IOutletContext>();
 
-  React.useEffect(() => closeSidebar(), [quizFilter]);
+  // React.useEffect(() => closeSidebar(), [quizFilter]);
 
   /**
    * Convert quiz main filter enum to appropriate template
@@ -113,19 +109,34 @@ const QuizSidebar = ({
    * with style and translation.
    */
   const displayMainFilters = () => {
-    return Object.values(QuizFilterEnum).map((value, i) => {
-      return (
-        <div
-          onClick={() => setQuizFilter({ ...quizFilter, main: value })}
-          key={i}
-          className={
-            "sidebar-tasks-list-item" +
-            (quizFilter.main === value ? " active" : "")
-          }>
-          <span>{getMainFilterLabel(value)}</span>
-        </div>
-      );
-    });
+    // return Object.values(QuizFilterEnum).map((value, i) => {
+    //   return (
+    //     <div
+    //       onClick={() => setQuizFilter({ ...quizFilter, main: value })}
+    //       key={i}
+    //       className={
+    //         "sidebar-tasks-list-item" +
+    //         (quizFilter.main === value ? " active" : "")
+    //       }>
+    //       <span>{getMainFilterLabel(value)}</span>
+    //     </div>
+    //   );
+    // });
+
+    return (
+      <>
+        <Box className={"sidebar-tasks-list-item"}>
+          <span>
+            <InterestsRounded /> Quiz introduction
+          </span>
+        </Box>
+        <Box className={"sidebar-tasks-list-item"}>
+          <span>
+            <QuestionAnswer /> Setup Questions
+          </span>
+        </Box>
+      </>
+    );
   };
 
   /**
@@ -167,7 +178,7 @@ const QuizSidebar = ({
 
   return (
     <div>
-      <div>
+      {/* <div>
         <Box className="app-create-button">
           <Button
             onClick={handleCreate}
@@ -178,20 +189,22 @@ const QuizSidebar = ({
             {t("quizs.createQuizBtnLabel")}
           </Button>
         </Box>
-      </div>
+      </div> */}
 
+      <Box mt={5}></Box>
+      <div className="sidebar-tasks-list-label">Configuration</div>
       <div className="sidebar-tasks-list">{displayMainFilters()}</div>
 
       {/* Lables Filter */}
-      <div className="sidebar-tasks-list">
+      {/* <div className="sidebar-tasks-list">
         <div className="sidebar-tasks-list-label">
           {t("quizs.difficultyLabel")}
         </div>
 
         {displayGenderFilters()}
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default QuizSidebar;
+export default QuizSetupSidebar;

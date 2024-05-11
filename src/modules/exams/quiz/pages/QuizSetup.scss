@@ -2,6 +2,30 @@
   .app-quiz-setup-item {
     margin-bottom: 4rem;
 
+    .app-quiz-input-adder {
+      color: rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+
+      &.below {
+        margin-bottom: 2rem;
+        margin-top: 0.3rem;
+      }
+
+      .adder-input-label {
+        margin-left: 0.5rem;
+        font-size: 1.2rem;
+      }
+
+      svg {
+        width: 1.4rem;
+      }
+    }
+
     @media screen and (max-width: 700px) {
       margin-bottom: 3rem;
     }
@@ -11,7 +35,7 @@
     background-color: #41a0ff;
     border-radius: 5px 5px 0 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
     // border: 4px solid red;
     // height: 44px;
     // max-height: 44px;
@@ -108,7 +132,8 @@
     transition: all 0.4s ease;
 
     &.opened {
-      max-height: 1000px;
+      max-height: 100rem;
+      overflow-y: auto;
     }
 
     .app-quiz-answers-box {

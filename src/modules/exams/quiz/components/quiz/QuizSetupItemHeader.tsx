@@ -1,6 +1,6 @@
 import { Edit, Delete, ArrowDropDownCircleRounded } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import QuizSetupInput from "./QuizSetupInput";
+import QuizSetupInput, { SetupInputType } from "./QuizSetupInput";
 
 interface Props {
   // isOpen: boolean;
@@ -8,11 +8,13 @@ interface Props {
   editing?: boolean;
   setEditing: (editing: boolean) => void;
   cancelAddEdit: () => void;
+  type: SetupInputType;
 }
 const QuizSetupItemHeader = ({
   editing,
   setEditing,
   cancelAddEdit,
+  type,
 }: // toggleOpen,
 Props) => {
   const displayTemplate = () => {
@@ -24,7 +26,11 @@ Props) => {
 
     if (editing) {
       return (
-        <QuizSetupInput cancelAddEdit={cancelAddEdit} defaultValue={text} />
+        <QuizSetupInput
+          type={type}
+          cancelAddEdit={cancelAddEdit}
+          defaultValue={text}
+        />
       );
     } else {
       return (
@@ -50,7 +56,9 @@ Props) => {
                 className="arrow-icon "
                 htmlColor="white"
               />
-              <span className="app-question-id">Question/Answer N° 234</span>
+              <span className="app-question-id">
+                {type === "QUESTION" ? "Question" : "Anwser"} N° 234
+              </span>
             </div>
 
             {!editing && (

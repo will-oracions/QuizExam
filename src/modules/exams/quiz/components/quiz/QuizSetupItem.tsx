@@ -1,12 +1,15 @@
 import React from "react";
 import QuizSetupItemHeader from "./QuizSetupItemHeader";
+import QuizSetupInputAdder from "./QuizSetupInputAdder";
+import { SetupInputType } from "./QuizSetupInput";
 
 interface Props {
   children?: React.ReactNode;
   expandable?: boolean;
+  type: SetupInputType;
 }
 
-const QuizSetupItem = ({ children, expandable }: Props) => {
+const QuizSetupItem = ({ children, expandable, type }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
 
@@ -26,9 +29,12 @@ const QuizSetupItem = ({ children, expandable }: Props) => {
 
   return (
     <>
+      <QuizSetupInputAdder direction="BEFORE" />
+
       <div className={"app-quiz-setup-section"}>
         <div onClick={toggleOpen}>
           <QuizSetupItemHeader
+            type={type}
             // toggleOpen={() => setIsOpen(!isOpen)}
             cancelAddEdit={handleCancel}
             editing={editing}
@@ -59,6 +65,7 @@ const QuizSetupItem = ({ children, expandable }: Props) => {
           </div>
         )}
       </div>
+      <QuizSetupInputAdder direction="BELOW" />
     </>
   );
 };

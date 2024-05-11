@@ -3,16 +3,20 @@ import QuizSetupItem from "./QuizSetupItem";
 
 const QuestionManger = () => {
   return (
-    <QuizSetupItem expandable={true}>
-      <Box className="app-quiz-answers-box">
-        <Box className="app-quiz-answers-box-title">Réponses à la question</Box>
-        <Box>
-          <QuizSetupItem />
-          <QuizSetupItem />
-          <QuizSetupItem />
+    <>
+      <QuizSetupItem type="QUESTION" expandable={true}>
+        <Box className="app-quiz-answers-box">
+          <Box className="app-quiz-answers-box-title">
+            Réponses à la question
+          </Box>
+          <Box>
+            <QuizSetupItem type="ANSWER" />
+            <QuizSetupItem type="ANSWER" />
+            <QuizSetupItem type="ANSWER" />
+          </Box>
         </Box>
-      </Box>
-    </QuizSetupItem>
+      </QuizSetupItem>
+    </>
   );
 };
 
