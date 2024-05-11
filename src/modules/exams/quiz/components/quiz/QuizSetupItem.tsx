@@ -1,17 +1,30 @@
 import React from "react";
 import QuizSetupItemHeader from "./QuizSetupItemHeader";
-import QuizSetupInputAdder from "./QuizSetupInputAdder";
+import QuizSetupInputAdder, {
+  IAddSetupItemOptions,
+} from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
+import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
 
 interface Props {
   children?: React.ReactNode;
   expandable?: boolean;
   type: SetupInputType;
+  item: QuizSetupQuestion | QuizSetupAnswer;
+  questionId?: number;
+  handleAddSetupInput: (option: IAddSetupItemOptions) => void;
 }
 
-const QuizSetupItem = ({ children, expandable, type }: Props) => {
+const QuizSetupItem = ({
+  children,
+  expandable,
+  type,
+  item,
+  questionId,
+  handleAddSetupInput,
+}: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [editing, setEditing] = React.useState(false);
+  const [editing, setEditing] = React.useState(item.editing);
 
   const handleEditing = (value: boolean) => {
     setIsOpen(false);
@@ -29,12 +42,19 @@ const QuizSetupItem = ({ children, expandable, type }: Props) => {
 
   return (
     <>
-      <QuizSetupInputAdder direction="BEFORE" />
+      <QuizSetupInputAdder
+        questionId={questionId}
+        itemId={item.id}
+        type={type}
+        handleAddSetupInput={handleAddSetupInput}
+        direction="BEFORE"
+      />
 
       <div className={"app-quiz-setup-section"}>
         <div onClick={toggleOpen}>
           <QuizSetupItemHeader
             type={type}
+            item={item}
             // toggleOpen={() => setIsOpen(!isOpen)}
             cancelAddEdit={handleCancel}
             editing={editing}
@@ -65,7 +85,13 @@ const QuizSetupItem = ({ children, expandable, type }: Props) => {
           </div>
         )}
       </div>
-      <QuizSetupInputAdder direction="BELOW" />
+      <QuizSetupInputAdder
+        questionId={questionId}
+        itemId={item.id}
+        type={type}
+        handleAddSetupInput={handleAddSetupInput}
+        direction="BELOW"
+      />
     </>
   );
 };

@@ -1,12 +1,30 @@
 import { AddCircle } from "@mui/icons-material";
+import { SetupInputType } from "./QuizSetupInput";
 
 export type QuizInputAddDirection = "BEFORE" | "BELOW";
 
-interface Props {
-  direction?: QuizInputAddDirection;
+export interface IAddSetupItemOptions {
+  type: SetupInputType;
+  direction: QuizInputAddDirection;
+  targetId: number;
+  questionId?: number;
 }
 
-const QuizSetupInputAdder = ({ direction }: Props) => {
+interface Props {
+  direction: QuizInputAddDirection;
+  type: SetupInputType;
+  itemId: number;
+  questionId?: number;
+  handleAddSetupInput: (option: IAddSetupItemOptions) => void;
+}
+
+const QuizSetupInputAdder = ({
+  direction,
+  handleAddSetupInput,
+  type,
+  itemId,
+  questionId,
+}: Props) => {
   const displayBtnTemplate = () => {
     const template = <AddCircle />;
     if (direction && direction === "BEFORE") {
@@ -27,6 +45,9 @@ const QuizSetupInputAdder = ({ direction }: Props) => {
   return (
     <>
       <div
+        onClick={() =>
+          handleAddSetupInput({ direction, type, targetId: itemId, questionId })
+        }
         className={
           "app-quiz-input-adder" + (direction === "BELOW" ? " below" : "")
         }>

@@ -1,6 +1,8 @@
 import { Edit, Delete, ArrowDropDownCircleRounded } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import QuizSetupInput, { SetupInputType } from "./QuizSetupInput";
+import { Quizquestion } from "../../../quizQuestions/models/Quizquestion";
+import { Quizanswer } from "../../../quizAnswers/models/Quizanswer";
 
 interface Props {
   // isOpen: boolean;
@@ -9,20 +11,21 @@ interface Props {
   setEditing: (editing: boolean) => void;
   cancelAddEdit: () => void;
   type: SetupInputType;
+  item: Quizquestion | Quizanswer;
 }
 const QuizSetupItemHeader = ({
   editing,
   setEditing,
   cancelAddEdit,
   type,
+  item,
 }: // toggleOpen,
 Props) => {
   const displayTemplate = () => {
-    const text = `Question: Lorem ipsum dolor sit amet consectetur adipisicing elit...
-    <br />
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ipsum,
-    eum aut enim, animi saepe distinctio dolorum ullam vitae minus atque
-    eius quas neque tenetur in dolorem? Rerum, quod saepe.`;
+    let text;
+
+    if (type === "QUESTION") text = (item as Quizquestion).questionText;
+    if (type === "ANSWER") text = (item as Quizanswer).answerText;
 
     if (editing) {
       return (

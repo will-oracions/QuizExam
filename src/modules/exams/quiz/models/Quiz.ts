@@ -1,3 +1,6 @@
+import { Quizanswer } from "../../quizAnswers/models/Quizanswer";
+import { Quizquestion } from "../../quizQuestions/models/Quizquestion";
+
 export interface Quiz {
   id: number;
   name: string;
@@ -6,6 +9,13 @@ export interface Quiz {
   concepts: string[];
   status: QuizStatus;
   difficulty: QuizDifficulty;
+}
+
+export type QuizSetupQuestion = Quizquestion & { editing?: boolean };
+export type QuizSetupAnswer = Quizanswer & { editing?: boolean };
+export interface IQuizSetupItem {
+  question: QuizSetupQuestion;
+  answers: QuizSetupAnswer[];
 }
 
 export enum QuizFilterEnum {
