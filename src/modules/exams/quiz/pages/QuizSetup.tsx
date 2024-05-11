@@ -14,9 +14,9 @@ const QuizSetup = () => {
           <h3>Quiz Setup</h3>
 
           {[1, 2, 3, 4].map((_, i) => (
-            <Box key={i} mb={10}>
+            <div className="app-quiz-setup-item" key={i}>
               <QuestionManger />
-            </Box>
+            </div>
           ))}
         </Box>
       </main>

@@ -1,4 +1,11 @@
 .app-quiz-setup {
+  .app-quiz-setup-item {
+    margin-bottom: 4rem;
+
+    @media screen and (max-width: 700px) {
+      margin-bottom: 3rem;
+    }
+  }
   .app-quiz-setup-section {
     border: 2px solid #41a0ff;
     background-color: #41a0ff;
@@ -32,15 +39,25 @@
           display: flex;
           // border: 4px solid red;
           margin-bottom: 0.5rem;
+          flex: 1;
 
           .app-question-id {
             font-size: 1.4rem;
             margin-left: 1rem;
+
+            @media screen and (max-width: 700px) {
+              font-size: 1.1rem;
+              margin-left: 1rem;
+              // border: 4px solid green;
+              word-wrap: wrap;
+            }
           }
         }
 
         .app-controls-btn {
           text-align: end;
+          width: fit-content;
+          // border: 4px solid orange;
         }
       }
 
@@ -98,6 +115,10 @@
       background-color: #f4f4f4;
       padding: 10px;
       padding-left: 25px;
+
+      @media screen and (max-width: 700px) {
+        padding-left: 10px;
+      }
 
       .app-quiz-answers-box-title {
         font-size: 1rem;

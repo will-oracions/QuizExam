@@ -22,7 +22,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       {/* <ThemeProvider theme={theme}> */}
       {/* <App /> */}
+      {/* <DndProvider backend={HTML5Backend}> */}
       <RouterProvider router={router} />
+      {/* </DndProvider> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

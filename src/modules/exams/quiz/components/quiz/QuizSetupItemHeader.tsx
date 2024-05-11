@@ -50,7 +50,7 @@ Props) => {
                 className="arrow-icon "
                 htmlColor="white"
               />
-              <span className="app-question-id">Question/Answer N°</span>
+              <span className="app-question-id">Question/Answer N° 234</span>
             </div>
 
             {!editing && (
