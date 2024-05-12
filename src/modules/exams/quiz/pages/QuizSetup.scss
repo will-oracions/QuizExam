@@ -1,6 +1,6 @@
 .app-quiz-setup {
   .app-quiz-setup-item {
-    margin-bottom: 4rem;
+    // margin-bottom: 0.5rem;
 
     .app-quiz-input-adder {
       color: rgba(0, 0, 0, 0.3);
@@ -8,9 +8,10 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      font-size: 1.4rem;
-      margin-bottom: 0.2rem;
+      // font-size: 1.4rem;
+      // margin-bottom: 0.2rem;
       transform: color 0.3s ease;
+      // border: 4px solid red;
 
       &:hover {
         color: rgba(0, 0, 0, 0.4);
@@ -21,29 +22,29 @@
       }
 
       &.below {
-        margin-bottom: 2rem;
-        margin-top: 0.3rem;
+        margin-bottom: 1rem;
+        // margin-top: 0.3rem;
       }
 
       .adder-input-label {
         margin-left: 0.5rem;
-        font-size: 1.2rem;
+        font-size: 0.85rem;
       }
 
       svg {
-        width: 1.4rem;
+        width: 0.85rem;
         color: rgba(0, 0, 0, 0.2);
       }
     }
 
     @media screen and (max-width: 700px) {
-      margin-bottom: 3rem;
+      // margin-bottom: 3rem;
     }
   }
   .app-quiz-setup-section {
     border: 2px solid #41a0ff;
     background-color: #41a0ff;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
     // margin-bottom: 1rem;
     // border: 4px solid red;
@@ -53,7 +54,7 @@
 
     .app-quiz-question-section-header {
       // border: 4px solid green;
-      padding: 1rem 10px;
+      padding: 5px 10px;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -98,6 +99,10 @@
 
       .app-quiz-question-section-label {
         font-size: 1.2rem;
+
+        @media screen and (max-width: 700px) {
+          font-size: 1rem;
+        }
       }
 
       .arrow-icon {

@@ -22,7 +22,7 @@ const QuizSetupInput = ({ defaultValue, cancelAddEdit, type }: Props) => {
               variant="outlined"
               fullWidth
               multiline
-              minRows={2}
+              minRows={1}
               maxRows={5}
               defaultValue={defaultValue}
             />

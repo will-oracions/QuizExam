@@ -55,13 +55,14 @@ Props) => {
         <div>
           <div className="app-quiz-controls">
             <div className="app-question-id-wrapper">
-              <ArrowDropDownCircleRounded
+              {/* <ArrowDropDownCircleRounded
                 className="arrow-icon "
                 htmlColor="white"
               />
               <span className="app-question-id">
                 {type === "QUESTION" ? "Question" : "Anwser"} N° 234
-              </span>
+              </span> */}
+              {displayTemplate()}
             </div>
 
             {!editing && (
@@ -71,7 +72,7 @@ Props) => {
               </div>
             )}
           </div>
-          <div>{displayTemplate()}</div>
+          {/* <div>{displayTemplate()}</div> */}
         </div>
       </div>
     </>
