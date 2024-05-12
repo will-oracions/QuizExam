@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import QuestionManger from "../components/quiz/QuestionManger";
 import "./QuizSetup.scss";
 import QuizSetupSidebar from "../components/quiz/QuizSetupSidebar";
-import { IQuizSetupItem } from "../models/Quiz";
+import { IQuizSetupItem, QuizSetupAnswer } from "../models/Quiz";
 import { IAddSetupItemOptions } from "../components/quiz/QuizSetupInputAdder";
 
 const quizSetupData: IQuizSetupItem[] = [
@@ -57,16 +57,73 @@ const QuizSetup = () => {
 
   const handleAddSetupInput = (options: IAddSetupItemOptions) => {
     console.log("options: ", options);
-    const newQuizSetupItem: IQuizSetupItem = {
-      question: {
-        id: new Date().getTime(),
-        questionText: "test",
-        editing: true,
-      },
-      answers: [],
-    };
+    if (options.type === "QUESTION") {
+      const questionIndex = quizSetup.findIndex(
+        (q) => q.question.id === options.targetId
+      );
 
-    setQuizSetup([newQuizSetupItem, ...quizSetup]);
+      if (questionIndex > -1) {
+        const newQuizSetupItem: IQuizSetupItem = {
+          question: {
+            id: new Date().getTime(),
+            questionText: "test",
+            editing: true,
+          },
+          answers: [],
+        };
+
+        const middleIndex =
+          options.direction === "BEFORE" ? questionIndex : questionIndex + 1;
+
+        // console.log(questionIndex, middleIndex);
+
+        const left = quizSetup.slice(0, middleIndex);
+        const right = quizSetup.slice(middleIndex);
+
+        const q = [...left, newQuizSetupItem, ...right];
+
+        setQuizSetup(q);
+      }
+    } else if (options.type === "ANSWER" && options.questionId) {
+      const questionIndex = quizSetup.findIndex(
+        (q) => q.question.id === options.questionId
+      );
+
+      const answerIndex = quizSetup[questionIndex].answers.findIndex(
+        (a) => a.id === options.targetId
+      );
+
+      if (answerIndex > -1) {
+        const newAnswerSetupItem: QuizSetupAnswer = {
+          id: new Date().getTime(),
+          answerText: "answer test",
+          editing: true,
+        };
+
+        const middleIndex =
+          options.direction === "BEFORE" ? answerIndex : answerIndex + 1;
+
+        // console.log(questionIndex, middleIndex);
+
+        setQuizSetup(
+          quizSetup.map((question, index) => {
+            if (index === questionIndex) {
+              const left = question.answers.slice(0, middleIndex);
+              const right = question.answers.slice(middleIndex);
+
+              const answers = [...left, newAnswerSetupItem, ...right];
+
+              return {
+                ...question,
+                answers: answers,
+              };
+            }
+
+            return question;
+          })
+        );
+      }
+    }
   };
 
   return (
