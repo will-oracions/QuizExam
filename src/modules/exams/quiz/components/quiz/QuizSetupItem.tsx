@@ -1,6 +1,9 @@
 import React from "react";
 import QuizSetupItemHeader from "./QuizSetupItemHeader";
-import QuizSetupInputAdder, { ISetupItemOptions } from "./QuizSetupInputAdder";
+import QuizSetupInputAdder, {
+  ISaveSetupItemOptions,
+  ISetupItemOptions,
+} from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
 import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
 
@@ -12,6 +15,7 @@ interface Props {
   questionId?: number;
   handleAddSetupInput: (option: ISetupItemOptions) => void;
   handleDelete: (row: Omit<ISetupItemOptions, "direction">) => void;
+  _handleSave: (options: ISaveSetupItemOptions) => void;
 }
 
 const QuizSetupItem = ({
@@ -22,9 +26,22 @@ const QuizSetupItem = ({
   questionId,
   handleAddSetupInput,
   handleDelete,
+  _handleSave,
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [editing, setEditing] = React.useState(item.editing);
+
+  const onSave = (textValue: string) => {
+    console.log("Text value: ", textValue);
+    const options: ISaveSetupItemOptions = {
+      content: textValue,
+      targetId: item.id,
+      type,
+      questionId,
+    };
+
+    _handleSave(options);
+  };
 
   const handleEditing = (value: boolean) => {
     setIsOpen(false);
@@ -53,6 +70,7 @@ const QuizSetupItem = ({
       <div className={"app-quiz-setup-section"}>
         <div onClick={toggleOpen}>
           <QuizSetupItemHeader
+            _handleSave={onSave}
             questionId={questionId}
             type={type}
             item={item}

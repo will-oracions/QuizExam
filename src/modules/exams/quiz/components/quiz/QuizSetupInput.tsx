@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, TextField, Button } from "@mui/material";
 
 export type SetupInputType = "QUESTION" | "ANSWER";
@@ -6,12 +7,25 @@ interface Props {
   defaultValue?: string;
   cancelAddEdit: () => void;
   type: SetupInputType;
+  _handleSave: (textValue: string) => void;
 }
-const QuizSetupInput = ({ defaultValue, cancelAddEdit, type }: Props) => {
+const QuizSetupInput = ({
+  defaultValue,
+  cancelAddEdit,
+  type,
+  _handleSave,
+}: Props) => {
+  const [textValue, setTextValue] = React.useState<string>("");
+
   const handleCancel = (e: any) => {
     e.stopPropagation();
     cancelAddEdit();
   };
+
+  const onSave = () => {
+    _handleSave(textValue);
+  };
+
   return (
     <>
       <Box className="app-quiz-question-input">
@@ -24,12 +38,14 @@ const QuizSetupInput = ({ defaultValue, cancelAddEdit, type }: Props) => {
               multiline
               minRows={1}
               maxRows={5}
+              value={textValue}
+              onChange={(e) => setTextValue(e.target.value)}
               defaultValue={defaultValue}
             />
           </div>
         </Box>
         <Box className="app-quiz-question-input-control">
-          <Button variant="contained" size="small">
+          <Button onClick={onSave} variant="contained" size="small">
             Save
           </Button>
 

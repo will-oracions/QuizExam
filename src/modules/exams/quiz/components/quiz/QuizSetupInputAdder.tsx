@@ -10,6 +10,13 @@ export interface ISetupItemOptions {
   questionId?: number;
 }
 
+export interface ISaveSetupItemOptions {
+  type: SetupInputType;
+  targetId: number;
+  content: string;
+  questionId?: number;
+}
+
 interface Props {
   direction: QuizInputAddDirection;
   type: SetupInputType;

@@ -15,6 +15,7 @@ interface Props {
   type: SetupInputType;
   item: Quizquestion | Quizanswer;
   questionId?: number;
+  _handleSave: (textValue: string) => void;
 }
 const QuizSetupItemHeader = ({
   editing,
@@ -24,6 +25,7 @@ const QuizSetupItemHeader = ({
   type,
   item,
   questionId,
+  _handleSave,
 }: // toggleOpen,
 Props) => {
   const displayTemplate = () => {
@@ -35,6 +37,7 @@ Props) => {
     if (editing) {
       return (
         <QuizSetupInput
+          _handleSave={_handleSave}
           type={type}
           cancelAddEdit={cancelAddEdit}
           defaultValue={text}

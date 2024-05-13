@@ -5,7 +5,10 @@ import QuestionManger from "../components/quiz/QuestionManger";
 import "./QuizSetup.scss";
 import QuizSetupSidebar from "../components/quiz/QuizSetupSidebar";
 import { IQuizSetupItem, QuizSetupAnswer } from "../models/Quiz";
-import { ISetupItemOptions } from "../components/quiz/QuizSetupInputAdder";
+import {
+  ISaveSetupItemOptions,
+  ISetupItemOptions,
+} from "../components/quiz/QuizSetupInputAdder";
 
 const quizSetupData: IQuizSetupItem[] = [
   {
@@ -51,6 +54,7 @@ const quizSetupData: IQuizSetupItem[] = [
     ],
   },
 ];
+
 const QuizSetup = () => {
   const [quizSetup, setQuizSetup] =
     React.useState<IQuizSetupItem[]>(quizSetupData);
@@ -154,6 +158,10 @@ const QuizSetup = () => {
     }
   };
 
+  const handleSave = (options: ISaveSetupItemOptions) => {
+    console.log(options);
+  };
+
   return (
     <>
       <div id="app-sidebar" className="mobile">
@@ -166,6 +174,7 @@ const QuizSetup = () => {
           {quizSetup.map((item) => (
             <div className="app-quiz-setup-item" key={item.question.id}>
               <QuestionManger
+                _handleSave={handleSave}
                 handleDelete={handleDelete}
                 handleAddSetupInput={handleAddSetupInput}
                 item={item}
