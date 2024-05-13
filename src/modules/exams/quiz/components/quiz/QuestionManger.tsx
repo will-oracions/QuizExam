@@ -5,12 +5,15 @@ import {
   ISaveSetupItemOptions,
   ISetupItemOptions,
 } from "./QuizSetupInputAdder";
+import { IQuizLoadingState } from "../../pages/QuizSetup";
 
 interface Props {
   item: IQuizSetupItem;
   handleAddSetupInput: (option: ISetupItemOptions) => void;
   handleDelete: (row: Omit<ISetupItemOptions, "direction">) => void;
   _handleSave: (options: ISaveSetupItemOptions) => void;
+  _loadingState: IQuizLoadingState;
+  _setLoadingState: (state: IQuizLoadingState) => void;
 }
 
 const QuestionManger = ({
@@ -18,10 +21,14 @@ const QuestionManger = ({
   handleAddSetupInput,
   handleDelete,
   _handleSave,
+  _loadingState,
+  _setLoadingState,
 }: Props) => {
   const displayAnswers = () =>
     item.answers.map((answer) => (
       <QuizSetupItem
+        _loadingState={_loadingState}
+        _setLoadingState={_setLoadingState}
         _handleSave={_handleSave}
         handleDelete={handleDelete}
         questionId={item.question.id}
@@ -34,6 +41,8 @@ const QuestionManger = ({
   return (
     <>
       <QuizSetupItem
+        _loadingState={_loadingState}
+        _setLoadingState={_setLoadingState}
         _handleSave={_handleSave}
         handleDelete={handleDelete}
         handleAddSetupInput={handleAddSetupInput}

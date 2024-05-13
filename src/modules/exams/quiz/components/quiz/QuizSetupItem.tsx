@@ -6,6 +6,7 @@ import QuizSetupInputAdder, {
 } from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
 import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
+import { IQuizLoadingState } from "../../pages/QuizSetup";
 
 interface Props {
   children?: React.ReactNode;
@@ -16,6 +17,8 @@ interface Props {
   handleAddSetupInput: (option: ISetupItemOptions) => void;
   handleDelete: (row: Omit<ISetupItemOptions, "direction">) => void;
   _handleSave: (options: ISaveSetupItemOptions) => void;
+  _loadingState: IQuizLoadingState;
+  _setLoadingState: (state: IQuizLoadingState) => void;
 }
 
 const QuizSetupItem = ({
@@ -27,6 +30,8 @@ const QuizSetupItem = ({
   handleAddSetupInput,
   handleDelete,
   _handleSave,
+  _loadingState,
+  _setLoadingState,
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [editing, setEditing] = React.useState(item.editing);
@@ -70,6 +75,8 @@ const QuizSetupItem = ({
       <div className={"app-quiz-setup-section"}>
         <div onClick={toggleOpen}>
           <QuizSetupItemHeader
+            _loadingState={_loadingState}
+            _setLoadingState={_setLoadingState}
             _handleSave={onSave}
             questionId={questionId}
             type={type}

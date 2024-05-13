@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 
 import QuestionManger from "../components/quiz/QuestionManger";
 import "./QuizSetup.scss";
@@ -55,9 +55,21 @@ const quizSetupData: IQuizSetupItem[] = [
   },
 ];
 
+export interface IQuizLoadingState {
+  loadingSave: boolean;
+  loadingEdit: boolean;
+  loadingDelete: boolean;
+}
+
 const QuizSetup = () => {
   const [quizSetup, setQuizSetup] =
     React.useState<IQuizSetupItem[]>(quizSetupData);
+
+  const [loadingState, setLoadingState] = React.useState<IQuizLoadingState>({
+    loadingSave: false,
+    loadingEdit: false,
+    loadingDelete: false,
+  });
 
   const handleAddSetupInput = (options: ISetupItemOptions) => {
     console.log("options: ", options);
@@ -174,6 +186,8 @@ const QuizSetup = () => {
           {quizSetup.map((item) => (
             <div className="app-quiz-setup-item" key={item.question.id}>
               <QuestionManger
+                _loadingState={loadingState}
+                _setLoadingState={setLoadingState}
                 _handleSave={handleSave}
                 handleDelete={handleDelete}
                 handleAddSetupInput={handleAddSetupInput}
@@ -182,13 +196,13 @@ const QuizSetup = () => {
             </div>
           ))}
 
-          <div>
+          {/* <div>
             <div>
               <Button variant="contained" color="primary">
                 Save
               </Button>
             </div>
-          </div>
+          </div> */}
         </Box>
       </main>
     </>

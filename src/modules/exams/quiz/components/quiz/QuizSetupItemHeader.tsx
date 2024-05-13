@@ -4,6 +4,7 @@ import QuizSetupInput, { SetupInputType } from "./QuizSetupInput";
 import { Quizquestion } from "../../../quizQuestions/models/Quizquestion";
 import { Quizanswer } from "../../../quizAnswers/models/Quizanswer";
 import { ISetupItemOptions } from "./QuizSetupInputAdder";
+import { IQuizLoadingState } from "../../pages/QuizSetup";
 
 interface Props {
   // isOpen: boolean;
@@ -16,6 +17,8 @@ interface Props {
   item: Quizquestion | Quizanswer;
   questionId?: number;
   _handleSave: (textValue: string) => void;
+  _loadingState: IQuizLoadingState;
+  _setLoadingState: (state: IQuizLoadingState) => void;
 }
 const QuizSetupItemHeader = ({
   editing,
@@ -26,6 +29,8 @@ const QuizSetupItemHeader = ({
   item,
   questionId,
   _handleSave,
+  _loadingState,
+  _setLoadingState,
 }: // toggleOpen,
 Props) => {
   const displayTemplate = () => {
@@ -37,6 +42,8 @@ Props) => {
     if (editing) {
       return (
         <QuizSetupInput
+          _loadingState={_loadingState}
+          _setLoadingState={_setLoadingState}
           _handleSave={_handleSave}
           type={type}
           cancelAddEdit={cancelAddEdit}
