@@ -9,6 +9,7 @@ import Quizs from "./modules/exams/quiz/pages/Quizs";
 import Quizquestions from "./modules/exams/quizQuestions/pages/Quizquestions";
 import Quizanswers from "./modules/exams/quizAnswers/pages/Quizanswers";
 import QuizSetup from "./modules/exams/quiz/pages/QuizSetup";
+import Test from "./modules/Test";
 
 const routes: RouteObject[] = [
   {
@@ -52,11 +53,11 @@ const routes: RouteObject[] = [
         path: "quiz-setup",
         element: <QuizSetup />,
       },
-      // {
-      //   path: "test",
-      //   element: <Test />,
-      // },
     ],
+  },
+  {
+    path: "test",
+    element: <Test />,
   },
 ];
 const router = createBrowserRouter(routes);

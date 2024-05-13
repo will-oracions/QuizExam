@@ -1,2 +1,6 @@
 // "@mui/x-data-grid-generator": "^7.3.1",
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+
+https://codesandbox.io/p/sandbox/draggable-list-zfy9p?file=%2Fsrc%2Fstyles.module.css%3A45%2C1
+
+pnpm i @react-spring/web react-use-gesture lodash.clamp lodash-move
