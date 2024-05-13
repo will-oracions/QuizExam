@@ -126,8 +126,32 @@ const QuizSetup = () => {
     }
   };
 
-  const handleDelete = (row: Omit<ISetupItemOptions, "direction">) => {
-    console.log("Delete: ", row);
+  const handleDelete = (options: Omit<ISetupItemOptions, "direction">) => {
+    // console.log("Delete: ", options);
+
+    if (options.type === "QUESTION") {
+      setQuizSetup((prev) =>
+        prev.filter((item) => item.question.id != options.targetId)
+      );
+    } else if (
+      options.type === "ANSWER" &&
+      options.questionId &&
+      options.targetId
+    ) {
+      setQuizSetup((prev) =>
+        prev.filter((item) => {
+          if (item.question.id === options.questionId) {
+            const answers = item.answers.filter(
+              (answer) => answer.id !== options.targetId
+            );
+            item.answers = answers;
+            return { ...item, answers };
+          }
+
+          return item;
+        })
+      );
+    }
   };
 
   return (
