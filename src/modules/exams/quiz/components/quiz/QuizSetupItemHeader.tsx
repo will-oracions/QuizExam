@@ -1,8 +1,9 @@
-import { Edit, Delete, ArrowDropDownCircleRounded } from "@mui/icons-material";
+import { Edit, Delete } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import QuizSetupInput, { SetupInputType } from "./QuizSetupInput";
 import { Quizquestion } from "../../../quizQuestions/models/Quizquestion";
 import { Quizanswer } from "../../../quizAnswers/models/Quizanswer";
+import { ISetupItemOptions } from "./QuizSetupInputAdder";
 
 interface Props {
   // isOpen: boolean;
@@ -10,15 +11,19 @@ interface Props {
   editing?: boolean;
   setEditing: (editing: boolean) => void;
   cancelAddEdit: () => void;
+  handleDelete: (row: Omit<ISetupItemOptions, "direction">) => void;
   type: SetupInputType;
   item: Quizquestion | Quizanswer;
+  questionId?: number;
 }
 const QuizSetupItemHeader = ({
   editing,
   setEditing,
   cancelAddEdit,
+  handleDelete,
   type,
   item,
+  questionId,
 }: // toggleOpen,
 Props) => {
   const displayTemplate = () => {
@@ -49,6 +54,18 @@ Props) => {
     setEditing(!editing);
   };
 
+  const onDelete = (e: any) => {
+    console.log("handle delete: ");
+    e.stopPropagation();
+    const options: Omit<ISetupItemOptions, "direction"> = {
+      type,
+      targetId: item.id,
+      questionId,
+    };
+
+    handleDelete(options);
+  };
+
   return (
     <>
       <div className="app-quiz-question-section-header">
@@ -68,7 +85,7 @@ Props) => {
             {!editing && (
               <div className="app-controls-btn">
                 <Edit onClick={handleEdit} color="primary" />
-                <Delete color="error" />
+                <Delete onClick={onDelete} color="error" />
               </div>
             )}
           </div>

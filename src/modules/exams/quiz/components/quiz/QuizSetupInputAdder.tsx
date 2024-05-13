@@ -3,7 +3,7 @@ import { SetupInputType } from "./QuizSetupInput";
 
 export type QuizInputAddDirection = "BEFORE" | "BELOW";
 
-export interface IAddSetupItemOptions {
+export interface ISetupItemOptions {
   type: SetupInputType;
   direction: QuizInputAddDirection;
   targetId: number;
@@ -15,7 +15,7 @@ interface Props {
   type: SetupInputType;
   itemId: number;
   questionId?: number;
-  handleAddSetupInput: (option: IAddSetupItemOptions) => void;
+  handleAddSetupInput: (option: ISetupItemOptions) => void;
 }
 
 const QuizSetupInputAdder = ({

@@ -12,6 +12,7 @@ export interface Quiz {
 }
 
 export type QuizSetupQuestion = Quizquestion & { editing?: boolean };
+
 export type QuizSetupAnswer = Quizanswer & { editing?: boolean };
 export interface IQuizSetupItem {
   question: QuizSetupQuestion;

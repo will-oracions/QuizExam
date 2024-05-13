@@ -5,7 +5,7 @@ import QuestionManger from "../components/quiz/QuestionManger";
 import "./QuizSetup.scss";
 import QuizSetupSidebar from "../components/quiz/QuizSetupSidebar";
 import { IQuizSetupItem, QuizSetupAnswer } from "../models/Quiz";
-import { IAddSetupItemOptions } from "../components/quiz/QuizSetupInputAdder";
+import { ISetupItemOptions } from "../components/quiz/QuizSetupInputAdder";
 
 const quizSetupData: IQuizSetupItem[] = [
   {
@@ -55,7 +55,7 @@ const QuizSetup = () => {
   const [quizSetup, setQuizSetup] =
     React.useState<IQuizSetupItem[]>(quizSetupData);
 
-  const handleAddSetupInput = (options: IAddSetupItemOptions) => {
+  const handleAddSetupInput = (options: ISetupItemOptions) => {
     console.log("options: ", options);
     if (options.type === "QUESTION") {
       const questionIndex = quizSetup.findIndex(
@@ -126,6 +126,10 @@ const QuizSetup = () => {
     }
   };
 
+  const handleDelete = (row: Omit<ISetupItemOptions, "direction">) => {
+    console.log("Delete: ", row);
+  };
+
   return (
     <>
       <div id="app-sidebar" className="mobile">
@@ -135,9 +139,10 @@ const QuizSetup = () => {
         <Box className="app-quiz-setup">
           <h3>Quiz Setup</h3>
 
-          {quizSetup.map((item, i) => (
+          {quizSetup.map((item) => (
             <div className="app-quiz-setup-item" key={item.question.id}>
               <QuestionManger
+                handleDelete={handleDelete}
                 handleAddSetupInput={handleAddSetupInput}
                 item={item}
               />

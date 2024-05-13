@@ -1,17 +1,19 @@
 import { Box } from "@mui/material";
 import QuizSetupItem from "./QuizSetupItem";
 import { IQuizSetupItem } from "../../models/Quiz";
-import { IAddSetupItemOptions } from "./QuizSetupInputAdder";
+import { ISetupItemOptions } from "./QuizSetupInputAdder";
 
 interface Props {
   item: IQuizSetupItem;
-  handleAddSetupInput: (option: IAddSetupItemOptions) => void;
+  handleAddSetupInput: (option: ISetupItemOptions) => void;
+  handleDelete: (row: Omit<ISetupItemOptions, "direction">) => void;
 }
 
-const QuestionManger = ({ item, handleAddSetupInput }: Props) => {
+const QuestionManger = ({ item, handleAddSetupInput, handleDelete }: Props) => {
   const displayAnswers = () =>
     item.answers.map((answer) => (
       <QuizSetupItem
+        handleDelete={handleDelete}
         questionId={item.question.id}
         handleAddSetupInput={handleAddSetupInput}
         key={answer.id}
@@ -22,6 +24,7 @@ const QuestionManger = ({ item, handleAddSetupInput }: Props) => {
   return (
     <>
       <QuizSetupItem
+        handleDelete={handleDelete}
         handleAddSetupInput={handleAddSetupInput}
         item={item.question}
         type="QUESTION"

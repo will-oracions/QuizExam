@@ -1,8 +1,6 @@
 import React from "react";
 import QuizSetupItemHeader from "./QuizSetupItemHeader";
-import QuizSetupInputAdder, {
-  IAddSetupItemOptions,
-} from "./QuizSetupInputAdder";
+import QuizSetupInputAdder, { ISetupItemOptions } from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
 import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
 
@@ -12,7 +10,8 @@ interface Props {
   type: SetupInputType;
   item: QuizSetupQuestion | QuizSetupAnswer;
   questionId?: number;
-  handleAddSetupInput: (option: IAddSetupItemOptions) => void;
+  handleAddSetupInput: (option: ISetupItemOptions) => void;
+  handleDelete: (row: Omit<ISetupItemOptions, "direction">) => void;
 }
 
 const QuizSetupItem = ({
@@ -22,6 +21,7 @@ const QuizSetupItem = ({
   item,
   questionId,
   handleAddSetupInput,
+  handleDelete,
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [editing, setEditing] = React.useState(item.editing);
@@ -46,19 +46,21 @@ const QuizSetupItem = ({
         questionId={questionId}
         itemId={item.id}
         type={type}
-        handleAddSetupInput={handleAddSetupInput}
         direction="BEFORE"
+        handleAddSetupInput={handleAddSetupInput}
       />
 
       <div className={"app-quiz-setup-section"}>
         <div onClick={toggleOpen}>
           <QuizSetupItemHeader
+            questionId={questionId}
             type={type}
             item={item}
             // toggleOpen={() => setIsOpen(!isOpen)}
             cancelAddEdit={handleCancel}
             editing={editing}
             setEditing={handleEditing}
+            handleDelete={handleDelete}
           />
         </div>
 
