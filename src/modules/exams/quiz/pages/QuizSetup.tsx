@@ -82,7 +82,7 @@ const QuizSetup = () => {
         const newQuizSetupItem: IQuizSetupItem = {
           question: {
             id: new Date().getTime(),
-            questionText: "test",
+            questionText: "",
             editing: true,
           },
           answers: [],
@@ -112,7 +112,7 @@ const QuizSetup = () => {
       if (answerIndex > -1) {
         const newAnswerSetupItem: QuizSetupAnswer = {
           id: new Date().getTime(),
-          answerText: "answer test",
+          answerText: "",
           editing: true,
         };
 
@@ -172,6 +172,47 @@ const QuizSetup = () => {
 
   const handleSave = (options: ISaveSetupItemOptions) => {
     console.log(options);
+    if (options.type === "QUESTION") {
+      setQuizSetup((prev) =>
+        prev.map((item) => {
+          if (item.question.id === options.targetId) {
+            return {
+              ...item,
+              question: {
+                ...item.question,
+                questionText: options.content,
+                editing: false,
+              },
+            };
+          }
+
+          return item;
+        })
+      );
+    } else if (
+      options.type === "ANSWER" &&
+      options.questionId &&
+      options.targetId
+    ) {
+      setQuizSetup((prev) =>
+        prev.map((item) => {
+          if (item.question.id === options.questionId) {
+            item.answers = item.answers.map((answer) => {
+              if (answer.id === options.targetId) {
+                return {
+                  ...answer,
+                  answerText: options.content,
+                  editing: false,
+                };
+              }
+              return answer;
+            });
+          }
+
+          return item;
+        })
+      );
+    }
   };
 
   return (
@@ -179,6 +220,7 @@ const QuizSetup = () => {
       <div id="app-sidebar" className="mobile">
         <QuizSetupSidebar />
       </div>
+
       <main id="app-main">
         <Box className="app-quiz-setup">
           <h3>Quiz Setup</h3>

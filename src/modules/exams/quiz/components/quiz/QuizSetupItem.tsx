@@ -33,7 +33,7 @@ const QuizSetupItem = ({
   _loadingState,
   _setLoadingState,
 }: Props) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(item.editing);
   const [editing, setEditing] = React.useState(item.editing);
 
   const onSave = (textValue: string) => {
@@ -46,6 +46,8 @@ const QuizSetupItem = ({
     };
 
     _handleSave(options);
+    // setEditing(false);
+    // setIsOpen(false);
   };
 
   const handleEditing = (value: boolean) => {
