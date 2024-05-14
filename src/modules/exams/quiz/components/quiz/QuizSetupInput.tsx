@@ -18,8 +18,8 @@ const QuizSetupInput = ({
   type,
   _handleSave,
   _loadingState,
-  _setLoadingState,
-}: Props) => {
+}: // _setLoadingState,
+Props) => {
   const [textValue, setTextValue] = React.useState<string>(defaultValue || "");
 
   const handleCancel = (e: any) => {

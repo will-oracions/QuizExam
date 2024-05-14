@@ -1,4 +1,4 @@
-import { Man, People, Woman } from "@mui/icons-material";
+import { People } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 import React from "react";
@@ -82,30 +82,30 @@ const QuizSidebar = ({
    * @returns template to render to quiz level filters list
    * with style and translation
    */
-  const getGenderFilterLabel = (value: string) => {
-    switch (value) {
-      case String(QuizLevel.L1):
-        return (
-          <>
-            <Man /> L1
-          </>
-        );
+  // const getGenderFilterLabel = (value: string) => {
+  //   switch (value) {
+  //     case String(QuizLevel.L1):
+  //       return (
+  //         <>
+  //           <Man /> L1
+  //         </>
+  //       );
 
-      case String(QuizLevel.L2):
-        return (
-          <>
-            <Woman /> L2
-          </>
-        );
+  //     case String(QuizLevel.L2):
+  //       return (
+  //         <>
+  //           <Woman /> L2
+  //         </>
+  //       );
 
-      case String(QuizLevel.L3):
-        return (
-          <>
-            <Woman /> L2
-          </>
-        );
-    }
-  };
+  //     case String(QuizLevel.L3):
+  //       return (
+  //         <>
+  //           <Woman /> L2
+  //         </>
+  //       );
+  //   }
+  // };
 
   /**
    * Display the list of Quiz filters list

@@ -1,12 +1,4 @@
-import {
-  InterestsRounded,
-  Man,
-  People,
-  QuestionAnswer,
-  Woman,
-} from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
-import { QuizFilterEnum, QuizLevel } from "../../models/Quiz";
+import { InterestsRounded, QuestionAnswer } from "@mui/icons-material";
 import { Box } from "@mui/material";
 
 interface Props {
@@ -28,7 +20,7 @@ const QuizSetupSidebar = ({}: /**
  */
 // setQuizFilter,
 Props) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   // const { closeSidebar } = useOutletContext<IOutletContext>();
 
@@ -41,35 +33,35 @@ Props) => {
    * @returns template to render to quiz filters list
    * with style and translation
    */
-  const getMainFilterLabel = (value: string) => {
-    switch (value) {
-      case String(QuizFilterEnum.ALL):
-        return (
-          <>
-            <People /> <span>{t("all")}</span>
-          </>
-        );
-      // case String(QuizFilterEnum.ALL_DONE):
-      //   return (
-      //     <>
-      //       <EventAvailable /> <span>{t("allTaskDone")}</span>
-      //     </>
-      //   );
-      // case String(QuizFilterEnum.DONT_HAVE_TASK):
-      //   return (
-      //     <>
-      //       <ErrorOutline /> {t("noTaskAssigned")}
-      //     </>
-      //   );
+  // const getMainFilterLabel = (value: string) => {
+  //   switch (value) {
+  //     case String(QuizFilterEnum.ALL):
+  //       return (
+  //         <>
+  //           <People /> <span>{t("all")}</span>
+  //         </>
+  //       );
+  //     // case String(QuizFilterEnum.ALL_DONE):
+  //     //   return (
+  //     //     <>
+  //     //       <EventAvailable /> <span>{t("allTaskDone")}</span>
+  //     //     </>
+  //     //   );
+  //     // case String(QuizFilterEnum.DONT_HAVE_TASK):
+  //     //   return (
+  //     //     <>
+  //     //       <ErrorOutline /> {t("noTaskAssigned")}
+  //     //     </>
+  //     //   );
 
-      // case String(QuizFilterEnum.NOTHING_DONE):
-      //   return (
-      //     <>
-      //       <Warning /> {t("NoTaskDone")}
-      //     </>
-      //   );
-    }
-  };
+  //     // case String(QuizFilterEnum.NOTHING_DONE):
+  //     //   return (
+  //     //     <>
+  //     //       <Warning /> {t("NoTaskDone")}
+  //     //     </>
+  //     //   );
+  //   }
+  // };
 
   /**
    * Convert quiz level filter to appropriate template
@@ -78,30 +70,30 @@ Props) => {
    * @returns template to render to quiz level filters list
    * with style and translation
    */
-  const getGenderFilterLabel = (value: string) => {
-    switch (value) {
-      case String(QuizLevel.L1):
-        return (
-          <>
-            <Man /> L1
-          </>
-        );
+  // const getGenderFilterLabel = (value: string) => {
+  //   switch (value) {
+  //     case String(QuizLevel.L1):
+  //       return (
+  //         <>
+  //           <Man /> L1
+  //         </>
+  //       );
 
-      case String(QuizLevel.L2):
-        return (
-          <>
-            <Woman /> L2
-          </>
-        );
+  //     case String(QuizLevel.L2):
+  //       return (
+  //         <>
+  //           <Woman /> L2
+  //         </>
+  //       );
 
-      case String(QuizLevel.L3):
-        return (
-          <>
-            <Woman /> L2
-          </>
-        );
-    }
-  };
+  //     case String(QuizLevel.L3):
+  //       return (
+  //         <>
+  //           <Woman /> L2
+  //         </>
+  //       );
+  //   }
+  // };
 
   /**
    * Display the list of Quiz filters list
@@ -144,37 +136,37 @@ Props) => {
    * @returns Template to render quiz level filters in the list
    * with style and translation
    */
-  const displayGenderFilters = () => {
-    // return Object.values(QuizLevel).map((value, i) => {
-    //   return (
-    //     <div
-    //       onClick={() =>
-    //         setQuizFilter({
-    //           ...quizFilter,
-    //           level: quizFilter.level === value ? "" : value,
-    //         })
-    //       }
-    //       key={i}
-    //       className={
-    //         "sidebar-tasks-list-item" +
-    //         (quizFilter.level === value ? " active" : "")
-    //       }>
-    //       <span>{getGenderFilterLabel(value)}</span>
-    //     </div>
-    //   );
-    // });
+  // const displayGenderFilters = () => {
+  // return Object.values(QuizLevel).map((value, i) => {
+  //   return (
+  //     <div
+  //       onClick={() =>
+  //         setQuizFilter({
+  //           ...quizFilter,
+  //           level: quizFilter.level === value ? "" : value,
+  //         })
+  //       }
+  //       key={i}
+  //       className={
+  //         "sidebar-tasks-list-item" +
+  //         (quizFilter.level === value ? " active" : "")
+  //       }>
+  //       <span>{getGenderFilterLabel(value)}</span>
+  //     </div>
+  //   );
+  // });
 
-    return (
-      <>
-        <div className={"sidebar-tasks-list-item"}>
-          <span>Quiz introduction</span>
-        </div>
-        <div className={"sidebar-tasks-list-item"}>
-          <span>Setup Questions</span>
-        </div>
-      </>
-    );
-  };
+  //   return (
+  //     <>
+  //       <div className={"sidebar-tasks-list-item"}>
+  //         <span>Quiz introduction</span>
+  //       </div>
+  //       <div className={"sidebar-tasks-list-item"}>
+  //         <span>Setup Questions</span>
+  //       </div>
+  //     </>
+  //   );
+  // };
 
   return (
     <div>
