@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import QuizSetupItem from "./QuizSetupItem";
 import { IQuizSetupItem } from "../../models/Quiz";
-import {
+import QuizSetupInputAdder, {
   ISaveSetupItemOptions,
   ISetupItemOptions,
   ISetupItemStateOptions,
@@ -58,6 +58,17 @@ const QuestionManger = ({
           <Box className="app-quiz-answers-box-title">
             Réponses à la question
           </Box>
+
+          {item.answers.length === 0 && (
+            <QuizSetupInputAdder
+              direction="NONE"
+              handleAddSetupInput={handleAddSetupInput}
+              type="ANSWER"
+              itemId={-1}
+              questionId={item.question.id}
+            />
+          )}
+
           <Box>
             {displayAnswers()}
             {/* <QuizSetupItem type="ANSWER" />

@@ -5,7 +5,7 @@ import QuestionManger from "../components/quiz/QuestionManger";
 import "./QuizSetup.scss";
 import QuizSetupSidebar from "../components/quiz/QuizSetupSidebar";
 import { IQuizSetupItem, QuizSetupAnswer } from "../models/Quiz";
-import {
+import QuizSetupInputAdder, {
   ISaveSetupItemOptions,
   ISetupItemOptions,
   ISetupItemStateOptions,
@@ -76,7 +76,25 @@ const QuizSetup = () => {
 
   const handleAddSetupInput = (options: ISetupItemOptions) => {
     console.log("options: ", options);
+
     if (options.type === "QUESTION") {
+      if (options.targetId === -1) {
+        // Add the first Question
+        setQuizSetup([
+          {
+            question: {
+              id: new Date().getTime(),
+              questionText: "",
+              editing: true,
+              isOpen: false,
+            },
+            answers: [],
+          },
+        ]);
+
+        return;
+      }
+
       const questionIndex = quizSetup.findIndex(
         (q) => q.question.id === options.targetId
       );
@@ -104,6 +122,25 @@ const QuizSetup = () => {
         setQuizSetup(q);
       }
     } else if (options.type === "ANSWER" && options.questionId) {
+      if (options.targetId === -1) {
+        setQuizSetup((prev) =>
+          prev.map((item) => {
+            if (item.question.id === options.questionId) {
+              item.answers = [
+                {
+                  id: new Date().getTime(),
+                  editing: true,
+                  answerText: "",
+                },
+              ];
+              return item;
+            }
+
+            return item;
+          })
+        );
+      }
+
       const questionIndex = quizSetup.findIndex(
         (q) => q.question.id === options.questionId
       );
@@ -185,7 +222,7 @@ const QuizSetup = () => {
                 ...item.question,
                 questionText: options.content,
                 editing: false,
-                isOpen: false,
+                isOpen: true,
               },
             };
           }
@@ -272,20 +309,30 @@ const QuizSetup = () => {
         <Box className="app-quiz-setup">
           <h3>Quiz Setup</h3>
 
-          {quizSetup.map((item) => (
-            <div className="app-quiz-setup-item" key={item.question.id}>
-              <QuestionManger
-                _handleSetupItemStateChange={handleSetupItemStateChange}
-                _loadingState={loadingState}
-                _setLoadingState={setLoadingState}
-                _handleSave={handleSave}
-                handleDelete={handleDelete}
-                handleAddSetupInput={handleAddSetupInput}
-                item={item}
-              />
-            </div>
-          ))}
+          {quizSetup.length === 0 && (
+            <QuizSetupInputAdder
+              direction="NONE"
+              handleAddSetupInput={handleAddSetupInput}
+              type="QUESTION"
+              itemId={-1}
+            />
+          )}
 
+          <div>
+            {quizSetup.map((item) => (
+              <div className="app-quiz-setup-item" key={item.question.id}>
+                <QuestionManger
+                  _handleSetupItemStateChange={handleSetupItemStateChange}
+                  _loadingState={loadingState}
+                  _setLoadingState={setLoadingState}
+                  _handleSave={handleSave}
+                  handleDelete={handleDelete}
+                  handleAddSetupInput={handleAddSetupInput}
+                  item={item}
+                />
+              </div>
+            ))}
+          </div>
           {/* <div>
             <div>
               <Button variant="contained" color="primary">

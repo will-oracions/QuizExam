@@ -1,7 +1,7 @@
 import { AddCircle } from "@mui/icons-material";
 import { SetupInputType } from "./QuizSetupInput";
 
-export type QuizInputAddDirection = "BEFORE" | "BELOW";
+export type QuizInputAddDirection = "BEFORE" | "BELOW" | "NONE";
 
 export interface ISetupItemOptions {
   type: SetupInputType;
@@ -48,13 +48,32 @@ const QuizSetupInputAdder = ({
           {template} <span className="adder-input-label">Add before</span>
         </>
       );
+    } else if (direction && direction === "BELOW") {
+      return (
+        <>
+          {template} <span className="adder-input-label">Add below</span>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="no-quiz-item-wrapper">
+            <div className="no-item-controls">
+              {template} <span className="adder-input-label">Add</span>
+            </div>
+            <div className="no-quiz-item">
+              No {type === "QUESTION" ? "questions" : "answers"}
+            </div>
+          </div>
+        </>
+      );
     }
+  };
 
-    return (
-      <>
-        {template} <span className="adder-input-label">Add below</span>
-      </>
-    );
+  const getAdderWrapperClass = () => {
+    if (direction === "BELOW") return " below";
+    if (direction === "NONE") return " none";
+    return "";
   };
 
   return (
@@ -63,9 +82,7 @@ const QuizSetupInputAdder = ({
         onClick={() =>
           handleAddSetupInput({ direction, type, targetId: itemId, questionId })
         }
-        className={
-          "app-quiz-input-adder" + (direction === "BELOW" ? " below" : "")
-        }>
+        className={"app-quiz-input-adder" + getAdderWrapperClass()}>
         {displayBtnTemplate()}
       </div>
     </>
