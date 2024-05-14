@@ -1,4 +1,4 @@
-# WizeTodoList
+# quizexam
 
 ![Capture d'écran](screenshoot.png)
 
@@ -13,9 +13,9 @@ Ce guide contient les fichiers nécessaires pour exécuter une application React
 
 ## Utilisation de l'image Docker depuis Docker Hub
 
-Lien vers l'image [https://hub.docker.com/r/oracions/wizetodolist](https://hub.docker.com/r/oracions/wizetodolist)
+Lien vers l'image [https://hub.docker.com/r/oracions/quizexam](https://hub.docker.com/r/oracions/quizexam)
 
-Vous pouvez exécuter l'image Docker `oracions/wizetodolist` directement depuis Docker Hub en suivant ces étapes simples :
+Vous pouvez exécuter l'image Docker `oracions/quizexam` directement depuis Docker Hub en suivant ces étapes simples :
 
 1. Assurez-vous d'avoir Docker installé sur votre machine. Si ce n'est pas le cas, vous pouvez le télécharger et l'installer à partir du [site officiel de Docker](https://www.docker.com/get-started).
 
@@ -24,13 +24,13 @@ Vous pouvez exécuter l'image Docker `oracions/wizetodolist` directement depuis 
 3. Exécutez la commande suivante pour tirer (pull) l'image Docker depuis Docker Hub :
 
 ```bash
-    docker pull oracions/wizetodolist
+    docker pull oracions/quizexam
 ```
 
 4. Une fois l'image téléchargée, vous pouvez exécuter un conteneur à partir de cette image en utilisant la commande suivante :
 
 ```bash
-    docker run -p 8080:80 oracions/wizetodolist
+    docker run -p 8080:80 oracions/quizexam
 ```
 5. L'application est accessible sur le port 8080 en locale.
 
@@ -52,7 +52,7 @@ Assurez-vous également d'avoir Docker et Docker Compose installés sur votre sy
 Clonez ce dépôt sur votre machine locale en utilisant la commande suivante :
 
 ```bash
-git clone https://github.com/will-oracions/wizeTodoList
+git clone https://github.com/will-oracions/quizexam
 ```
 
 ### Lancement de l'application
