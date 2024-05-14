@@ -11,7 +11,10 @@ export interface Quiz {
   difficulty: QuizDifficulty;
 }
 
-export type QuizSetupQuestion = Quizquestion & { editing?: boolean };
+export type QuizSetupQuestion = Quizquestion & {
+  editing?: boolean;
+  isOpen?: boolean;
+};
 
 export type QuizSetupAnswer = Quizanswer & { editing?: boolean };
 export interface IQuizSetupItem {

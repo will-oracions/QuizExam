@@ -119,12 +119,18 @@ Props) => {
       <>
         <Box className={"sidebar-tasks-list-item"}>
           <span>
-            <InterestsRounded /> Quiz introduction
+            <InterestsRounded /> Information
           </span>
         </Box>
         <Box className={"sidebar-tasks-list-item"}>
           <span>
-            <QuestionAnswer /> Setup Questions
+            <QuestionAnswer /> Questions
+          </span>
+        </Box>
+
+        <Box className={"sidebar-tasks-list-item"}>
+          <span>
+            <QuestionAnswer /> Preview
           </span>
         </Box>
       </>
@@ -184,7 +190,7 @@ Props) => {
       </div> */}
 
       <Box mt={5}></Box>
-      <div className="sidebar-tasks-list-label">Configuration</div>
+      <div className="sidebar-tasks-list-label">Quiz Configuration</div>
       <div className="sidebar-tasks-list">{displayMainFilters()}</div>
 
       {/* Lables Filter */}

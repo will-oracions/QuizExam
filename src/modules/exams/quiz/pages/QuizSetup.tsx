@@ -8,6 +8,7 @@ import { IQuizSetupItem, QuizSetupAnswer } from "../models/Quiz";
 import {
   ISaveSetupItemOptions,
   ISetupItemOptions,
+  ISetupItemStateOptions,
 } from "../components/quiz/QuizSetupInputAdder";
 
 const quizSetupData: IQuizSetupItem[] = [
@@ -15,6 +16,8 @@ const quizSetupData: IQuizSetupItem[] = [
     question: {
       id: 1,
       questionText: "Quel est votre nom ?",
+      // isOpen: true,
+      // editing: true,
     },
     answers: [
       {
@@ -182,6 +185,7 @@ const QuizSetup = () => {
                 ...item.question,
                 questionText: options.content,
                 editing: false,
+                isOpen: false,
               },
             };
           }
@@ -215,6 +219,49 @@ const QuizSetup = () => {
     }
   };
 
+  const handleSetupItemStateChange = (options: ISetupItemStateOptions) => {
+    console.log("options: ", options);
+    if (options.type === "QUESTION" && options.targetId) {
+      setQuizSetup((prev) =>
+        prev.map((item: IQuizSetupItem) => {
+          if (item.question.id === options.targetId) {
+            item.question.isOpen = options.isOpen;
+            item.question.editing = options.editing;
+            return item;
+          }
+
+          item.question.editing = false;
+
+          return item;
+        })
+      );
+    } else if (
+      options.type === "ANSWER" &&
+      options.questionId &&
+      options.targetId
+    ) {
+      setQuizSetup((prev) =>
+        prev.map((item) => {
+          if (item.question.id === options.questionId) {
+            item.answers = item.answers.map((answer) => {
+              if (answer.id === options.targetId) {
+                answer.editing = options.editing;
+                return answer;
+              }
+
+              answer.editing = false;
+              return answer;
+            });
+
+            return item;
+          }
+
+          return item;
+        })
+      );
+    }
+  };
+
   return (
     <>
       <div id="app-sidebar" className="mobile">
@@ -228,6 +275,7 @@ const QuizSetup = () => {
           {quizSetup.map((item) => (
             <div className="app-quiz-setup-item" key={item.question.id}>
               <QuestionManger
+                _handleSetupItemStateChange={handleSetupItemStateChange}
                 _loadingState={loadingState}
                 _setLoadingState={setLoadingState}
                 _handleSave={handleSave}

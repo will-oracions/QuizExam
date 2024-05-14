@@ -3,6 +3,7 @@ import QuizSetupItemHeader from "./QuizSetupItemHeader";
 import QuizSetupInputAdder, {
   ISaveSetupItemOptions,
   ISetupItemOptions,
+  ISetupItemStateOptions,
 } from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
 import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
@@ -19,6 +20,7 @@ interface Props {
   _handleSave: (options: ISaveSetupItemOptions) => void;
   _loadingState: IQuizLoadingState;
   _setLoadingState: (state: IQuizLoadingState) => void;
+  _handleSetupItemStateChange: (options: ISetupItemStateOptions) => void;
 }
 
 const QuizSetupItem = ({
@@ -32,9 +34,10 @@ const QuizSetupItem = ({
   _handleSave,
   _loadingState,
   _setLoadingState,
+  _handleSetupItemStateChange,
 }: Props) => {
-  const [isOpen, setIsOpen] = React.useState(item.editing);
-  const [editing, setEditing] = React.useState(item.editing);
+  // const [isOpen, setIsOpen] = React.useState(item.editing);
+  // const [editing, setEditing] = React.useState(item.editing);
 
   const onSave = (textValue: string) => {
     console.log("Text value: ", textValue);
@@ -51,17 +54,47 @@ const QuizSetupItem = ({
   };
 
   const handleEditing = (value: boolean) => {
-    setIsOpen(false);
-    setEditing(value);
+    // setIsOpen(false);
+    // setEditing(value);
+    const options: ISetupItemStateOptions = {
+      targetId: item.id,
+      type,
+      editing: value,
+      isOpen: false,
+      questionId,
+    };
+
+    _handleSetupItemStateChange(options);
   };
 
   const handleCancel = () => {
-    setEditing(false);
-    setIsOpen(false);
+    // setEditing(false);
+    // setIsOpen(false);
+
+    const options: ISetupItemStateOptions = {
+      targetId: item.id,
+      type,
+      editing: false,
+      isOpen: false,
+      questionId,
+    };
+
+    _handleSetupItemStateChange(options);
   };
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    // setIsOpen(!isOpen);
+    if (item.editing) return;
+
+    const options: ISetupItemStateOptions = {
+      targetId: item.id,
+      type,
+      editing: false,
+      isOpen: !(item as QuizSetupQuestion).isOpen,
+      questionId,
+    };
+
+    _handleSetupItemStateChange(options);
   };
 
   return (
@@ -85,17 +118,19 @@ const QuizSetupItem = ({
             item={item}
             // toggleOpen={() => setIsOpen(!isOpen)}
             cancelAddEdit={handleCancel}
-            editing={editing}
+            editing={item.editing}
             setEditing={handleEditing}
             handleDelete={handleDelete}
           />
         </div>
 
-        {expandable && (
+        {!item.editing && expandable && (
           <div
             className={
               "app-quiz-question-section-content" +
-              (!editing && isOpen ? " opened" : "")
+              (!item.editing && (item as QuizSetupQuestion).isOpen
+                ? " opened"
+                : "")
             }>
             {/* <Box>
               <Box className="app-quiz-question-text">

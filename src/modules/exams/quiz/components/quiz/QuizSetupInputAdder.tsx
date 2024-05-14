@@ -17,6 +17,14 @@ export interface ISaveSetupItemOptions {
   questionId?: number;
 }
 
+export interface ISetupItemStateOptions {
+  type: SetupInputType;
+  targetId: number;
+  editing?: boolean;
+  isOpen?: boolean;
+  questionId?: number;
+}
+
 interface Props {
   direction: QuizInputAddDirection;
   type: SetupInputType;
