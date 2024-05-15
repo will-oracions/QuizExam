@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, TextField, Button, CircularProgress } from "@mui/material";
-import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetup";
+import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetupQuestions";
 
 export type SetupInputType = "QUESTION" | "ANSWER";
 

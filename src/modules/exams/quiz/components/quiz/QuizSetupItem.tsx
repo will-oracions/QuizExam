@@ -7,7 +7,7 @@ import QuizSetupInputAdder, {
 } from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
 import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
-import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetup";
+import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetupQuestions";
 
 interface Props {
   children?: React.ReactNode;
@@ -40,7 +40,7 @@ const QuizSetupItem = ({
   // const [editing, setEditing] = React.useState(item.editing);
 
   const onSave = (textValue: string) => {
-    console.log("Text value: ", textValue);
+    // console.log("Text value: ", textValue);
     const options: ISaveSetupItemOptions = {
       content: textValue,
       targetId: item.id,

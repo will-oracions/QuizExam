@@ -1,14 +1,17 @@
+import { Box, Link } from "@mui/material";
 import React from "react";
-import { Box } from "@mui/material";
 
 import QuestionManger from "../../components/quiz/QuestionManger";
-import "./QuizSetup.scss";
-import { IQuizSetupItem, QuizSetupAnswer } from "../../models/Quiz";
 import QuizSetupInputAdder, {
   ISaveSetupItemOptions,
   ISetupItemOptions,
   ISetupItemStateOptions,
 } from "../../components/quiz/QuizSetupInputAdder";
+import { IQuizSetupItem, QuizSetupAnswer } from "../../models/Quiz";
+import "./QuizSetup.scss";
+import QuizSetupNavItem from "../../components/quiz/QuizSetupNavItem";
+import { useOutletContext } from "react-router-dom";
+import { IQuizSetupOutletContext } from "./QuizSetup";
 
 const quizSetupData: IQuizSetupItem[] = [
   {
@@ -64,6 +67,7 @@ export interface IQuizLoadingState {
 }
 
 const QuizSetupQuestions = () => {
+  const { quiz } = useOutletContext<IQuizSetupOutletContext>();
   const [quizSetup, setQuizSetup] =
     React.useState<IQuizSetupItem[]>(quizSetupData);
 
@@ -298,10 +302,25 @@ const QuizSetupQuestions = () => {
     }
   };
 
+  const displayNavLink = () => (
+    <QuizSetupNavItem
+      leftLink={{
+        label: "Informations",
+        url: `/quiz-setup/${quiz.id}/informations`,
+      }}
+      rightLink={{
+        label: "Preview",
+        url: `/quiz-setup/${quiz.id}/preview`,
+      }}
+    />
+  );
+
   return (
     <>
       <Box className="app-quiz-setup">
-        <h3>Quiz Setup</h3>
+        <h3>Quiz Setup Questions</h3>
+
+        <Box mb={4}>{displayNavLink()}</Box>
 
         {quizSetup.length === 0 && (
           <QuizSetupInputAdder
@@ -327,13 +346,8 @@ const QuizSetupQuestions = () => {
             </div>
           ))}
         </div>
-        {/* <div>
-            <div>
-              <Button variant="contained" color="primary">
-                Save
-              </Button>
-            </div>
-          </div> */}
+
+        <Box mt={4}>{displayNavLink()}</Box>
       </Box>
     </>
   );

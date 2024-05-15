@@ -6,7 +6,7 @@ import QuizSetupInputAdder, {
   ISetupItemOptions,
   ISetupItemStateOptions,
 } from "./QuizSetupInputAdder";
-import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetup";
+import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetupQuestions";
 
 interface Props {
   item: IQuizSetupItem;

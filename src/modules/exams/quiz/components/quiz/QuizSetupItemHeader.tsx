@@ -4,7 +4,7 @@ import QuizSetupInput, { SetupInputType } from "./QuizSetupInput";
 import { Quizquestion } from "../../../quizQuestions/models/Quizquestion";
 import { Quizanswer } from "../../../quizAnswers/models/Quizanswer";
 import { ISetupItemOptions } from "./QuizSetupInputAdder";
-import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetup";
+import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetupQuestions";
 
 interface Props {
   // isOpen: boolean;
