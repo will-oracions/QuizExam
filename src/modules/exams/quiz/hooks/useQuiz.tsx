@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Quiz } from "../models/Quiz";
 
@@ -7,10 +7,10 @@ const getQuiz = async (id: number) => {
   return res.data;
 };
 
-const useQuiz = () => {
-  return useMutation({
-    // mutationKey: ["quiz"],
-    mutationFn: getQuiz,
+const useQuiz = (id: number) => {
+  return useQuery({
+    queryKey: [`quiz-${id}`],
+    queryFn: () => getQuiz(id),
     retry: 3,
   });
 };

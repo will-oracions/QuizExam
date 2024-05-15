@@ -413,6 +413,13 @@ axiosMock.onPost("/quizs").reply(async (config) => {
   return [201, quiz];
 });
 
+axiosMock.onGet(/\/quizs\/\d+/).reply((config) => {
+  const quizId = parseInt(config.url!.split("/").pop()!);
+  const data = quizs.find((item) => item.id === quizId);
+  if (!data) return [404, null];
+  return [200, toQuizModel(data)];
+});
+
 axiosMock.onPut(/\/quizs\/\d+/).reply(async (config) => {
   const quizId = parseInt(config.url!.split("/").pop()!);
   const updatedQuiz: Quiz = JSON.parse(config.data);

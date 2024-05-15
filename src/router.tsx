@@ -8,8 +8,11 @@ import Courses from "./modules/courses/pages/Courses";
 import Quizs from "./modules/exams/quiz/pages/Quizs";
 import Quizquestions from "./modules/exams/quizQuestions/pages/Quizquestions";
 import Quizanswers from "./modules/exams/quizAnswers/pages/Quizanswers";
-import QuizSetup from "./modules/exams/quiz/pages/QuizSetup";
+import QuizSetup from "./modules/exams/quiz/pages/quizSetup/QuizSetup";
 import Test from "./modules/Test";
+import QuizSetupQuestions from "./modules/exams/quiz/pages/quizSetup/QuizSetupQuestions";
+import QuizSetupInformations from "./modules/exams/quiz/pages/quizSetup/QuizSetupInformations";
+import QuizSetupPreview from "./modules/exams/quiz/pages/quizSetup/QuizSetupPreview";
 
 const routes: RouteObject[] = [
   {
@@ -52,6 +55,20 @@ const routes: RouteObject[] = [
       {
         path: "quiz-setup/:id",
         element: <QuizSetup />,
+        children: [
+          {
+            path: "questions",
+            element: <QuizSetupQuestions />,
+          },
+          {
+            path: "informations",
+            element: <QuizSetupInformations />,
+          },
+          {
+            path: "preview",
+            element: <QuizSetupPreview />,
+          },
+        ],
       },
     ],
   },

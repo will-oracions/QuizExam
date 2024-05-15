@@ -1,15 +1,14 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-import QuestionManger from "../components/quiz/QuestionManger";
+import QuestionManger from "../../components/quiz/QuestionManger";
 import "./QuizSetup.scss";
-import QuizSetupSidebar from "../components/quiz/QuizSetupSidebar";
-import { IQuizSetupItem, QuizSetupAnswer } from "../models/Quiz";
+import { IQuizSetupItem, QuizSetupAnswer } from "../../models/Quiz";
 import QuizSetupInputAdder, {
   ISaveSetupItemOptions,
   ISetupItemOptions,
   ISetupItemStateOptions,
-} from "../components/quiz/QuizSetupInputAdder";
+} from "../../components/quiz/QuizSetupInputAdder";
 
 const quizSetupData: IQuizSetupItem[] = [
   {
@@ -64,7 +63,7 @@ export interface IQuizLoadingState {
   loadingDelete: boolean;
 }
 
-const QuizSetup = () => {
+const QuizSetupQuestions = () => {
   const [quizSetup, setQuizSetup] =
     React.useState<IQuizSetupItem[]>(quizSetupData);
 
@@ -301,49 +300,43 @@ const QuizSetup = () => {
 
   return (
     <>
-      <div id="app-sidebar" className="mobile">
-        <QuizSetupSidebar />
-      </div>
+      <Box className="app-quiz-setup">
+        <h3>Quiz Setup</h3>
 
-      <main id="app-main">
-        <Box className="app-quiz-setup">
-          <h3>Quiz Setup</h3>
+        {quizSetup.length === 0 && (
+          <QuizSetupInputAdder
+            direction="NONE"
+            handleAddSetupInput={handleAddSetupInput}
+            type="QUESTION"
+            itemId={-1}
+          />
+        )}
 
-          {quizSetup.length === 0 && (
-            <QuizSetupInputAdder
-              direction="NONE"
-              handleAddSetupInput={handleAddSetupInput}
-              type="QUESTION"
-              itemId={-1}
-            />
-          )}
-
-          <div>
-            {quizSetup.map((item) => (
-              <div className="app-quiz-setup-item" key={item.question.id}>
-                <QuestionManger
-                  _handleSetupItemStateChange={handleSetupItemStateChange}
-                  _loadingState={loadingState}
-                  _setLoadingState={setLoadingState}
-                  _handleSave={handleSave}
-                  handleDelete={handleDelete}
-                  handleAddSetupInput={handleAddSetupInput}
-                  item={item}
-                />
-              </div>
-            ))}
-          </div>
-          {/* <div>
+        <div>
+          {quizSetup.map((item) => (
+            <div className="app-quiz-setup-item" key={item.question.id}>
+              <QuestionManger
+                _handleSetupItemStateChange={handleSetupItemStateChange}
+                _loadingState={loadingState}
+                _setLoadingState={setLoadingState}
+                _handleSave={handleSave}
+                handleDelete={handleDelete}
+                handleAddSetupInput={handleAddSetupInput}
+                item={item}
+              />
+            </div>
+          ))}
+        </div>
+        {/* <div>
             <div>
               <Button variant="contained" color="primary">
                 Save
               </Button>
             </div>
           </div> */}
-        </Box>
-      </main>
+      </Box>
     </>
   );
 };
 
-export default QuizSetup;
+export default QuizSetupQuestions;

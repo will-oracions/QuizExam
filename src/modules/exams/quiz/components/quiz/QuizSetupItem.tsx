@@ -7,7 +7,7 @@ import QuizSetupInputAdder, {
 } from "./QuizSetupInputAdder";
 import { SetupInputType } from "./QuizSetupInput";
 import { QuizSetupAnswer, QuizSetupQuestion } from "../../models/Quiz";
-import { IQuizLoadingState } from "../../pages/QuizSetup";
+import { IQuizLoadingState } from "../../pages/quizSetup/QuizSetup";
 
 interface Props {
   children?: React.ReactNode;
