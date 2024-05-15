@@ -50,7 +50,7 @@ const routes: RouteObject[] = [
         element: <Quizanswers />,
       },
       {
-        path: "quiz-setup",
+        path: "quiz-setup/:id",
         element: <QuizSetup />,
       },
     ],

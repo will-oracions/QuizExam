@@ -241,6 +241,8 @@
     "descriptionLabel": "Description",
     "conceptsLabel": "Concepts",
     "difficultyLabel": "Difficulté",
+    "configLabel": "Configurations",
+    "configure": "Configurer",
     "noQuizs": "Pas de quizs",
     "quizForm": {
       "createTitle": "Créer un quiz",

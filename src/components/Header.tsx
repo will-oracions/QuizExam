@@ -20,18 +20,14 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { Menu, SupportAgent } from "@mui/icons-material";
 
 const menu = [
-  {
-    label: "todosLabel",
-    url: "/tasks",
-  },
-  {
-    label: "assigneesLabel",
-    url: "/assignees",
-  },
-  {
-    label: "usersLabel",
-    url: "/users",
-  },
+  // {
+  //   label: "todosLabel",
+  //   url: "/tasks",
+  // },
+  // {
+  //   label: "assigneesLabel",
+  //   url: "/assignees",
+  // },
   {
     label: "courses.coursesLabel",
     url: "/courses",
@@ -41,13 +37,17 @@ const menu = [
     url: "/quiz",
   },
   {
-    label: "quizQuestions.quizQuestionsLabel",
-    url: "/quiz-questions",
+    label: "usersLabel",
+    url: "/users",
   },
-  {
-    label: "quizAnswers.quizAnswersLabel",
-    url: "/quiz-answers",
-  },
+  // {
+  //   label: "quizQuestions.quizQuestionsLabel",
+  //   url: "/quiz-questions",
+  // },
+  // {
+  //   label: "quizAnswers.quizAnswersLabel",
+  //   url: "/quiz-answers",
+  // },
 ];
 
 // theme

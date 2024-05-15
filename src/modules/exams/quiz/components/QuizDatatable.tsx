@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import CustomDatatable from "../../../../components/CustomDatatable/CustomDatatable";
 import { Quiz } from "../models/Quiz";
 import { todoDifficultyEnumToLabel } from "../helpers/EnumParsers";
+import { Button } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   quizs: Quiz[];
@@ -39,6 +41,22 @@ const QuizDatatable = ({ quizs, handleEdit, handleDelete }: Props) => {
       flex: 1,
       minWidth: 120,
       renderCell: (params) => todoDifficultyEnumToLabel(params.row.difficulty),
+    },
+    {
+      field: "config",
+      headerName: t("quizs.configLabel"),
+      flex: 1,
+      minWidth: 120,
+      renderCell: (params) => (
+        <>
+          <Button
+            component={NavLink}
+            to={`/quiz-setup/${params.row.id}`}
+            size="small">
+            {t("quizs.configure")}
+          </Button>
+        </>
+      ),
     },
     // {
     //   field: "tasksDone",
