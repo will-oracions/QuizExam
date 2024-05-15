@@ -3,6 +3,12 @@ import QuizSetupSidebar from "../../components/quiz/QuizSetupSidebar";
 import "./QuizSetup.scss";
 import useQuiz from "../../hooks/useQuiz";
 import { Alert, CircularProgress } from "@mui/material";
+import { Quiz } from "../../models/Quiz";
+
+export interface IQuizSetupOutletContext {
+  quiz: Quiz;
+}
+
 const QuizSetup = () => {
   const { id } = useParams();
 
@@ -15,7 +21,7 @@ const QuizSetup = () => {
     return <Alert color="error">{error?.message}</Alert>;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -24,7 +30,8 @@ const QuizSetup = () => {
       </div>
 
       <main id="app-main">
-        <Outlet />
+        <div>Quiz: {data.name}</div>
+        <Outlet context={{ quiz: data }} />
       </main>
     </>
   );
