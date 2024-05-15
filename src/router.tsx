@@ -57,6 +57,10 @@ const routes: RouteObject[] = [
         element: <QuizSetup />,
         children: [
           {
+            index: true,
+            element: <Navigate to="questions" />,
+          },
+          {
             path: "questions",
             element: <QuizSetupQuestions />,
           },
