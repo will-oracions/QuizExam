@@ -435,3 +435,398 @@ export const todoFakeData = [
     completed: true,
   },
 ];
+
+export const quizFakeData = [
+  {
+    id: 1,
+    name: "Sciences Générales",
+    description: "Testez vos connaissances générales en sciences.",
+    date: "2024-05-15",
+    concepts: ["Biologie", "Physique", "Chimie"],
+    status: "1",
+    difficulty: "2",
+    questions: [
+      {
+        id: 1,
+        questionText: "Quelle est la formule chimique de l'eau ?",
+        answers: [
+          { id: 1, answerText: "H2O", isCorrect: true },
+          { id: 2, answerText: "O2H" },
+          { id: 3, answerText: "HO2" },
+        ],
+      },
+      {
+        id: 2,
+        questionText: "Quel est l'élément chimique avec le symbole Fe ?",
+        answers: [
+          { id: 1, answerText: "Fer", isCorrect: true },
+          { id: 2, answerText: "Fluor" },
+          { id: 3, answerText: "Phosphore" },
+        ],
+      },
+      {
+        id: 3,
+        questionText: "Quel est le plus grand organe du corps humain ?",
+        answers: [
+          { id: 1, answerText: "Peau", isCorrect: true },
+          { id: 2, answerText: "Foie" },
+          { id: 3, answerText: "Poumon" },
+        ],
+      },
+      {
+        id: 4,
+        questionText: "Quelle est la planète la plus proche du Soleil ?",
+        answers: [
+          { id: 1, answerText: "Mercure", isCorrect: true },
+          { id: 2, answerText: "Venus" },
+          { id: 3, answerText: "Terre" },
+        ],
+      },
+      {
+        id: 5,
+        questionText: "Quel gaz est essentiel pour la respiration humaine ?",
+        answers: [
+          { id: 1, answerText: "Oxygène", isCorrect: true },
+          { id: 2, answerText: "Hydrogène" },
+          { id: 3, answerText: "Azote" },
+        ],
+      },
+      {
+        id: 6,
+        questionText:
+          "Quel est l'organe responsable de la production d'insuline ?",
+        answers: [
+          { id: 1, answerText: "Pancréas", isCorrect: true },
+          { id: 2, answerText: "Foie" },
+          { id: 3, answerText: "Reins" },
+        ],
+      },
+      {
+        id: 7,
+        questionText: "Quelle est la vitesse de la lumière dans le vide ?",
+        answers: [
+          { id: 1, answerText: "300 000 km/s", isCorrect: true },
+          { id: 2, answerText: "150 000 km/s" },
+          { id: 3, answerText: "450 000 km/s" },
+        ],
+      },
+      {
+        id: 8,
+        questionText: "Quel est le symbole chimique de l'or ?",
+        answers: [
+          { id: 1, answerText: "Au", isCorrect: true },
+          { id: 2, answerText: "Ag" },
+          { id: 3, answerText: "Pb" },
+        ],
+      },
+      {
+        id: 9,
+        questionText: "Quel est le principal gaz à effet de serre ?",
+        answers: [
+          { id: 1, answerText: "Dioxyde de carbone", isCorrect: true },
+          { id: 2, answerText: "Méthane" },
+          { id: 3, answerText: "Ozone" },
+        ],
+      },
+      {
+        id: 10,
+        questionText: "Quelle est la distance entre la Terre et la Lune ?",
+        answers: [
+          { id: 1, answerText: "384 400 km", isCorrect: true },
+          { id: 2, answerText: "150 000 km" },
+          { id: 3, answerText: "500 000 km" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Histoire du Monde",
+    description: "Explorez les événements clés de l'histoire mondiale.",
+    date: "2024-05-15",
+    concepts: ["Ancienne", "Moyen Âge", "Moderne"],
+    status: "1",
+    difficulty: "2",
+    questions: [
+      {
+        id: 1,
+        questionText: "Qui a été le premier président des États-Unis ?",
+        answers: [
+          { id: 1, answerText: "George Washington", isCorrect: true },
+          { id: 2, answerText: "Thomas Jefferson" },
+          { id: 3, answerText: "Abraham Lincoln" },
+        ],
+      },
+      {
+        id: 2,
+        questionText: "Quel empire a construit le Colisée à Rome ?",
+        answers: [
+          { id: 1, answerText: "Empire Romain", isCorrect: true },
+          { id: 2, answerText: "Empire Byzantin" },
+          { id: 3, answerText: "Empire Ottoman" },
+        ],
+      },
+      {
+        id: 3,
+        questionText: "En quelle année a eu lieu la Révolution française ?",
+        answers: [
+          { id: 1, answerText: "1789", isCorrect: true },
+          { id: 2, answerText: "1776" },
+          { id: 3, answerText: "1804" },
+        ],
+      },
+      {
+        id: 4,
+        questionText: "Quel pays a été dirigé par Gengis Khan ?",
+        answers: [
+          { id: 1, answerText: "Mongolie", isCorrect: true },
+          { id: 2, answerText: "Chine" },
+          { id: 3, answerText: "Russie" },
+        ],
+      },
+      {
+        id: 5,
+        questionText: "Quelle ville était la capitale de l'Empire Inca ?",
+        answers: [
+          { id: 1, answerText: "Cuzco", isCorrect: true },
+          { id: 2, answerText: "Machu Picchu" },
+          { id: 3, answerText: "Lima" },
+        ],
+      },
+      {
+        id: 6,
+        questionText: "Quel traité a mis fin à la Première Guerre mondiale ?",
+        answers: [
+          { id: 1, answerText: "Traité de Versailles", isCorrect: true },
+          { id: 2, answerText: "Traité de Paris" },
+          { id: 3, answerText: "Traité de Tordesillas" },
+        ],
+      },
+      {
+        id: 7,
+        questionText: "Qui a découvert l'Amérique en 1492 ?",
+        answers: [
+          { id: 1, answerText: "Christophe Colomb", isCorrect: true },
+          { id: 2, answerText: "Ferdinand Magellan" },
+          { id: 3, answerText: "James Cook" },
+        ],
+      },
+      {
+        id: 8,
+        questionText:
+          "Quelle guerre a opposé les États du Nord et du Sud des États-Unis ?",
+        answers: [
+          { id: 1, answerText: "Guerre de Sécession", isCorrect: true },
+          { id: 2, answerText: "Guerre d'Indépendance" },
+          { id: 3, answerText: "Guerre du Mexique" },
+        ],
+      },
+      {
+        id: 9,
+        questionText:
+          "Quel pharaon a été découvert dans une tombe presque intacte en 1922 ?",
+        answers: [
+          { id: 1, answerText: "Toutankhamon", isCorrect: true },
+          { id: 2, answerText: "Ramsès II" },
+          { id: 3, answerText: "Akhenaton" },
+        ],
+      },
+      {
+        id: 10,
+        questionText:
+          "Quelle ville a été détruite par l'éruption du Vésuve en 79 ap. J.-C. ?",
+        answers: [
+          { id: 1, answerText: "Pompéi", isCorrect: true },
+          { id: 2, answerText: "Herculanum" },
+          { id: 3, answerText: "Stabies" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Géographie du Monde",
+    description: "Découvrez les merveilles géographiques de notre planète.",
+    date: "2024-05-15",
+    concepts: ["Continents", "Pays", "Villes"],
+    status: "1",
+    difficulty: "2",
+    questions: [
+      {
+        id: 1,
+        questionText: "Quel est le plus grand désert du monde ?",
+        answers: [
+          { id: 1, answerText: "Désert du Sahara", isCorrect: true },
+          { id: 2, answerText: "Désert de Gobi" },
+          { id: 3, answerText: "Désert du Kalahari" },
+        ],
+      },
+      {
+        id: 2,
+        questionText: "Quelle est la plus longue rivière du monde ?",
+        answers: [
+          { id: 1, answerText: "Nil", isCorrect: true },
+          { id: 2, answerText: "Amazonie" },
+          { id: 3, answerText: "Yangtsé" },
+        ],
+      },
+      {
+        id: 3,
+        questionText: "Quel est le pays le plus peuplé du monde ?",
+        answers: [
+          { id: 1, answerText: "Chine", isCorrect: true },
+          { id: 2, answerText: "Inde" },
+          { id: 3, answerText: "États-Unis" },
+        ],
+      },
+      {
+        id: 4,
+        questionText: "Quelle est la plus haute montagne du monde ?",
+        answers: [
+          { id: 1, answerText: "Mont Everest", isCorrect: true },
+          { id: 2, answerText: "K2" },
+          { id: 3, answerText: "Kangchenjunga" },
+        ],
+      },
+      {
+        id: 5,
+        questionText: "Quel pays est surnommé le pays du Soleil Levant ?",
+        answers: [
+          { id: 1, answerText: "Japon", isCorrect: true },
+          { id: 2, answerText: "Thaïlande" },
+          { id: 3, answerText: "Corée du Sud" },
+        ],
+      },
+      {
+        id: 6,
+        questionText: "Quelle est la capitale de l'Australie ?",
+        answers: [
+          { id: 1, answerText: "Canberra", isCorrect: true },
+          { id: 2, answerText: "Sydney" },
+          { id: 3, answerText: "Melbourne" },
+        ],
+      },
+      {
+        id: 7,
+        questionText: "Quel océan borde la côte est des États-Unis ?",
+        answers: [
+          { id: 1, answerText: "Océan Atlantique", isCorrect: true },
+          { id: 2, answerText: "Océan Pacifique" },
+          { id: 3, answerText: "Océan Indien" },
+        ],
+      },
+      {
+        id: 8,
+        questionText: "Quelle chaîne de montagnes sépare l'Europe de l'Asie ?",
+        answers: [
+          { id: 1, answerText: "Monts Oural", isCorrect: true },
+          { id: 2, answerText: "Alpes" },
+          { id: 3, answerText: "Caucase" },
+        ],
+      },
+      {
+        id: 9,
+        questionText: "Quelle ville est connue sous le nom de Big Apple ?",
+        answers: [
+          { id: 1, answerText: "New York", isCorrect: true },
+          { id: 2, answerText: "Los Angeles" },
+          { id: 3, answerText: "Chicago" },
+        ],
+      },
+      {
+        id: 10,
+        questionText: "Quel pays est traversé par le fleuve Amazone ?",
+        answers: [
+          { id: 1, answerText: "Brésil", isCorrect: true },
+          { id: 2, answerText: "Pérou" },
+          { id: 3, answerText: "Colombie" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "Littérature Classique",
+    description:
+      "Testez vos connaissances sur les œuvres littéraires classiques.",
+    date: "2024-05-15",
+    concepts: ["Romans", "Poésie", "Théâtre"],
+    status: "1",
+    difficulty: "2",
+    questions: [
+      {
+        id: 1,
+        questionText: "Qui a écrit 'Les Misérables' ?",
+        answers: [
+          { id: 1, answerText: "Victor Hugo", isCorrect: true },
+          { id: 2, answerText: "Émile Zola" },
+          { id: 3, answerText: "Honoré de Balzac" },
+        ],
+      },
+      {
+        id: 2,
+        questionText: "Quel est le titre du chef-d'œuvre de Cervantes ?",
+        answers: [
+          { id: 1, answerText: "Don Quichotte", isCorrect: true },
+          { id: 2, answerText: "La Celestina" },
+          { id: 3, answerText: "Lazarillo de Tormes" },
+        ],
+      },
+      {
+        id: 3,
+        questionText:
+          "Quelle œuvre est célèbre pour sa phrase 'To be, or not to be' ?",
+        answers: [
+          { id: 1, answerText: "Hamlet", isCorrect: true },
+          { id: 2, answerText: "Macbeth" },
+          { id: 3, answerText: "Othello" },
+        ],
+      },
+      {
+        id: 4,
+        questionText: "Quel est le roman le plus célèbre de Jane Austen ?",
+        answers: [
+          { id: 1, answerText: "Orgueil et Préjugés", isCorrect: true },
+          { id: 2, answerText: "Emma" },
+          { id: 3, answerText: "Raison et Sentiments" },
+        ],
+      },
+      {
+        id: 5,
+        questionText: "Qui a écrit 'Le vieil homme et la mer' ?",
+        answers: [
+          { id: 1, answerText: "Ernest Hemingway", isCorrect: true },
+          { id: 2, answerText: "F. Scott Fitzgerald" },
+          { id: 3, answerText: "John Steinbeck" },
+        ],
+      },
+      {
+        id: 6,
+        questionText: "Qui est l'auteur de '1984' ?",
+        answers: [
+          { id: 1, answerText: "George Orwell", isCorrect: true },
+          { id: 2, answerText: "Aldous Huxley" },
+          { id: 3, answerText: "Ray Bradbury" },
+        ],
+      },
+      {
+        id: 7,
+        questionText: "Quelle œuvre a été écrite par Homère ?",
+        answers: [
+          { id: 1, answerText: "L'Iliade", isCorrect: true },
+          { id: 2, answerText: "L'Énéide" },
+          { id: 3, answerText: "La Théogonie" },
+        ],
+      },
+      {
+        id: 8,
+        questionText: "Quel est le titre original de 'Guerre et Paix' ?",
+        answers: [
+          { id: 1, answerText: "Voyna i mir", isCorrect: true },
+          { id: 2, answerText: "Voyna i Pokoj" },
+          { id: 3, answerText: "Voyna i Lyubov" },
+        ],
+      },
+    ],
+  },
+];

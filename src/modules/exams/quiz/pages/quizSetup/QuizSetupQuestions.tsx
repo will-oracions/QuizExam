@@ -12,53 +12,54 @@ import "./QuizSetup.scss";
 import QuizSetupNavItem from "../../components/quiz/QuizSetupNavItem";
 import { useOutletContext } from "react-router-dom";
 import { IQuizSetupOutletContext } from "./QuizSetup";
+import { toQuizSetupItemList } from "../../helpers/quizDataParser";
 
-const quizSetupData: IQuizSetupItem[] = [
-  {
-    question: {
-      id: 1,
-      questionText: "Quel est votre nom ?",
-      // isOpen: true,
-      // editing: true,
-    },
-    answers: [
-      {
-        id: 1,
-        answerText: "Noe",
-        isCorrect: true,
-      },
-      {
-        id: 2,
-        answerText: "Leo",
-      },
-      {
-        id: 3,
-        answerText: "Martine",
-      },
-    ],
-  },
-  {
-    question: {
-      id: 2,
-      questionText: "Quel est la capitale du Cameroun ?",
-    },
-    answers: [
-      {
-        id: 1,
-        answerText: "Yaoundé",
-        isCorrect: true,
-      },
-      {
-        id: 2,
-        answerText: "Bafia",
-      },
-      {
-        id: 3,
-        answerText: "Maroua",
-      },
-    ],
-  },
-];
+// const quizSetupData: IQuizSetupItem[] = [
+//   {
+//     question: {
+//       id: 1,
+//       questionText: "Quel est votre nom ?",
+//       // isOpen: true,
+//       // editing: true,
+//     },
+//     answers: [
+//       {
+//         id: 1,
+//         answerText: "Noe",
+//         isCorrect: true,
+//       },
+//       {
+//         id: 2,
+//         answerText: "Leo",
+//       },
+//       {
+//         id: 3,
+//         answerText: "Martine",
+//       },
+//     ],
+//   },
+//   {
+//     question: {
+//       id: 2,
+//       questionText: "Quel est la capitale du Cameroun ?",
+//     },
+//     answers: [
+//       {
+//         id: 1,
+//         answerText: "Yaoundé",
+//         isCorrect: true,
+//       },
+//       {
+//         id: 2,
+//         answerText: "Bafia",
+//       },
+//       {
+//         id: 3,
+//         answerText: "Maroua",
+//       },
+//     ],
+//   },
+// ];
 
 export interface IQuizLoadingState {
   loadingSave: boolean;
@@ -68,8 +69,9 @@ export interface IQuizLoadingState {
 
 const QuizSetupQuestions = () => {
   const { quiz } = useOutletContext<IQuizSetupOutletContext>();
-  const [quizSetup, setQuizSetup] =
-    React.useState<IQuizSetupItem[]>(quizSetupData);
+  const [quizSetup, setQuizSetup] = React.useState<IQuizSetupItem[]>(
+    toQuizSetupItemList(quiz)
+  );
 
   const [loadingState, setLoadingState] = React.useState<IQuizLoadingState>({
     loadingSave: false,

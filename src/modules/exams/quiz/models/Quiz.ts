@@ -9,7 +9,10 @@ export interface Quiz {
   concepts: string[];
   status: QuizStatus;
   difficulty: QuizDifficulty;
+  questions: QuizQuestionResponse[];
 }
+
+export type QuizQuestionResponse = Quizquestion & { answers: Quizanswer[] };
 
 export type QuizSetupQuestion = Quizquestion & {
   editing?: boolean;

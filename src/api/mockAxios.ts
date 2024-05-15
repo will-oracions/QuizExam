@@ -3,7 +3,7 @@ import MockAdapter from "axios-mock-adapter";
 import { Todo } from "../modules/todos/models/Todo";
 import { Assignee } from "../modules/assignees/models/Assignee";
 import { generateFakeId, sleep } from "../utils";
-import { assigneeFakeData, todoFakeData } from "./fakeData";
+import { assigneeFakeData, quizFakeData, todoFakeData } from "./fakeData";
 import { User } from "../modules/users/models/User";
 import { Course } from "../modules/courses/models/Course";
 import { Quiz } from "../modules/exams/quiz/models/Quiz";
@@ -50,7 +50,8 @@ let todos: any[] = getData()?.todos || todoFakeData;
 let assignees: Assignee[] = getData()?.assignees || assigneeFakeData;
 let users: User[] = getData()?.users || [];
 let courses: Course[] = getData()?.courses || [];
-let quizs: Quiz[] = getData()?.quizs || [];
+// @ts-ignore
+let quizs: Quiz[] = getData()?.quizs || quizFakeData;
 let quizQuestions: Quizquestion[] = getData()?.quizQuestions || [];
 let quizAnswers: Quizanswer[] = getData()?.quizAnswers || [];
 
