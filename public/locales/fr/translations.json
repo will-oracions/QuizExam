@@ -60,6 +60,9 @@
           "required": "La description est requise"
         }
       },
+      "favoriteField": {
+        "label": "favorite"
+      },
       "priorityField": {
         "label": "priorité",
         "validation": {

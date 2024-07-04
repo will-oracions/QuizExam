@@ -59,6 +59,9 @@
           "required": "Description is required"
         }
       },
+      "favoriteField": {
+        "label": "favorite"
+      },
       "priorityField": {
         "label": "priority",
         "validation": {

@@ -8,6 +8,7 @@ import {
 import { Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { DatatableCelToDateCalendar } from "../../../helpers/dateHelper";
+import { Star } from "@mui/icons-material";
 
 interface Props {
   todos: Todo[];
@@ -35,6 +36,13 @@ const TodoDatatable = ({ todos, handleEdit, handleDelete }: Props) => {
       headerName: t("todos.descriptionLabel"),
       minWidth: 120,
       flex: 1,
+    },
+    {
+      field: "favorite",
+      headerName: t("todos.favoriteLabel"),
+      minWidth: 120,
+      flex: 1,
+      renderCell: (params) => <Star color="primary" />,
     },
     {
       field: "startDate",
