@@ -1,15 +1,21 @@
-// import { BrowserRouter } from "react-router-dom";
-// import DefaultLayout from "./@crema/components/AppLayout/DefaultLayout";
+import { BrowserRouter } from "react-router-dom";
+import DefaultLayout from "./@crema/components/AppLayout/DefaultLayout";
+import { CssBaseline } from "@mui/material";
+import AppThemeProvider from "@crema/context/AppThemeProvider";
+
 // import "./styles/index.css";
 
 function App() {
-  return <h1>hello world !!</h1>;
-
-  //   return (
-  //     <BrowserRouter>
-  //       <DefaultLayout />;
-  //     </BrowserRouter>
-  //   );
+  return (
+    <BrowserRouter>
+      <AppThemeProvider>
+        <>
+          <CssBaseline />
+          <DefaultLayout />;
+        </>
+      </AppThemeProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
