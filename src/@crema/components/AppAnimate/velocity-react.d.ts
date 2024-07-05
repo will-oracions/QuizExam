@@ -1,1 +1,1 @@
-declare module 'velocity-react';
+// declare module 'velocity-react';

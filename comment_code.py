@@ -6,7 +6,7 @@ def commenter_fichiers_tsx(dossier):
     # Parcours récursif des fichiers dans le dossier et ses sous-dossiers
     for dossier_racine, _, fichiers in os.walk(dossier):
         for nom_fichier in fichiers:
-            if nom_fichier.endswith('.tsx'):
+            if nom_fichier.endswith('.ts'):
                 chemin_fichier = os.path.join(dossier_racine, nom_fichier)
                 print(f"Commenting {chemin_fichier}...")
 
