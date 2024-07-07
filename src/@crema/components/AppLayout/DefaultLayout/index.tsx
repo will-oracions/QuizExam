@@ -12,13 +12,13 @@ import AppSidebar from "./AppSidebar";
 import DefaultLayoutContainer from "./DefaultLayoutContainer";
 import { useLocation } from "react-router-dom";
 import AboutUs from "../../../../modules/lab/pages/AboutUs";
-// import { RouterConfigData } from '@crema/types/models/Apps';
+import { RouterConfigData } from "@crema/types/models/Apps";
 
 type Props = {
   // routes: React.ReactElement | null;
-  // routesConfig: RouterConfigData[];
+  routesConfig: RouterConfigData[];
 };
-const DefaultLayout = ({}: Props) => {
+const DefaultLayout = ({ routesConfig }: Props) => {
   // const { footer, layoutType, headerType, footerType } = useLayoutContext();
   const { pathname } = useLocation();
   const [isNavCollapsed, setNavCollapsed] = useState(false);
@@ -42,7 +42,7 @@ const DefaultLayout = ({}: Props) => {
           appMainFixedHeader: true, // headerType === 'fixed',
         })}>
         <AppSidebar
-          // routesConfig={[]} // routesConfig}
+          routesConfig={routesConfig}
           isNavCollapsed={isNavCollapsed}
           toggleNavCollapsed={toggleNavCollapsed}
         />

@@ -8,12 +8,12 @@ import MainSidebar from "../components/MainSidebar";
 // import { useLayoutContext } from "@crema/context/AppContextProvider/LayoutContextProvider";
 import UserInfo from "../components/UserInfo";
 // import { useSidebarContext } from "@crema/context/AppContextProvider/SidebarContextProvider";
-// import { RouterConfigData } from "@crema/types/models/Apps";
+import { RouterConfigData } from "@crema/types/models/Apps";
 
 type AppSidebarProps = {
   position?: "left" | "top" | "right" | "bottom";
   variant?: string;
-  // routesConfig: RouterConfigData[];
+  routesConfig: RouterConfigData[];
   isNavCollapsed: boolean;
   toggleNavCollapsed: () => void;
 };
@@ -23,7 +23,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
   position = "left",
   toggleNavCollapsed,
   isNavCollapsed,
-  // routesConfig,
+  routesConfig,
 }) => {
   // const { footer, footerType } = useLayoutContext();
 
@@ -51,7 +51,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
                   `solid 1px ${theme.palette.divider}`,
                 mt: 0.5,
               }}>
-              <VerticalNav routesConfig={[]} />
+              <VerticalNav routesConfig={routesConfig} />
             </AppScrollbar>
           </MainSidebar>
         </Drawer>
@@ -76,7 +76,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({
                 },
               },
             }}>
-            <VerticalNav routesConfig={[]} />
+            <VerticalNav routesConfig={routesConfig} />
           </AppScrollbar>
         </MainSidebar>
       </Hidden>

@@ -3,10 +3,10 @@
 // import { useLayoutContext } from "@crema/context/AppContextProvider/LayoutContextProvider";
 // import Typography from "@mui/material/Typography";
 // import FooterWrapper from "./FooterWrapper";
-// 
+//
 // const AppFooter = () => {
 //   const { footer, footerType, navStyle } = useLayoutContext();
-// 
+//
 //   return (
 //     <>
 //       {footer &&
@@ -33,5 +33,5 @@
 //     </>
 //   );
 // };
-// 
+//
 // export default AppFooter;
