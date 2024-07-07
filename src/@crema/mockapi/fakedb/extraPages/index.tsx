@@ -1,4 +1,4 @@
-// export * from './aboutUs';
+export * from "./aboutUs";
 // export * from './contactUs';
 // export * from './dndData/simpleListData';
 // export * from './ecommerce/ecommerceData';

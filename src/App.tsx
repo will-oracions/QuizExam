@@ -3,7 +3,7 @@ import DefaultLayout from "./@crema/components/AppLayout/DefaultLayout";
 import { CssBaseline } from "@mui/material";
 import AppThemeProvider from "@crema/context/AppThemeProvider";
 
-// import "./styles/index.css";
+import "./styles/index.css";
 
 function App() {
   return (

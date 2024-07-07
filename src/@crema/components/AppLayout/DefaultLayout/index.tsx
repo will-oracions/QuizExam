@@ -11,6 +11,7 @@ import MainContent from "./MainContent";
 import AppSidebar from "./AppSidebar";
 import DefaultLayoutContainer from "./DefaultLayoutContainer";
 import { useLocation } from "react-router-dom";
+import AboutUs from "../../../../modules/lab/pages/AboutUs";
 // import { RouterConfigData } from '@crema/types/models/Apps';
 
 type Props = {
@@ -50,6 +51,9 @@ const DefaultLayout = ({}: Props) => {
           <AppHeader toggleNavCollapsed={toggleNavCollapsed} />
           {/* <AppContentView routes={routes} /> */}
           <h1>Portez ce whisky au vieux juge blond qui fume !</h1>
+
+          <AboutUs />
+
           {/* <AppFixedFooter /> */}
         </MainContent>
         {/* <AppThemeSetting /> */}
